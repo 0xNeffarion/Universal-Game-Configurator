@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Descriptions>
+  <Description>
+    <Tag>BORDERLESS_WINDOW</Tag>
+    <Text>Borderless Window option allows the game to fake fullscreen mode without removing the windowed properties (Easier Alt-Tab and automatic Triple Buffering).</Text>
+    <Image>AA_Difference.jpg</Image>
+  </Description>
+  <Description>
+    <Tag>ANTI_ALIASING</Tag>
+    <Text>Anti-aliasing is a technique for softening or blurring sharp edges so they appear less jagged when rendered.</Text>
+  </Description>
+  <Description>
+    <Tag>FX_LENSFLARE</Tag>
+    <Text>Lens flare simulates the light scattered in a lens systems.</Text>
+    <Image>LensFlare_Difference.jpg</Image>
+  </Description>
+</Descriptions>

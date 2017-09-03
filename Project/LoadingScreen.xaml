@@ -1,0 +1,22 @@
+﻿<Window x:Name="loadingWindow" x:Class="Universal_Game_Configurator.LoadingScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Universal_Game_Configurator"
+        mc:Ignorable="d"
+        
+        Title="Loading..." Height="114" Width="500" ResizeMode="NoResize" Icon="Resources/UGC_Icon.ico" WindowStartupLocation="CenterScreen" TextOptions.TextFormattingMode="Display" ScrollViewer.VerticalScrollBarVisibility="Disabled" BorderThickness="0" Loaded="loadingWindow_Loaded" FontFamily="Open Sans" UseLayoutRounding="True" Opacity="0.8" AllowsTransparency="True" WindowStyle="None" Background="{x:Null}">
+    <Border x:Name="loadBorder" CornerRadius="5" Background="{DynamicResource WindowBackgroundBrush}" BorderBrush="#FF9B9B9B" BorderThickness="1" MouseDown="loadBorder_MouseDown" >
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="61"/>
+                <RowDefinition Height="51"/>
+            </Grid.RowDefinitions>
+            <ProgressBar Height="23" IsIndeterminate="True" Grid.Row="1" Margin="25,0,25,10" />
+            <TextBlock x:Name="txtTitle" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" TextWrapping="Wrap" Text="%TEXT%" VerticalAlignment="Center" FontSize="18" FontWeight="SemiBold" TextTrimming="WordEllipsis" TextAlignment="Center" Foreground="#FFE8E8E8"/>
+
+        </Grid>
+    </Border>
+</Window>

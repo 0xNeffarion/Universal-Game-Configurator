@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Configs>
+  <Config>
+    <Id>1</Id>
+    <FileIndex>1</FileIndex>
+    <Section>Display</Section>
+    <Variable>bBorderless</Variable>
+    <Default>0</Default>
+    <Type>5</Type>
+    <Name>Borderless Window</Name>
+    <IsFixedValues>0</IsFixedValues>
+    <RangeMin>-1</RangeMin>
+    <RangeMax>-1</RangeMax>
+    <Interval>-1</Interval>
+    <Description>%BORDERLESS_WINDOW%</Description>
+    <Group>1</Group>
+  </Config>
+  <Config>
+    <Id>2</Id>
+    <FileIndex>1</FileIndex>
+    <Section>Imagespace</Section>
+    <Variable>bLensFlare</Variable>
+    <Default>1</Default>
+    <Type>5</Type>
+    <Name>Lens Flare</Name>
+    <IsFixedValues>0</IsFixedValues>
+    <RangeMin>-1</RangeMin>
+    <RangeMax>-1</RangeMax>
+    <Interval>-1</Interval>
+    <Description>%FX_LENSFLARE%</Description>
+    <Group>1</Group>
+  </Config>
+  <Config>
+    <Id>3</Id>
+    <FileIndex>1</FileIndex>
+    <Section>GamePlay</Section>
+    <Variable>iDifficulty</Variable>
+    <Default>2</Default>
+    <Type>8</Type>
+    <Interval>-1</Interval>
+    <Name>Game Difficulty</Name>
+    <IsFixedValues>1</IsFixedValues>
+    <Values>
+      <Value>
+        <Val>0</Val>
+        <Desc>Very Easy</Desc>
+      </Value>
+      <Value>
+        <Val>1</Val>
+        <Desc>Easy</Desc>
+      </Value>
+      <Value>
+        <Val>2</Val>
+        <Desc>Medium</Desc>
+      </Value>
+      <Value>
+        <Val>3</Val>
+        <Desc>Hard</Desc>
+      </Value>
+      <Value>
+        <Val>4</Val>
+        <Desc>Very Hard</Desc>
+      </Value>
+      <Value>
+        <Val>5</Val>
+        <Desc>Survival</Desc>
+      </Value>
+    </Values>
+    <RangeMin>-1</RangeMin>
+    <RangeMax>-1</RangeMax>
+    <Description>%GAME_DIFFICULTY%</Description>
+    <Group>0</Group>
+  </Config>
+</Configs>
