@@ -19,7 +19,7 @@ Along with it, a config editor tool will be made to create data easier and faste
 
 ## Contributing
 
-Please read [CONTRIBUTING](CONTRIBUTING) for information on how to contribute to the project
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for information on how to contribute to the project
 
 ## License
 
