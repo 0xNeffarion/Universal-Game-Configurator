@@ -68,7 +68,7 @@
                             <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
                                     <Border Margin="6" BorderBrush="#FF747474" BorderThickness="1" Width="65" Height="65" CornerRadius="9" HorizontalAlignment="Left" VerticalAlignment="Center">
-                                        <Image RenderOptions.BitmapScalingMode="HighQuality" x:Name="imgGameIcon" Width="65" Height="65"  Source="{Binding ImagePath}" Stretch="UniformToFill">
+                                        <Image RenderOptions.BitmapScalingMode="HighQuality" x:Name="imgGameIcon" Width="65" Height="65" Source="{Binding ImagePath}" Stretch="UniformToFill">
                                             <Image.Clip>
                                                 <RectangleGeometry RadiusX="9" RadiusY="9" Rect="0,0,64,64"/>
                                             </Image.Clip>

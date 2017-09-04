@@ -39,13 +39,29 @@ namespace Universal_Game_Configurator {
         private void LoadGamesList() {
             String path = Utilities.AppDir + @"\data\games\database\gameslist.xml";
 
-            Games games;
+            Games games = new Games();
+            games.games_list = new List<Game>();
+            List<String> inif = new List<String>();
+            inif.Add(Utilities.GetConfigLocation(@"#MYGAMES#\Fallout4\Fallout4.ini", ""));
+            inif.Add(Utilities.GetConfigLocation(@"#MYGAMES#\Fallout4\Fallout4Prefs.ini", ""));
+
+
+            games.games_list.Add(new Game() {
+                Id = 1,
+                Name = "Fallout 4",
+                Type = "A",
+                Genre = "RPG",
+                ImagePath = Utilities.AppDir + @"\data\games\images\icons\fo4.jpg",
+                InstallPath = "Steam App 377160",
+                ConfigFiles = inif
+            });
+
             XmlSerializer xs = new XmlSerializer(typeof(Game));
             using (var sr = new StreamReader(path)) {
-             //   games = (Games)xs.Deserialize(sr);
+               // games = (Games)xs.Deserialize(sr);
             }
 
-           // _gamesList = games.games_list;
+            _gamesList = games.games_list;
 
             Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(delegate { ldScreen.Close(); }));
         }

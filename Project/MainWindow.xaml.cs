@@ -63,7 +63,7 @@ namespace Universal_Game_Configurator {
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
             windowTitle.Text = this.Title;
-            groupBox_setting.Foreground = new SolidColorBrush(_mainColor);
+            //groupBox_setting.Foreground = new SolidColorBrush(_mainColor);
             var anim = new DoubleAnimation(1, (Duration)TimeSpan.FromMilliseconds(300));
             this.BeginAnimation(UIElement.OpacityProperty, anim);
             RefreshListSize();
