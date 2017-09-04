@@ -19,8 +19,8 @@ Microsoft Windows 7 or UP
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for information on how to contribute to the project
+Please read [CONTRIBUTING](CONTRIBUTING) for information on how to contribute to the project
 
 ## License
 
-This project is licensed under the Apache License - see the [LICENSE.md](LICENSE.md) file for more details
+This project is licensed under the Apache License - see the [LICENSE](LICENSE) file for more details
