@@ -5,7 +5,7 @@ Software that allows you to modify configurations of a variety of games, all wit
 ## WIP
 
 Project is still fresh and in development.  
-Along with it a config editor tool will be made to create data easier and faster for the UGC to use
+Along with it, a config editor tool will be made to create data easier and faster for the UGC to use
 
 ### Prerequisites
 
