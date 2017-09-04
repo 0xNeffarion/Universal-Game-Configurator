@@ -6,6 +6,7 @@ Software that allows you to modify configurations of a variety of games, all wit
 
 Project is still fresh and in development.  
 Along with it, a config editor tool will be made to create data easier and faster for the UGC to use
+Here are some early screenshots of the UI: [Game Selector](https://i.imgur.com/TGPlNYc.png) & [Configurator Window](https://i.imgur.com/cvgQ49w.png)
 
 ### Prerequisites
 
