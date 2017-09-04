@@ -9,8 +9,8 @@ Along with it a config editor tool will be made to create data easier and faster
 
 ### Prerequisites
 
-Microsoft Windows 7 or UP
-[.NET Framework 4.5.1](https://www.microsoft.com/en-gb/download/details.aspx?id=40773)
+* Microsoft Windows 7 or above
+* [.NET Framework 4.5.1](https://www.microsoft.com/en-gb/download/details.aspx?id=40773)
 
 ## Libraries
 
