@@ -323,6 +323,10 @@ namespace Universal_Game_Configurator {
                     255, path);
                 return temp.ToString();
             }
+
+            internal void IniWriteValue(object section, object variable, object value) {
+                throw new NotImplementedException();
+            }
         }
 
         public class FastCRC32 {
@@ -393,7 +397,7 @@ namespace Universal_Game_Configurator {
             }
 
             /// <summary>
-            ///     Compute a checksum for a given string.
+            /// Compute a checksum for a given string.
             /// </summary>
             /// <param name="text">The string to compute the checksum for.</param>
             /// <returns>The computed checksum.</returns>
@@ -419,7 +423,7 @@ namespace Universal_Game_Configurator {
             }
 
             /// <summary>
-            ///     Compute a checksum for a given array of bytes.
+            /// Compute a checksum for a given array of bytes.
             /// </summary>
             /// <param name="bytes">The array of bytes to compute the checksum for.</param>
             /// <returns>The computed checksum.</returns>

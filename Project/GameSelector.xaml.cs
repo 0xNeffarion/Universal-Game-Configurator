@@ -17,9 +17,6 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Xml.Linq;
 using System.Xml.Serialization;
-using Universal_Game_Configurator.Configurators;
-using Universal_Game_Configurator.Configurators.Types;
-using Universal_Game_Configurator.Theme;
 
 namespace Universal_Game_Configurator {
     /// <summary>

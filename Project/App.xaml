@@ -4,7 +4,6 @@
              xmlns:local="clr-namespace:Universal_Game_Configurator"
              StartupUri="GameSelector.xaml" ShutdownMode="OnLastWindowClose">
     <Application.Resources>
-       
         <SolidColorBrush x:Key="UIColor" Color="#FF9D57B8"/>
     </Application.Resources>
 </Application>

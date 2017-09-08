@@ -6,7 +6,10 @@
         xmlns:local="clr-namespace:Universal_Game_Configurator"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="Universal Game Configurator - Game selection" Height="579" Width="615" Icon="Resources/UGC_Icon.ico" WindowStartupLocation="CenterScreen" TextOptions.TextFormattingMode="Display" MinHeight="320" MinWidth="460" UseLayoutRounding="True" Loaded="GameSelectionWindow_Loaded" FontFamily="Open Sans" WindowStyle="None" AllowsTransparency="True" Background="{x:Null}" ResizeMode="CanResizeWithGrip" Closing="GameSelectionWindow_Closing">
+        Title="Universal Game Configurator - Game selection" Height="579" Width="615" 
+        Icon="Resources/UGC_Icon.ico" WindowStartupLocation="CenterScreen" TextOptions.TextFormattingMode="Display" 
+        MinHeight="320" MinWidth="460" UseLayoutRounding="True" Loaded="GameSelectionWindow_Loaded" FontFamily="Open Sans" 
+        WindowStyle="None" AllowsTransparency="True" Background="{x:Null}" ResizeMode="CanResizeWithGrip" Closing="GameSelectionWindow_Closing">
     <Window.Resources>
         <SolidColorBrush x:Key="ListViewItemSelectedBackgroundThemeBrush" Color="Gray" />
         <Style x:Key="myHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
@@ -29,87 +32,181 @@
         </Style>
     </Window.Resources>
     <Border CornerRadius="5" Background="{DynamicResource WindowBackgroundBrush}" BorderBrush="#FF555555" BorderThickness="1" >
-
         <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="34"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="29"></RowDefinition>
-            <RowDefinition Height="38"/>
-            <RowDefinition Height="41"/>
-            <RowDefinition Height="74*"/>
-            <RowDefinition Height="139*"/>
-            <RowDefinition Height="177*"/>
-
-        </Grid.RowDefinitions>
-
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="34"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="29"></RowDefinition>
+                <RowDefinition Height="38"/>
+                <RowDefinition Height="41"/>
+                <RowDefinition Height="74*"/>
+                <RowDefinition Height="139*"/>
+                <RowDefinition Height="177*"/>
+            </Grid.RowDefinitions>
             <DockPanel x:Name="titleBorder" Grid.ColumnSpan="2" Background="#FF424242" MouseDown="titleBorder_MouseDown">
-
-            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" VerticalAlignment="Center" Margin="10,0,0,0">
-                <TextBlock x:Name="windowTitle" Text="Title" Foreground="White" ForceCursor="True" FontWeight="SemiBold" FontSize="14" VerticalAlignment="Center"></TextBlock>
-            </StackPanel>
+                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" VerticalAlignment="Center" Margin="10,0,0,0">
+                    <TextBlock x:Name="windowTitle" Text="Title" Foreground="White" ForceCursor="True" FontWeight="SemiBold" FontSize="14" VerticalAlignment="Center"></TextBlock>
+                </StackPanel>
                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,4,0" DockPanel.Dock="Right">
                     <Button x:Name="btnMinimizeWindow" FontFamily="Marlett" Content="0" Margin="1,1,4,1" VerticalAlignment="Center" Padding="7,4" FontWeight="Bold" Foreground="White" Click="btnMinimizeWindow_Click" />
                     <Button x:Name="btnCloseWindow" FontFamily="Marlett" Content="r" Margin="1" VerticalAlignment="Center" Padding="7,4" FontWeight="Bold" Foreground="White" Background="#FFCB2626" Click="btnCloseWindow_Click" />
                 </StackPanel>
-
             </DockPanel>
-        <ListView x:Name="GamesListView" Grid.ColumnSpan="2" Grid.Column="0" Grid.RowSpan="3" Margin="10,5,10,20" Grid.Row="3" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Padding="0,0,0,6" SelectionMode="Single" SizeChanged="GamesListView_SizeChanged" Foreground="#FFFBFBFB" BorderBrush="LightGray" BorderThickness="0" Background="{x:Null}" KeyDown="GamesListView_KeyDown">
-              <ListView.DataContext>
-                <local:Game/>
-            </ListView.DataContext>
-            
-            <ListView.View>
-                <GridView ColumnHeaderContainerStyle="{StaticResource myHeaderStyle}" AllowsColumnReorder="False" >
-                    <GridViewColumn x:Name="GridCol1" Header="Installed game">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                    <Border Margin="6" BorderBrush="#FF747474" BorderThickness="1" Width="65" Height="65" CornerRadius="9" HorizontalAlignment="Left" VerticalAlignment="Center">
-                                        <Image RenderOptions.BitmapScalingMode="HighQuality" x:Name="imgGameIcon" Width="65" Height="65" Source="{Binding ImagePath}" Stretch="UniformToFill">
-                                            <Image.Clip>
-                                                <RectangleGeometry RadiusX="9" RadiusY="9" Rect="0,0,64,64"/>
-                                            </Image.Clip>
-                                        </Image>
+            <ListView x:Name="GamesListView" Grid.ColumnSpan="2" Grid.Column="0" Grid.RowSpan="3" Margin="10,5,10,20" Grid.Row="3" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Padding="0,0,0,6" SelectionMode="Single" SizeChanged="GamesListView_SizeChanged" Foreground="#FFFBFBFB" BorderBrush="LightGray" BorderThickness="0" Background="{x:Null}" KeyDown="GamesListView_KeyDown">
+                <ListView.DataContext>
+                    <local:Game/>
+                </ListView.DataContext>
+                <ListView.Resources>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+                        <Setter Property="FocusVisualStyle" Value="{StaticResource ListViewItemFocusVisual}" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                    <ControlTemplate.Resources>
+                                        <Storyboard x:Key="HoverOn">
+                                            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HoverRectangle" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                                <SplineDoubleKeyFrame KeyTime="00:00:00.1000000" Value="1"/>
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                        <Storyboard x:Key="HoverOff">
+                                            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HoverRectangle" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                                <SplineDoubleKeyFrame KeyTime="00:00:00.4000000" Value="0"/>
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                        <Storyboard x:Key="SelectedOn">
+                                            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="SelectedRectangle" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                                <SplineDoubleKeyFrame KeyTime="00:00:00.1000000" Value="1"/>
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                        <Storyboard x:Key="SelectedOff">
+                                            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="SelectedRectangle" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                                <SplineDoubleKeyFrame KeyTime="00:00:00.4000000" Value="0"/>
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                        <Storyboard x:Key="FocussedOn">
+                                            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="FocusVisualElement" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                                <SplineDoubleKeyFrame KeyTime="00:00:00.1000000" Value="1"/>
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                        <Storyboard x:Key="FocussedOff">
+                                            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="FocusVisualElement" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                                <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="0"/>
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </ControlTemplate.Resources>
+                                    <Border SnapsToDevicePixels="true" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="2" x:Name="border">
+                                        <Grid Margin="0">
+                                            <Rectangle x:Name="Background" IsHitTestVisible="True" Opacity="0.25" Fill="{StaticResource NormalBrush}" RadiusX="1" RadiusY="1"/>
+                                            <Rectangle x:Name="HoverRectangle" IsHitTestVisible="True" Opacity="0" Fill="{StaticResource NormalBrush}" RadiusX="1" RadiusY="1"/>
+                                            <Rectangle x:Name="SelectedRectangle" IsHitTestVisible="True" Opacity="0" Fill="{StaticResource SelectedBackgroundBrush}" RadiusX="1" RadiusY="1"/>
+                                            <GridViewRowPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Margin="0" VerticalAlignment="Stretch" />
+                                        </Grid>
                                     </Border>
-                                    <TextBlock x:Name="txtGameName" Text="{Binding Name}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" FontWeight="Bold" Margin="15,0,0,0" TextTrimming="WordEllipsis" ToolTip="{Binding InstallPath}"></TextBlock>
-                                </StackPanel>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn x:Name="GridCol2" Header="Genre" Width="90">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                    <TextBlock x:Name="txtGameType" Text="{Binding Genre}" VerticalAlignment="Stretch" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,0" HorizontalAlignment="Stretch" TextAlignment="Center" TextTrimming="WordEllipsis"></TextBlock>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn x:Name="GridCol3" Header="" Width="70">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Image x:Name="imgNext" VerticalAlignment="Center" HorizontalAlignment="Center" Width="24" Height="24" Source="Resources/arrow-right-24.png" Cursor="Hand" MouseDown="imgNext_MouseDown" ToolTip="Configure" ></Image>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                </GridView>
-            </ListView.View>
-
-        </ListView>
-        <TextBlock x:Name="TitleText" TextWrapping="Wrap" Text="Select the game to configure:" Grid.Row="1"
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsSelected" Value="true">
+                                            <Trigger.ExitActions>
+                                                <BeginStoryboard Storyboard="{StaticResource SelectedOff}" x:Name="SelectedOff_BeginStoryboard"/>
+                                            </Trigger.ExitActions>
+                                            <Trigger.EnterActions>
+                                                <BeginStoryboard Storyboard="{StaticResource SelectedOn}" x:Name="SelectedOn_BeginStoryboard"/>
+                                            </Trigger.EnterActions>
+                                        </Trigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.ExitActions>
+                                                <BeginStoryboard Storyboard="{StaticResource HoverOff}" x:Name="HoverOff_BeginStoryboard"/>
+                                            </MultiTrigger.ExitActions>
+                                            <MultiTrigger.EnterActions>
+                                                <BeginStoryboard Storyboard="{StaticResource HoverOn}"/>
+                                            </MultiTrigger.EnterActions>
+                                            <MultiTrigger.Conditions>
+                                                <Condition Property="IsMouseOver" Value="True" />
+                                                <Condition Property="Selector.IsSelected" Value="False" />
+                                            </MultiTrigger.Conditions>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
+                                                <Condition Property="Selector.IsSelected" Value="True" />
+                                                <Condition Property="IsMouseOver" Value="True" />
+                                            </MultiTrigger.Conditions>
+                                        </MultiTrigger>
+                                        <Trigger Property="IsEnabled" Value="false">
+                                            <Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}" />
+                                            <Setter Property="Fill" TargetName="Background" Value="{DynamicResource DisabledBackgroundBrush}"/>
+                                        </Trigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
+                                                <Condition Property="IsSelected" Value="true" />
+                                                <Condition Property="Selector.IsSelectionActive" Value="false" />
+                                            </MultiTrigger.Conditions>
+                                        </MultiTrigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="Selector.IsSelected" Value="True">
+                                <Setter Property="Foreground">
+                                    <Setter.Value>
+                                        <SolidColorBrush Color="{DynamicResource BlackColor}" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListView.Resources>
+                <ListView.View>
+                    <GridView ColumnHeaderContainerStyle="{StaticResource myHeaderStyle}" AllowsColumnReorder="False" >
+                        <GridViewColumn x:Name="GridCol1" Header="Installed game">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Border Margin="6" BorderBrush="#FF747474" BorderThickness="1" Width="65" Height="65" CornerRadius="9" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                            <Image RenderOptions.BitmapScalingMode="HighQuality" x:Name="imgGameIcon" Width="65" Height="65" Source="{Binding ImagePath}" Stretch="UniformToFill">
+                                                <Image.Clip>
+                                                    <RectangleGeometry RadiusX="9" RadiusY="9" Rect="0,0,64,64"/>
+                                                </Image.Clip>
+                                            </Image>
+                                        </Border>
+                                        <TextBlock x:Name="txtGameName" Text="{Binding Name}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" 
+                                                   FontWeight="Bold" Margin="15,0,0,0" TextTrimming="WordEllipsis" ToolTip="{Binding InstallPath, StringFormat=Directory: \{0\}}"></TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn x:Name="GridCol2" Header="Genre" Width="90">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock x:Name="txtGameType" Text="{Binding Genre}" VerticalAlignment="Stretch" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,0" HorizontalAlignment="Stretch" TextAlignment="Center" TextTrimming="WordEllipsis" TextOptions.TextFormattingMode="Display"></TextBlock>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn x:Name="GridCol3" Header="" Width="70">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image x:Name="imgNext" VerticalAlignment="Center" HorizontalAlignment="Center" Width="24" Height="24" Source="Resources/arrow-right-24.png" Cursor="Hand" MouseDown="imgNext_MouseDown" ToolTip="Configure" ></Image>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <TextBlock x:Name="TitleText" TextWrapping="Wrap" Text="Select the game to configure:" Grid.Row="1"
                    Grid.ColumnSpan="2" Grid.Column="0" TextAlignment="Center" VerticalAlignment="Center" FontSize="17" FontWeight="SemiBold" Height="23" Margin="0,15,0,0" Foreground="#FFE0E0E0"/>
-        <DockPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"/>
-            <Border  Margin="10,10,20,5" Grid.Row="2" Grid.Column="0" BorderThickness="1" BorderBrush="#FF898989" Grid.ColumnSpan="2"><xctk:WatermarkTextBox Style="{StaticResource borderRem}" x:Name="txtBoxSearch"  TextWrapping="Wrap"  Height="26" VerticalAlignment="Center" TextChanged="txtBoxSearch_TextChanged" Foreground="White" VerticalContentAlignment="Center" Background="{x:Null}" BorderThickness="0" >
-            <xctk:WatermarkTextBox.Watermark>
-                <StackPanel Orientation="Horizontal">
-                    <Image Source="Resources/magnifier.png" Width="16" Height="16" Stretch="Uniform" />
-                    <TextBlock Text="Search installed games..." Margin="4,2,0,0" Foreground="#FFF0F0F0" />
-                </StackPanel>
-            </xctk:WatermarkTextBox.Watermark>
-        </xctk:WatermarkTextBox></Border>
-        <Image x:Name="imgRefresh" Grid.Column="1" Grid.Row="1" Source="Resources/arrow_refresh.png" Margin="7,14,10,11" Cursor="Hand" ToolTip="Refresh list" MouseDown="imgRefresh_MouseDown"/>
-
+            <DockPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"/>
+            <Border Margin="10,10,20,5" Grid.Row="2" Grid.Column="0" BorderThickness="1" BorderBrush="#FF898989" Grid.ColumnSpan="2">
+                <xctk:WatermarkTextBox Style="{StaticResource borderRem}" x:Name="txtBoxSearch"  TextWrapping="Wrap" Height="26" VerticalAlignment="Center" TextChanged="txtBoxSearch_TextChanged" Foreground="White" VerticalContentAlignment="Center" Background="{x:Null}" BorderThickness="0" >
+                    <xctk:WatermarkTextBox.Watermark>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="Resources/magnifier.png" Width="16" Height="16" Stretch="Uniform" />
+                            <TextBlock Text="Search installed games..." Margin="4,2,0,0" Foreground="#FFF0F0F0" />
+                        </StackPanel>
+                    </xctk:WatermarkTextBox.Watermark>
+                </xctk:WatermarkTextBox>
+            </Border>
+            <Image x:Name="imgRefresh" Grid.Column="1" Grid.Row="1" Source="Resources/arrow_refresh.png" Margin="7,14,10,11" Cursor="Hand" ToolTip="Refresh list" MouseDown="imgRefresh_MouseDown"/>
         </Grid>
     </Border>
 </Window>

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Universal_Game_Configurator {
     public static class StringExtensions {
@@ -29,6 +25,10 @@ namespace Universal_Game_Configurator {
 
         public static Decimal ToDecimal(this string str) {
             return Convert.ToDecimal(str);
+        }
+
+        public static String CRC32Hash(this string str) {
+            return Utilities.FastCRC32.CRC32String(str).ToString("X");
         }
 
     }

@@ -21,9 +21,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Xml.Linq;
-using UGCEditor.Configurators;
-using Universal_Game_Configurator.Configurators;
-using Universal_Game_Configurator.Configurators.Types;
 using Xceed.Wpf.AvalonDock.Controls;
 using Xceed.Wpf.Toolkit;
 using Color = System.Windows.Media.Color;
@@ -46,7 +43,7 @@ namespace Universal_Game_Configurator {
         private LoadingScreen _ldScreen;
 
         public MainWindow(Game game) {
-            _currentConfigurator = ConfigUtils.GetConfiguratorByString(game.Type,game.ConfigFiles);
+            _currentConfigurator = ConfigTypes.GetConfigurator(game.Type, game.ConfigFiles);
             _gamePath = game.InstallPath;
             _gameId = game.Id;
             InitializeComponent();
@@ -57,7 +54,7 @@ namespace Universal_Game_Configurator {
 
         private void listView_SizeChanged(object sender, SizeChangedEventArgs e) {
             if (this.IsLoaded) {
-                RefreshListSize();        
+                RefreshListSize();
             }
         }
 
@@ -99,69 +96,8 @@ namespace Universal_Game_Configurator {
             double interval = 0;
             Decimal rangeMax = 0;
             Groups gp = Groups.Gameplay;
-            
-            foreach (var elementRoot in root) {
-                Dictionary<String, String> valsDesc = new Dictionary<string, string>();
-                try {
-                    id = elementRoot.Element("Id").Value.ToInt();
-                    index = short.Parse(elementRoot.Element("FileIndex").Value);
-                    section = elementRoot.Element("Section").Value;
-                    variable = elementRoot.Element("Variable").Value;
-                    name = elementRoot.Element("Name").Value;
-                    desc = elementRoot.Element("Description").Value;
-                    tp = elementRoot.Element("Type").Value.ToInt();
-                    defVal = elementRoot.Element("Default").Value;
-                    isFixed = (elementRoot.Element("IsFixedValues").Value.ToLower() == "1");
-                    rangeMin = elementRoot.Element("RangeMin").Value.ToDecimal();
-                    interval = elementRoot.Element("Interval").Value.ToDouble();
-                    rangeMax = elementRoot.Element("RangeMax").Value.ToDecimal();
-                    gp = (Groups)Enum.Parse(typeof(Groups), (elementRoot.Element("Group").Value));
-                } catch (Exception ex) {
-                    System.Windows.MessageBox.Show("An Error as ocurred while loading XML database files.\nError message: " +
-                                        ex.ToString(), "Reading error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    Environment.Exit(0);
-                }
 
-                if (isFixed) {
-                    var vals = elementRoot.Descendants("Value");
-                    foreach (var element in vals) {
-                        string v1 = element.Element("Val").Value;
-                        string d1 = element.Element("Desc").Value;
-                        valsDesc.Add(v1, d1);
-                    }
 
-                }
-
-                Config cf = new Config {
-                    Id = id,
-                    Description = desc,
-                    FileIndex = index,
-                    Interval = interval,
-                    IsFixedValues = isFixed,
-                    Name = name,
-                    Range = new Decimal[] { rangeMin, rangeMax },
-                    Section = section,
-                    Variable = variable,
-                    Type = tp,
-                    Default = defVal,
-                    Value = null,
-                    IsChanged = 0,
-                    ValueDesc = valsDesc,
-                    Group = gp
-
-                };
-
-                _configs.Add(cf);
-
-            }
-
-            string temp = "";
-            for (int i = 0; i < _configs.Count; i++) {
-                temp = _currentConfigurator.ReadValue(_configs[i].Variable, _configs[i].Section, _configs[i].FileIndex);
-                if (!string.IsNullOrEmpty(temp)) {
-                    _configs[i].Value = temp;
-                }
-            }
 
             LoadLocalConfigs();
 
@@ -440,13 +376,13 @@ namespace Universal_Game_Configurator {
                 }
 
                 foreach (var config in _configs) {
-                    config.Value = _currentConfigurator.ReadValue(config);
+                    //nfig.Value = _currentConfigurator.ReadValue(config);
                 }
             } catch (Exception) { }
         }
 
         private void SettingsList_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            if (SettingsList.Items.Count > 0) {
+            /*if (SettingsList.Items.Count > 0) {
                 if (SettingsList.SelectedIndex != -1) {
                     Config cg = (SettingsList.SelectedItem as Config);
                     if (cg.Description.Length > 0) {
@@ -469,11 +405,9 @@ namespace Universal_Game_Configurator {
 
 
 
-                }
+                }*/
 
 
-
-            }
         }
 
         private void SetInformation(string tag) {
@@ -516,7 +450,7 @@ namespace Universal_Game_Configurator {
 
         private void ApplySettings() {
             foreach (var cg in _configs) {
-                _currentConfigurator.WriteValue(cg);
+                //   _currentConfigurator.WriteValue(cg);
             }
         }
 
@@ -554,36 +488,8 @@ namespace Universal_Game_Configurator {
                     item.Background = new SolidColorBrush(_mainColor);
                 } catch (NullReferenceException) { }
 
-                var cg = SettingsList.SelectedItem as Config;
+                var cg = SettingsList.SelectedItem as ConfigEntry;
 
-                cg.IsChanged = 1;
-                if (cg.Type == 0) // VALUE
-                {
-                    cg.Value = (_currentControl as IntegerUpDown)?.Value.ToString();
-                } else if (cg.Type == 1) // TEXT
-                  {
-                    cg.Value = (_currentControl as TextBox)?.Text.ToString();
-                } else if (cg.Type == 2) // Decimal
-                  {
-                    cg.Value = (_currentControl as DecimalUpDown)?.Value.ToString();
-                } else if (cg.Type == 3) // Combo Normal
-                  {
-                    cg.Value = ((_currentControl as ComboBox)?.SelectedIndex) == 1 ? "True" : "False";
-                } else if (cg.Type == 4) // Combo YesNo
-                  {
-                    var ct = (_currentControl as ComboBox);
-                    cg.Value = (ct?.SelectedIndex) == 1 ? "Yes" : "No";
-                } else if (cg.Type == 5) // Combo
-                  {
-                    var ct = (_currentControl as ComboBox);
-                    cg.Value = ct?.SelectedIndex.ToString();
-                } else if (cg.Type == 6 || cg.Type == 7) // Slider
-                  {
-                    cg.Value = (_currentControl as Slider)?.Value.ToString();
-                } else if (cg.Type == 8) // Combo Last
-                  {
-                    cg.Value = ((ComboBoxItem)(_currentControl as ComboBox)?.SelectedItem)?.Tag.ToString();
-                }
 
 
 
@@ -627,7 +533,7 @@ namespace Universal_Game_Configurator {
 
         private bool FilterSearch(object o) {
             if (txtBoxSearch.Text.Length > 2) {
-                var cg = o as Config;
+                var cg = o as ConfigEntry;
                 if (cg != null) {
                     if (cg.Name.ToLower().Contains(txtBoxSearch.Text.ToLower())) {
                         return true;
@@ -771,8 +677,8 @@ namespace Universal_Game_Configurator {
             }
 
             for (int i = 0; i < SettingsList.Items.Count; i++) {
-                var item = SettingsList.Items[i] as Config;
-                if (item.IsChanged == 1) {
+                var item = SettingsList.Items[i] as ConfigEntry;
+                if (item.IsChanged) {
                     ListViewItem it = SettingsList.ItemContainerGenerator.ContainerFromItem(SettingsList.Items[i]) as ListViewItem;
                     if (it != null) {
                         it.Background = new SolidColorBrush(_mainColor);
@@ -783,4 +689,5 @@ namespace Universal_Game_Configurator {
             App.Current.Resources["UIColor"] = new SolidColorBrush(_mainColor);
         }
     }
+
 }

@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Universal_Game_Configurator {
 
-namespace Universal_Game_Configurator {
+    /// <summary>
+    /// Config list categories/groups
+    /// </summary>
     public enum Groups {
         General = 0,
         Graphics = 1,

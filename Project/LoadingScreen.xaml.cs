@@ -36,7 +36,6 @@ namespace Universal_Game_Configurator {
         private void loadBorder_MouseDown(object sender, MouseButtonEventArgs e) {
             if (e.LeftButton == MouseButtonState.Pressed) {
                 this.DragMove();
-
             }
         }
     }

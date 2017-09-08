@@ -30,6 +30,8 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -83,6 +85,10 @@
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="PresentationFramework.Aero" />
     <Reference Include="presentationframework.aero2" />
+    <Reference Include="PropertyChanged, Version=2.1.4.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
+      <HintPath>packages\PropertyChanged.Fody.2.1.4\lib\netstandard1.0\PropertyChanged.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -129,19 +135,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Configurators\ConfigUtils.cs" />
-    <Compile Include="Objects\Config.cs" />
+    <Compile Include="Configurators\ConfigTypes.cs" />
+    <Compile Include="Controls\ControlFactory.cs" />
+    <Compile Include="Objects\ConfigEntry.cs" />
     <Compile Include="Configurators\Configurator.cs" />
     <Compile Include="Configurators\Types\TypeA.cs" />
-    <Compile Include="Configurators\Types\Type01.cs" />
-    <Compile Include="Configurators\Types\TypeC.cs" />
     <Compile Include="Converters.cs" />
-    <Compile Include="Objects\Configs.cs" />
+    <Compile Include="Objects\Lists\Config.cs" />
     <Compile Include="Objects\Description.cs" />
     <Compile Include="Extensions\FileExtensions.cs" />
-    <Compile Include="Objects\Descriptions.cs" />
+    <Compile Include="Objects\Lists\Descriptions.cs" />
+    <Compile Include="Controls\EntryType.cs" />
     <Compile Include="Objects\Game.cs" />
-    <Compile Include="Objects\Games.cs" />
+    <Compile Include="Objects\Lists\Games.cs" />
     <Compile Include="Objects\Groups.cs" />
     <Compile Include="LoadingScreen.xaml.cs">
       <DependentUpon>LoadingScreen.xaml</DependentUpon>
@@ -172,6 +178,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Theme\ExpressionDark.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -249,8 +259,8 @@
     <Resource Include="Resources\UGC_Icon_trans_hover.png" />
     <Resource Include="Resources\UGC_Icon_trans.png" />
     <Resource Include="Resources\help.png" />
-    <Resource Include="Resources\Differences\LensFlare_Difference.jpg" />
-    <Resource Include="Resources\Differences\AA_Difference.jpg" />
+    <Resource Include="Resources\Differences\lensflare.jpg" />
+    <Resource Include="Resources\Differences\aa.jpg" />
     <Resource Include="Resources\Differences\empty.png" />
     <Resource Include="Resources\magnifier.png" />
     <Resource Include="Resources\page_save.png" />
@@ -266,6 +276,13 @@
     <Resource Include="Resources\arrow-right-24.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="packages\Fody.2.1.2\build\netstandard1.0\Fody.targets" Condition="Exists('packages\Fody.2.1.2\build\netstandard1.0\Fody.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\Fody.2.1.2\build\netstandard1.0\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Fody.2.1.2\build\netstandard1.0\Fody.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

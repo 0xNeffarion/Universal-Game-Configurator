@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
 using System.Xml.Serialization;
 
-namespace Universal_Game_Configurator.Objects {
+namespace Universal_Game_Configurator {
 
     [Serializable]
     [XmlRoot("Descriptions_List")]

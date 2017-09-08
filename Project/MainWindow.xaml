@@ -7,7 +7,10 @@
         xmlns:local="clr-namespace:Universal_Game_Configurator"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d" Background="Transparent"
-        Title="Universal Game Configurator - Configurator" Height="660" Width="830" FontFamily="Open Sans" TextOptions.TextFormattingMode="Display" WindowStartupLocation="CenterScreen" MinHeight="570" MinWidth="660" Loaded="Window_Loaded" Icon="Resources/UGC_Icon.ico" UseLayoutRounding="True" WindowStyle="None" AllowsTransparency="True" Closing="mainWindow_Closing" ResizeMode="CanResizeWithGrip">
+        Title="Universal Game Configurator - Configurator" Height="660" Width="830" 
+        FontFamily="Open Sans" TextOptions.TextFormattingMode="Display" WindowStartupLocation="CenterScreen" 
+        MinHeight="570" MinWidth="660" Loaded="Window_Loaded" Icon="Resources/UGC_Icon.ico" UseLayoutRounding="True"
+        WindowStyle="None" AllowsTransparency="True" Closing="mainWindow_Closing" ResizeMode="CanResizeWithGrip">
     <Window.Resources>
         <Style x:Key="sepSty" TargetType="{x:Type Separator}">
             <Setter Property="Height" Value="1" />
@@ -61,7 +64,6 @@
     </Window.Resources>
     <Border CornerRadius="5" Background="{DynamicResource WindowBackgroundBrush}" BorderBrush="#FF555555" BorderThickness="1" >
         <Grid>
-
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="94*"/>
                 <ColumnDefinition Width="60*"/>
@@ -75,11 +77,8 @@
                 <RowDefinition Height="88*"/>
                 <RowDefinition Height="45"/>
             </Grid.RowDefinitions>
-
             <Border Background="{DynamicResource WindowBackgroundBrush}" DockPanel.Dock="Top" BorderBrush="#FF444444" BorderThickness="0,0,0,1" Grid.Row="0" Grid.ColumnSpan="3" MouseDown="Border_MouseDown">
-
                 <DockPanel Background="#FF424242">
-
                     <Button ContextMenuService.IsEnabled="false" x:Name="btnMenu" BorderThickness="0" Background="#FF404040" Width="75" Margin="0,0,5,0" Foreground="#FFDEDEDE" HorizontalContentAlignment="Stretch" Height="28" HorizontalAlignment="Left" Click="btnMenu_Click" >
                         <Button.ContextMenu>
                             <ContextMenu>
@@ -135,7 +134,7 @@
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
-                        
+
                     <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" VerticalAlignment="Center" Margin="7,0,0,0">
                         <TextBlock x:Name="windowTitle" Text="Title" Foreground="White" ForceCursor="True" FontWeight="SemiBold" FontSize="14" VerticalAlignment="Center"></TextBlock>
                     </StackPanel>
@@ -147,7 +146,6 @@
                     </StackPanel>
                 </DockPanel>
             </Border>
-
             <ListView AlternationCount="2" ItemContainerStyle="{StaticResource listviewAlternate}" x:Name="SettingsList" Grid.Row="3" Grid.Column="0" Margin="10,5,10,10" Grid.RowSpan="2" SizeChanged="listView_SizeChanged" Grid.ColumnSpan="2" SelectionChanged="SettingsList_SelectionChanged" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="Transparent" BorderThickness="0" BorderBrush="#FF898989" UseLayoutRounding="True">
 
                 <ListView.Resources>
@@ -211,7 +209,6 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-
             <StackPanel Margin="5,0,3,3" Grid.Row="5" Grid.Column="0" Orientation="Horizontal" Grid.ColumnSpan="2">
                 <Button x:Name="btnBack" Width="140" Margin="5,0,0,7" Click="btnBack_Click" ToolTip="Go back and change the game to configure" IsCancel="True">
                     <StackPanel Orientation="Horizontal">
@@ -293,7 +290,6 @@
                 <CheckBox x:Name="chk_alphabetic" Content="Alphabetic (A-Z)" IsChecked="True" Width="115" Margin="5,0,0,0" Checked="chk_alphabetic_Checked" Unchecked="chk_alphabetic_Unchecked" />
                 <CheckBox x:Name="chk_default" Content="Show Default Value" Width="145" Margin="10,0,0,0" Checked="chk_default_Checked" Unchecked="chk_default_Unchecked" />
             </StackPanel>
-
         </Grid>
     </Border>
 </Window>
