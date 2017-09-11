@@ -17,6 +17,7 @@ Here are some early screenshots of the UI: [Game Selector](https://i.imgur.com/H
 
 * [Extended WPF Toolkit](https://github.com/xceedsoftware/wpftoolkit)
 * [WPF Themes](https://wpfthemes.codeplex.com/)
+* [Fody INotifyPropertyChanged](https://github.com/Fody/PropertyChanged)
 
 ## Contributing
 
