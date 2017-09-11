@@ -55,7 +55,7 @@ namespace Universal_Game_Configurator {
 
             XmlSerializer xs = new XmlSerializer(typeof(Game));
             using (var sr = new StreamReader(path)) {
-               // games = (Games)xs.Deserialize(sr);
+                // games = (Games)xs.Deserialize(sr);
             }
 
             _gamesList = games.games_list;
@@ -91,9 +91,8 @@ namespace Universal_Game_Configurator {
 
         private void GameSelectionWindow_Loaded(object sender, RoutedEventArgs e) {
             windowTitle.Text = this.Title;
-            ThemeManager.ApplyTheme(this, "ExpressionDark");
-            Application.Current.ApplyTheme("ExpressionDark");
-            var anim = new DoubleAnimation(1, (Duration)TimeSpan.FromMilliseconds(250));
+            this.ApplyThemeToWindow(ThemeManager.THEME);
+            var anim = new DoubleAnimation(1, (Duration)TimeSpan.FromMilliseconds(150 * Settings.AnimationMult));
             this.BeginAnimation(UIElement.OpacityProperty, anim);
             GetInstalledGames();
         }
@@ -156,7 +155,7 @@ namespace Universal_Game_Configurator {
         private void GameSelectionWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e) {
             Closing -= GameSelectionWindow_Closing;
             e.Cancel = true;
-            var anim = new DoubleAnimation(0, (Duration)TimeSpan.FromMilliseconds(200));
+            var anim = new DoubleAnimation(0, (Duration)TimeSpan.FromMilliseconds(150));
             anim.Completed += (s, _) => this.Close();
             this.BeginAnimation(UIElement.OpacityProperty, anim);
         }

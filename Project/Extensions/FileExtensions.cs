@@ -6,7 +6,7 @@ namespace Universal_Game_Configurator {
 
         public static String CRC32Hash(this FileInfo file) {
             byte[] fileBytes = File.ReadAllBytes(file.FullName);
-            return Utilities.FastCRC32.CRC32Bytes(fileBytes).ToString("X");
+            return Utilities.FastCRC32.CRC32Bytes(fileBytes).ToString("X2");
         }
 
     }

@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
-using System.Windows.Media.Imaging;
 
 namespace Universal_Game_Configurator {
-    public class ImageConverter : IValueConverter {
+    public class GenresConverter : IValueConverter {
 
-        public static ImageConverter Instance = new ImageConverter();
+        public static GenresConverter Instance = new GenresConverter();
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
-            try {
-                return new BitmapImage(new Uri(Paths.PACKPATH + ((String)value)));
-            } catch {
+            Genres g = (Genres)value;
+
+            if (g == null) {
                 return null;
             }
+
+            return g.ToString();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {

@@ -14,7 +14,7 @@ namespace Universal_Game_Configurator {
         private Utilities.INIFile iniF;
 
         public TypeA(List<string> Files) : base(Files) {
-            
+
         }
 
         public override void WriteValue(ConfigEntry cf) {
@@ -31,6 +31,5 @@ namespace Universal_Game_Configurator {
             iniF = new Utilities.INIFile(Files[cf.FileIndex]);
             return iniF.IniReadValue(cf.Section, cf.Variable);
         }
-
     }
 }

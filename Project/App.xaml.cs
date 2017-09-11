@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Management;
-using System.Reflection;
 using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Interop;
-using System.Windows.Media;
 using System.Windows.Threading;
-using Microsoft.VisualBasic.Devices;
 using System.Windows.Media.Animation;
 
 namespace Universal_Game_Configurator {
@@ -27,12 +22,7 @@ namespace Universal_Game_Configurator {
         public bool DoHandle { get; set; }
 
         protected override void OnStartup(StartupEventArgs e) {
-            try {
-                var uri = new Uri(@"pack://application:,,,/Theme/ExpressionDark.xaml");
-                Resources.MergedDictionaries.Add(LoadComponent(uri) as ResourceDictionary);
-            } catch (Exception ex) {
-                Utilities.showError(null, "Unable to apply WPF Theme.\n" + ex.ToString());
-            }
+
         }
 
         private void Current_Exit(object sender, ExitEventArgs e) {

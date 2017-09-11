@@ -135,26 +135,45 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Configurators\ConfigTypes.cs" />
+    <Compile Include="Configurators\ConfigType.cs" />
+    <Compile Include="Configurators\ConfigTypeUtil.cs" />
     <Compile Include="Controls\ControlFactory.cs" />
-    <Compile Include="Objects\ConfigEntry.cs" />
+    <Compile Include="Converters\GenresConverter.cs" />
+    <Compile Include="Converters\ImageConverter.cs" />
+    <Compile Include="Objects\Data\ConfigEntry.cs" />
     <Compile Include="Configurators\Configurator.cs" />
     <Compile Include="Configurators\Types\TypeA.cs" />
-    <Compile Include="Converters.cs" />
-    <Compile Include="Objects\Lists\Config.cs" />
-    <Compile Include="Objects\Description.cs" />
+    <Compile Include="Objects\Data\Helpers\ConfigUtil.cs" />
+    <Compile Include="Objects\Data\Helpers\DescriptionUtil.cs" />
+    <Compile Include="Objects\Data\Helpers\GamesUtil.cs" />
+    <Compile Include="Objects\Data\Lists\Config.cs" />
+    <Compile Include="Objects\Data\Description.cs" />
     <Compile Include="Extensions\FileExtensions.cs" />
-    <Compile Include="Objects\Lists\Descriptions.cs" />
+    <Compile Include="Objects\Data\Lists\Descriptions.cs" />
     <Compile Include="Controls\EntryType.cs" />
-    <Compile Include="Objects\Game.cs" />
-    <Compile Include="Objects\Lists\Games.cs" />
-    <Compile Include="Objects\Groups.cs" />
+    <Compile Include="Objects\Data\Game.cs" />
+    <Compile Include="Objects\Data\Lists\Games.cs" />
+    <Compile Include="Objects\Data\Group.cs" />
     <Compile Include="LoadingScreen.xaml.cs">
       <DependentUpon>LoadingScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="Extensions\StringExtensions.cs" />
-    <Compile Include="Settings.cs" />
-    <Compile Include="Utilities.cs" />
+    <Compile Include="Objects\Data\Genre.cs" />
+    <Compile Include="Objects\Data\Lists\Genres.cs" />
+    <Compile Include="Objects\ViewModels\Base\BaseCommand.cs" />
+    <Compile Include="Objects\ViewModels\Base\BaseViewModel.cs" />
+    <Compile Include="Objects\ViewModels\ConfigEntryViewModel.cs" />
+    <Compile Include="Objects\ViewModels\GamesCollectionViewModel.cs" />
+    <Compile Include="Objects\ViewModels\GameViewModel.cs" />
+    <Compile Include="Settings\Settings.cs" />
+    <Compile Include="Util\Hashing\CRC32.cs" />
+    <Compile Include="Util\INIFile.cs" />
+    <Compile Include="Util\MsgBoxUtil.cs" />
+    <Compile Include="Util\Tools\CollectionTools.cs" />
+    <Compile Include="Util\Utilities.cs" />
+    <Compile Include="Const\Paths.cs" />
+    <Compile Include="Util\Tools\WebTools.cs" />
+    <Compile Include="Util\WinSystem.cs" />
     <Page Include="GameSelector.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -178,10 +197,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Theme\ExpressionDark.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -230,7 +245,9 @@
   <ItemGroup>
     <Resource Include="Resources\UGC_Icon.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Objects\ViewModels\Helpers\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="data\configs\games\2.xml">
       <SubType>Designer</SubType>

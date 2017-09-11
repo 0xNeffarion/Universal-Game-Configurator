@@ -60,14 +60,14 @@ namespace Universal_Game_Configurator {
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
             windowTitle.Text = this.Title;
-            //groupBox_setting.Foreground = new SolidColorBrush(_mainColor);
+            this.ApplyThemeToWindow(ThemeManager.THEME);
             var anim = new DoubleAnimation(1, (Duration)TimeSpan.FromMilliseconds(300));
             this.BeginAnimation(UIElement.OpacityProperty, anim);
             RefreshListSize();
             _configs.Clear();
             SettingsList.ItemsSource = null;
 
-            _ldScreen = new LoadingScreen("Loading game configuration definitions...");
+            _ldScreen = new LoadingScreen("Loading game configs...");
             Thread th = new Thread(new ThreadStart(LoadConfigs));
             th.Start();
             _ldScreen.ShowDialog();
