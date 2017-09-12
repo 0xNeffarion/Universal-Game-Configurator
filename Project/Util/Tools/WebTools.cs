@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Net;
 using System.Net.NetworkInformation;
 
-namespace Universal_Game_Configurator {
+namespace Universal_Game_Configurator.Util.Tools {
     public class WebTools {
 
         /// <summary>

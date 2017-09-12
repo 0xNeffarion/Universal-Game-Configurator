@@ -1,20 +1,20 @@
-﻿using System;
-using System.Reflection;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Universal_Game_Configurator {
+namespace Universal_Game_Configurator.Theme {
     public static class ThemeManager {
 
         public const String THEME = "ExpressionDark";
-        public const String THEME_PATH = @"/WPF.Themes;component/ExpressionDark/Theme.xaml";
+        public const String THEME_PATH_EXT = @"/WPF.Themes;component/ExpressionDark/Theme.xaml";
+        public const String THEME_LOCAL = @"Theme/ExpressionDark.xaml";
 
         private static ResourceDictionary GetThemeResourceDictionary() {
-            Assembly assembly = Assembly.LoadFrom("WPF.Themes.dll");
-            return Application.LoadComponent(new Uri(THEME_PATH, UriKind.Relative)) as ResourceDictionary;
+            //Assembly assembly = Assembly.LoadFrom("WPF.Themes.dll");
+            return Application.LoadComponent(new Uri(THEME_LOCAL, UriKind.Relative)) as ResourceDictionary;
         }
 
-        private static void ApplyTheme(this Application app, string theme) {
+        public static void ApplyTheme(this Application app, string theme) {
             ResourceDictionary dictionary = GetThemeResourceDictionary();
 
             if (dictionary != null) {
@@ -23,7 +23,7 @@ namespace Universal_Game_Configurator {
             }
         }
 
-        private static void ApplyTheme(this ContentControl control, string theme) {
+        public static void ApplyTheme(this ContentControl control, string theme) {
             ResourceDictionary dictionary = GetThemeResourceDictionary();
 
             if (dictionary != null) {

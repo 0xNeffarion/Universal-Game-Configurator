@@ -1,15 +1,20 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Windows.Input;
+using Universal_Game_Configurator.Configurators;
+using Universal_Game_Configurator.Objects.Commands.Base;
+using Universal_Game_Configurator.Objects.Data;
+using Universal_Game_Configurator.Objects.Data.Helpers;
+using Universal_Game_Configurator.Objects.ViewModels.Base;
 
-namespace Universal_Game_Configurator {
+namespace Universal_Game_Configurator.Objects.ViewModels {
     public class ConfigEntryViewModel : BaseViewModel {
 
         private String Initial_Value { get; set; }
 
         public ConfigEntryViewModel(ConfigEntry entry, Game game) {
-            Initialize(entry.Id, entry.Variable, entry.FileIndex, entry.Section, entry.Value, entry.Name, entry.Group,
-                game.ConfigFiles, game.Configurator, entry.Description);
+
         }
 
         public int Id { get; set; }
@@ -40,12 +45,9 @@ namespace Universal_Game_Configurator {
 
         public ICommand SaveEntryCommand { get; set; }
 
-        public ConfigEntry ToConfigEntry() {
-            return new ConfigEntry(this);
-        }
 
         private void SaveEntry() {
-            Configurator.WriteValue(this.ToConfigEntry());
+            //Configurator.WriteValue(this.ToConfigEntry());
         }
 
         private void Initialize(int id, string variable, int fileIndex, string section, string value,

@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Windows;
 
-namespace Universal_Game_Configurator {
+namespace Universal_Game_Configurator.Util {
 
     public static class MsgBoxUtil {
 

@@ -1,7 +1,9 @@
-﻿using System;
+using System;
 using System.Windows.Media;
+using Universal_Game_Configurator.Const;
+using Universal_Game_Configurator.Util;
 
-namespace Universal_Game_Configurator {
+namespace Universal_Game_Configurator.Settings {
 
     public class Settings {
 

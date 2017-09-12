@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Universal_Game_Configurator {
+namespace Universal_Game_Configurator.Util.Tools {
     public static class CollectionTools {
 
         /// <summary>

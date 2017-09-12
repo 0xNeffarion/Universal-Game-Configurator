@@ -8,8 +8,8 @@
         mc:Ignorable="d"
         Title="Universal Game Configurator - Game selection" Height="579" Width="615" 
         Icon="Resources/UGC_Icon.ico" WindowStartupLocation="CenterScreen" TextOptions.TextFormattingMode="Display" 
-        MinHeight="320" MinWidth="460" UseLayoutRounding="True" Loaded="GameSelectionWindow_Loaded" FontFamily="Open Sans" 
-        WindowStyle="None" AllowsTransparency="True" Background="{x:Null}" ResizeMode="CanResizeWithGrip" Closing="GameSelectionWindow_Closing">
+        MinHeight="320" MinWidth="460" UseLayoutRounding="True" FontFamily="Open Sans" 
+        WindowStyle="None" AllowsTransparency="True" Background="{x:Null}" ResizeMode="CanResizeWithGrip">
     <Window.Resources>
         <SolidColorBrush x:Key="ListViewItemSelectedBackgroundThemeBrush" Color="Gray" />
         <Style x:Key="myHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
@@ -50,14 +50,15 @@
                     <TextBlock x:Name="windowTitle" Text="Title" Foreground="White" ForceCursor="True" FontWeight="SemiBold" FontSize="14" VerticalAlignment="Center"></TextBlock>
                 </StackPanel>
                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,4,0" DockPanel.Dock="Right">
-                    <Button x:Name="btnMinimizeWindow" FontFamily="Marlett" Content="0" Margin="1,1,4,1" VerticalAlignment="Center" Padding="7,4" FontWeight="Bold" Foreground="White" Click="btnMinimizeWindow_Click" />
-                    <Button x:Name="btnCloseWindow" FontFamily="Marlett" Content="r" Margin="1" VerticalAlignment="Center" Padding="7,4" FontWeight="Bold" Foreground="White" Background="#FFCB2626" Click="btnCloseWindow_Click" />
+                    <Button x:Name="btnMinimizeWindow" FontFamily="Marlett" Content="0" Margin="1,1,4,1" VerticalAlignment="Center" Padding="7,4" FontWeight="Bold" Foreground="White" 
+                            Click="btnMinimizeWindow_Click" BorderThickness="1"  />
+                    <Button x:Name="btnCloseWindow" FontFamily="Marlett" Content="r" Margin="1" VerticalAlignment="Center" Padding="7,4" FontWeight="Bold" Foreground="White" 
+                            Background="#FFCB2626" Click="btnCloseWindow_Click" BorderThickness="1" />
                 </StackPanel>
             </DockPanel>
-            <ListView x:Name="GamesListView" Grid.ColumnSpan="2" Grid.Column="0" Grid.RowSpan="3" Margin="10,5,10,20" Grid.Row="3" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Padding="0,0,0,6" SelectionMode="Single" SizeChanged="GamesListView_SizeChanged" Foreground="#FFFBFBFB" BorderBrush="LightGray" BorderThickness="0" Background="{x:Null}" KeyDown="GamesListView_KeyDown">
-                <ListView.DataContext>
-                    <local:Game/>
-                </ListView.DataContext>
+            <ListView x:Name="GamesListView" Grid.ColumnSpan="2" Grid.Column="0" Grid.RowSpan="3" Margin="10,5,10,20" Grid.Row="3" ScrollViewer.VerticalScrollBarVisibility="Visible" 
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled" Padding="0,0,0,6" SelectionMode="Single" SizeChanged="GamesListView_SizeChanged" Foreground="#FFFBFBFB" 
+                      BorderBrush="LightGray" BorderThickness="0" Background="{x:Null}" >
                 <ListView.Resources>
                     <Style TargetType="{x:Type ListViewItem}">
                         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
@@ -158,20 +159,20 @@
                     </Style>
                 </ListView.Resources>
                 <ListView.View>
-                    <GridView ColumnHeaderContainerStyle="{StaticResource myHeaderStyle}" AllowsColumnReorder="False" >
+                    <GridView ColumnHeaderContainerStyle="{StaticResource myHeaderStyle}" AllowsColumnReorder="False">
                         <GridViewColumn x:Name="GridCol1" Header="Installed game">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
                                         <Border Margin="6" BorderBrush="#FF747474" BorderThickness="1" Width="65" Height="65" CornerRadius="9" HorizontalAlignment="Left" VerticalAlignment="Center">
-                                            <Image RenderOptions.BitmapScalingMode="HighQuality" x:Name="imgGameIcon" Width="65" Height="65" Source="{Binding ImagePath}" Stretch="UniformToFill">
+                                            <Image RenderOptions.BitmapScalingMode="HighQuality" x:Name="imgGameIcon" Width="65" Height="65" Stretch="UniformToFill">
                                                 <Image.Clip>
                                                     <RectangleGeometry RadiusX="9" RadiusY="9" Rect="0,0,64,64"/>
                                                 </Image.Clip>
                                             </Image>
                                         </Border>
-                                        <TextBlock x:Name="txtGameName" Text="{Binding Name}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" 
-                                                   FontWeight="Bold" Margin="15,0,0,0" TextTrimming="WordEllipsis" ToolTip="{Binding InstallPath, StringFormat=Directory: \{0\}}"></TextBlock>
+                                        <TextBlock x:Name="txtGameName" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" 
+                                                   FontWeight="Bold" Margin="15,0,0,0" TextTrimming="WordEllipsis"></TextBlock>
                                     </StackPanel>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
@@ -179,14 +180,16 @@
                         <GridViewColumn x:Name="GridCol2" Header="Genre" Width="90">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock x:Name="txtGameType" Text="{Binding Genre}" VerticalAlignment="Stretch" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,0" HorizontalAlignment="Stretch" TextAlignment="Center" TextTrimming="WordEllipsis" TextOptions.TextFormattingMode="Display"></TextBlock>
+                                    <TextBlock x:Name="txtGameType" VerticalAlignment="Stretch" FontSize="14" FontWeight="SemiBold" Margin="0" HorizontalAlignment="Stretch" 
+                                               TextAlignment="Center" TextTrimming="WordEllipsis" TextOptions.TextFormattingMode="Display"></TextBlock>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn x:Name="GridCol3" Header="" Width="70">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Image x:Name="imgNext" VerticalAlignment="Center" HorizontalAlignment="Center" Width="24" Height="24" Source="Resources/arrow-right-24.png" Cursor="Hand" MouseDown="imgNext_MouseDown" ToolTip="Configure" ></Image>
+                                    <Image x:Name="imgNext" VerticalAlignment="Center" HorizontalAlignment="Center" Width="24" 
+                                           Height="24" Source="Resources/arrow-right-24.png" Cursor="Hand" ToolTip="Configure" IsHitTestVisible="True" ></Image>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -197,7 +200,8 @@
                    Grid.ColumnSpan="2" Grid.Column="0" TextAlignment="Center" VerticalAlignment="Center" FontSize="17" FontWeight="SemiBold" Height="23" Margin="0,15,0,0" Foreground="#FFE0E0E0"/>
             <DockPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"/>
             <Border Margin="10,10,20,5" Grid.Row="2" Grid.Column="0" BorderThickness="1" BorderBrush="#FF898989" Grid.ColumnSpan="2">
-                <xctk:WatermarkTextBox Style="{StaticResource borderRem}" x:Name="txtBoxSearch"  TextWrapping="Wrap" Height="26" VerticalAlignment="Center" TextChanged="txtBoxSearch_TextChanged" Foreground="White" VerticalContentAlignment="Center" Background="{x:Null}" BorderThickness="0" >
+                <xctk:WatermarkTextBox Style="{StaticResource borderRem}" x:Name="txtBoxSearch"  TextWrapping="Wrap" Height="26" VerticalAlignment="Center" 
+                                       TextChanged="txtBoxSearch_TextChanged" Foreground="White" VerticalContentAlignment="Center" Background="{x:Null}" BorderThickness="0" >
                     <xctk:WatermarkTextBox.Watermark>
                         <StackPanel Orientation="Horizontal">
                             <Image Source="Resources/magnifier.png" Width="16" Height="16" Stretch="Uniform" />
@@ -206,7 +210,7 @@
                     </xctk:WatermarkTextBox.Watermark>
                 </xctk:WatermarkTextBox>
             </Border>
-            <Image x:Name="imgRefresh" Grid.Column="1" Grid.Row="1" Source="Resources/arrow_refresh.png" Margin="7,14,10,11" Cursor="Hand" ToolTip="Refresh list" MouseDown="imgRefresh_MouseDown"/>
+            <Image x:Name="imgRefresh" Grid.Column="1" Grid.Row="1" Source="Resources/arrow_refresh.png" Margin="7,14,10,11" Cursor="Hand" ToolTip="Refresh list"/>
         </Grid>
     </Border>
 </Window>

@@ -4,6 +4,13 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 using System.Windows.Media.Animation;
+using System.Xml.Serialization;
+using Universal_Game_Configurator.Extensions;
+using Universal_Game_Configurator.Objects.Data.Databases;
+using Universal_Game_Configurator.Objects.Data;
+using Universal_Game_Configurator.Objects.Data.Lesser;
+using Universal_Game_Configurator.Util;
+using Universal_Game_Configurator.Theme;
 
 namespace Universal_Game_Configurator {
 
@@ -16,13 +23,16 @@ namespace Universal_Game_Configurator {
             TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
             Current.Exit += Current_Exit;
 
-            Timeline.DesiredFrameRateProperty.OverrideMetadata(typeof(Timeline), new FrameworkPropertyMetadata { DefaultValue = 60 });
+            this.ApplyTheme(ThemeManager.THEME);
+
+            Timeline.DesiredFrameRateProperty.OverrideMetadata(typeof(Timeline), new FrameworkPropertyMetadata { DefaultValue = WinSystem.Display.getRefreshRate() });
         }
 
         public bool DoHandle { get; set; }
 
         protected override void OnStartup(StartupEventArgs e) {
-
+            Type[] myTypes = new Type[] { typeof(GamesDatabase), typeof(ConfigsDatabase), typeof(Game), typeof(ConfigEntry), typeof(ConfigFile) };
+            XmlSerializer.FromTypes(myTypes);
         }
 
         private void Current_Exit(object sender, ExitEventArgs e) {
@@ -32,28 +42,36 @@ namespace Universal_Game_Configurator {
         #region Exceptions
 
         private void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e) {
+            String hash = e.ToString().GetHashCode().ToString();
+
             MessageBox.Show("A Critical error caused the application to crash!\nThe exception has been logged.\nError code: " +
-                Utilities.FastCRC32.CRC32String(e.ToString()), "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-            Console.WriteLine("UNHANDLED EXCEPTION (1) (Code: " + e.ToString().CRC32Hash() + ") : " +
+               hash, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            Console.WriteLine("UNHANDLED EXCEPTION (1) (Code: " + hash + ") : " +
                                   e.Exception.ToString());
         }
 
         private void Current_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e) {
+            String hash = e.ToString().GetHashCode().ToString();
+
             MessageBox.Show("A Critical error caused the application to crash!\nThe exception has been logged.\nError code: " +
-                Utilities.FastCRC32.CRC32String(e.ToString()), "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-            Console.WriteLine("UNHANDLED EXCEPTION (2) (Code: " + e.ToString().CRC32Hash() + ") : " +
+                hash, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            Console.WriteLine("UNHANDLED EXCEPTION (2) (Code: " + hash + ") : " +
                                   e.Exception.ToString());
         }
 
         private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e) {
+            String hash = e.ToString().GetHashCode().ToString();
+
             MessageBox.Show("A Critical error caused the application to crash!\nThe exception has been logged.\nError code: " +
-                Utilities.FastCRC32.CRC32String(e.ToString()), "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-            Console.WriteLine("UNHANDLED EXCEPTION (3) (Code: " + e.ToString().CRC32Hash() + ") : " +
+                (hash), "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            Console.WriteLine("UNHANDLED EXCEPTION (3) (Code: " + hash + ") : " +
                                   e.ExceptionObject.ToString());
         }
 
         private void CurrentDomain_FirstChanceException(object sender, FirstChanceExceptionEventArgs e) {
-            Console.WriteLine("UNHANDLED EXCEPTION (4) (Code: " + e.ToString().CRC32Hash() + ") : " +
+            String hash = e.ToString().GetHashCode().ToString();
+
+            Console.WriteLine("UNHANDLED EXCEPTION (4) (Code: " + hash + ") : " +
                                   e.Exception.ToString());
         }
 

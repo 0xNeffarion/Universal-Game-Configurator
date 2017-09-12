@@ -1,12 +1,13 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using Xceed.Wpf.Toolkit;
 using Universal_Game_Configurator;
+using Universal_Game_Configurator.Objects.Data;
 
-namespace Universal_Game_Configurator {
+namespace Universal_Game_Configurator.Controls {
     public class ControlFactory {
 
         private const Decimal RANGE_PH = -999;
@@ -28,42 +29,42 @@ namespace Universal_Game_Configurator {
 
         public UIElement CreateElement(ConfigEntry cfgEntry) {
             UIElement MyElement = null;
+            /*
+                        switch (cfgEntry.Type) {
+                            case EntryType.IntegerUpDown:
+                                MyElement = MakeIntegerUpDown(cfgEntry.Default, cfgEntry.Range);
+                                break;
+                            case EntryType.DoubleUpDown:
+                                MyElement = MakeDoubleUpDown(cfgEntry.Default, cfgEntry.Range);
+                                break;
+                            case EntryType.StringTextBox:
+                                MyElement = MakeTextBox(cfgEntry.Default);
+                                break;
+                            case EntryType.DoubleSlider:
+                                MyElement = MakeDoubleSlider(cfgEntry.Default, cfgEntry.Range, cfgEntry.Interval);
+                                break;
+                            case EntryType.IntegerSlider:
+                                MyElement = MakeIntegerSlider(cfgEntry.Default, cfgEntry.Range, cfgEntry.Interval);
+                                break;
+                            case EntryType.BooleanNormalComboBox:
+                                MyElement = MakeNormalBoolCombo(cfgEntry.Default);
+                                break;
+                            case EntryType.BooleanYesNoComboBox:
+                                MyElement = MakeYesNoCombo(cfgEntry.Default);
+                                break;
+                            case EntryType.BooleanBinaryComboBox:
+                                MyElement = MakeBinaryBoolCombo(cfgEntry.Default);
+                                break;
+                            case EntryType.ComboWithDescriptions:
+                                MyElement = MakeComboWithValueDesc(cfgEntry.ValueDesc, cfgEntry.Default);
+                                break;
+                        }*/
 
-            switch (cfgEntry.Type) {
-                case EntryType.IntegerUpDown:
-                    MyElement = MakeIntegerUpDown(cfgEntry.Default, cfgEntry.Range);
-                    break;
-                case EntryType.DoubleUpDown:
-                    MyElement = MakeDoubleUpDown(cfgEntry.Default, cfgEntry.Range);
-                    break;
-                case EntryType.StringTextBox:
-                    MyElement = MakeTextBox(cfgEntry.Default);
-                    break;
-                case EntryType.DoubleSlider:
-                    MyElement = MakeDoubleSlider(cfgEntry.Default, cfgEntry.Range, cfgEntry.Interval);
-                    break;
-                case EntryType.IntegerSlider:
-                    MyElement = MakeIntegerSlider(cfgEntry.Default, cfgEntry.Range, cfgEntry.Interval);
-                    break;
-                case EntryType.BooleanNormalComboBox:
-                    MyElement = MakeNormalBoolCombo(cfgEntry.Default);
-                    break;
-                case EntryType.BooleanYesNoComboBox:
-                    MyElement = MakeYesNoCombo(cfgEntry.Default);
-                    break;
-                case EntryType.BooleanBinaryComboBox:
-                    MyElement = MakeBinaryBoolCombo(cfgEntry.Default);
-                    break;
-                case EntryType.ComboWithDescriptions:
-                    MyElement = MakeComboWithValueDesc(cfgEntry.ValueDesc, cfgEntry.Default);
-                    break;
-            }
-            
             return MyElement;
         }
 
         private void ElementValueChanged(object sender, RoutedEventArgs e) {
-           
+
         }
 
         private UIElement MakeIntegerUpDown(Object defaultValue = null, Decimal[] ranges = null) {
@@ -89,7 +90,7 @@ namespace Universal_Game_Configurator {
             }
 
             // Set default value if it exists
-            if(defaultValue != null) {
+            if (defaultValue != null) {
                 int val = (int)defaultValue;
                 IntElement.Value = val;
             }
@@ -219,7 +220,7 @@ namespace Universal_Game_Configurator {
             sliderElement.AutoToolTipPrecision = 4;
 
             // Set value intervals
-            if(interval != -1 && interval > 0) {
+            if (interval != -1 && interval > 0) {
                 sliderElement.TickFrequency = interval;
                 sliderElement.IsSnapToTickEnabled = true;
                 sliderElement.TickPlacement = TickPlacement.BottomRight;

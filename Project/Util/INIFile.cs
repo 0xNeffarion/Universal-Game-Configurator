@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Universal_Game_Configurator {
+namespace Universal_Game_Configurator.Util {
 
     public class INIFile {
         public String path;

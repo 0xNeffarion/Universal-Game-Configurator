@@ -15,6 +15,9 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -27,22 +30,21 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>true</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>
     </DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>On</GenerateSerializationAssemblies>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -52,6 +54,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>Universal_Game_Configurator.App</StartupObject>
@@ -108,20 +111,8 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="WPF.Themes">
-      <HintPath>packages\WPF.Themes.dll</HintPath>
-    </Reference>
     <Reference Include="Xceed.Wpf.AvalonDock">
       <HintPath>packages\Extended.Wpf.Toolkit.3.1\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
-    </Reference>
-    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero">
-      <HintPath>packages\Extended.Wpf.Toolkit.3.1\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
-    </Reference>
-    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro">
-      <HintPath>packages\Extended.Wpf.Toolkit.3.1\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
-    </Reference>
-    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010">
-      <HintPath>packages\Extended.Wpf.Toolkit.3.1\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
     </Reference>
     <Reference Include="Xceed.Wpf.DataGrid">
       <HintPath>packages\Extended.Wpf.Toolkit.3.1\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
@@ -140,33 +131,35 @@
     <Compile Include="Controls\ControlFactory.cs" />
     <Compile Include="Converters\GenresConverter.cs" />
     <Compile Include="Converters\ImageConverter.cs" />
+    <Compile Include="Objects\Commands\GameSelector\ConfigureCommand.cs" />
+    <Compile Include="Objects\Data\Lesser\ConfigFile.cs" />
     <Compile Include="Objects\Data\ConfigEntry.cs" />
     <Compile Include="Configurators\Configurator.cs" />
     <Compile Include="Configurators\Types\TypeA.cs" />
+    <Compile Include="Objects\Data\Lesser\DescriptionValue.cs" />
     <Compile Include="Objects\Data\Helpers\ConfigUtil.cs" />
     <Compile Include="Objects\Data\Helpers\DescriptionUtil.cs" />
     <Compile Include="Objects\Data\Helpers\GamesUtil.cs" />
-    <Compile Include="Objects\Data\Lists\Config.cs" />
+    <Compile Include="Objects\Data\Databases\ConfigsDatabase.cs" />
     <Compile Include="Objects\Data\Description.cs" />
     <Compile Include="Extensions\FileExtensions.cs" />
-    <Compile Include="Objects\Data\Lists\Descriptions.cs" />
+    <Compile Include="Objects\Data\Databases\DescriptionsDatabase.cs" />
     <Compile Include="Controls\EntryType.cs" />
     <Compile Include="Objects\Data\Game.cs" />
-    <Compile Include="Objects\Data\Lists\Games.cs" />
-    <Compile Include="Objects\Data\Group.cs" />
+    <Compile Include="Objects\Data\Databases\GamesDatabase.cs" />
+    <Compile Include="Objects\Data\Lesser\Group.cs" />
     <Compile Include="LoadingScreen.xaml.cs">
       <DependentUpon>LoadingScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Objects\Data\Genre.cs" />
-    <Compile Include="Objects\Data\Lists\Genres.cs" />
-    <Compile Include="Objects\ViewModels\Base\BaseCommand.cs" />
+    <Compile Include="Objects\Data\Lesser\Genres.cs" />
+    <Compile Include="Objects\Commands\Base\BaseCommand.cs" />
     <Compile Include="Objects\ViewModels\Base\BaseViewModel.cs" />
     <Compile Include="Objects\ViewModels\ConfigEntryViewModel.cs" />
-    <Compile Include="Objects\ViewModels\GamesCollectionViewModel.cs" />
     <Compile Include="Objects\ViewModels\GameViewModel.cs" />
     <Compile Include="Settings\Settings.cs" />
-    <Compile Include="Util\Hashing\CRC32.cs" />
+    <Compile Include="Util\Extern\Devmode.cs" />
     <Compile Include="Util\INIFile.cs" />
     <Compile Include="Util\MsgBoxUtil.cs" />
     <Compile Include="Util\Tools\CollectionTools.cs" />
@@ -197,6 +190,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Theme\ExpressionDark.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -217,7 +214,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.manifest" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -247,6 +246,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Objects\ViewModels\Helpers\" />
+    <Folder Include="Util\Hashing\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="data\configs\games\2.xml">
@@ -300,6 +300,9 @@
     </PropertyGroup>
     <Error Condition="!Exists('packages\Fody.2.1.2\build\netstandard1.0\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Fody.2.1.2\build\netstandard1.0\Fody.targets'))" />
   </Target>
+  <PropertyGroup>
+    <PostBuildEvent>rd /s /q "de", "es", "fr", "it", "ja", "ko", "ru", "zh-Hans", "zh-Hant","pt-BR","ro","hu","sv"</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

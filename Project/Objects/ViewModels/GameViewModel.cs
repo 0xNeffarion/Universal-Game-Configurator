@@ -1,37 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
+using Universal_Game_Configurator.Objects.Commands.Base;
+using Universal_Game_Configurator.Objects.Commands.GameSelector;
+using Universal_Game_Configurator.Objects.Data;
+using Universal_Game_Configurator.Objects.Data.Helpers;
+using Universal_Game_Configurator.Objects.ViewModels.Base;
 
-namespace Universal_Game_Configurator {
+namespace Universal_Game_Configurator.Objects.ViewModels {
     public class GameViewModel : BaseViewModel {
 
-        public GameViewModel(int id, string name, Configurator configurator, Genres genres, string imageName, string installPath) {
-            Initialize(id, name, configurator, genres, imageName, installPath);
+        public ObservableCollection<Game> Games { get; set; }
+
+        public ICommand ConfigureCommand { get; set; }
+
+        public ICommand GetGamesCommand { get; set; }
+
+        public Action CloseWindowAction { get; set; }
+
+        public GameViewModel() {
+            ConfigureCommand = new ConfigureCommand(Configure);
+            GetGamesCommand = new BaseCommand(GetGames);
+            GetGames();
         }
 
-        public int Id { get; set; }
-
-        public String Name { get; set; }
-
-        public Configurator Configurator { get; set; }
-
-        public Genres Genres { get; set; }
-
-        public String ImageName { get; set; }
-
-        public String InstallPath { get; set; }
-
-        private void Initialize(int id, string name, Configurator configurator, Genres genres, string imageName, string installPath) {
-            this.Id = id;
-            this.Name = name;
-            this.Configurator = configurator;
-            this.Genres = genres;
-            this.ImageName = imageName;
-            this.InstallPath = installPath;
+        private void Configure() {
+            CloseWindowAction();
         }
+
+        private void GetGames() {
+            Games = new ObservableCollection<Game>(GamesUtil.GetInstalledGames());
+        }
+
+
 
     }
 }

@@ -21,6 +21,10 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Xml.Linq;
+using Universal_Game_Configurator.Configurators;
+using Universal_Game_Configurator.Objects.Data;
+using Universal_Game_Configurator.Theme;
+using Universal_Game_Configurator.Util;
 using Xceed.Wpf.AvalonDock.Controls;
 using Xceed.Wpf.Toolkit;
 using Color = System.Windows.Media.Color;
@@ -38,12 +42,12 @@ namespace Universal_Game_Configurator {
         private GridViewColumn _tempColumn;
         private byte _numCols = 3;
         private string _gamePath = null;
-        private ObservableCollection<Config> _configs = new ObservableCollection<Config>();
+        private ObservableCollection<ConfigEntry> _configs = new ObservableCollection<ConfigEntry>();
         private readonly Configurator _currentConfigurator;
         private LoadingScreen _ldScreen;
 
         public MainWindow(Game game) {
-            _currentConfigurator = ConfigTypes.GetConfigurator(game.Type, game.ConfigFiles);
+            //_currentConfigurator = ConfigTypes.GetConfigurator(game.Type, game.ConfigFiles);
             _gamePath = game.InstallPath;
             _gameId = game.Id;
             InitializeComponent();
@@ -81,7 +85,7 @@ namespace Universal_Game_Configurator {
         }
 
         private void LoadConfigs() {
-            XDocument doc = XDocument.Load(Utilities.AppDir + @"\data\configs\games\" + _gameId + ".xml");
+            /*XDocument doc = XDocument.Load(Utilities.AppDir + @"\data\configs\games\" + _gameId + ".xml");
             var root = doc.Descendants("Config");
             int id = 0;
             short index = 0;
@@ -120,248 +124,12 @@ namespace Universal_Game_Configurator {
                 _ldScreen.Close();
                 SettingsList.SelectedIndex = 0;
 
-            }));
+            }));*/
 
         }
 
         private void CreateValueControl(int type, object defaultVal, Decimal rangeMin = -1, Decimal rangeMax = -1, double interval = -1, Dictionary<String, String> valdescriptions = null) {
-            ValueContainer.Children.Clear();
 
-            switch (type) {
-                case 0:  // Normal Integer TextBox
-
-                    IntegerUpDown control = new IntegerUpDown();
-
-                    if (rangeMax == -1 && rangeMin == -1) {
-                        control.Maximum = Int32.MaxValue;
-                        control.Minimum = Int32.MinValue;
-                    } else {
-                        control.Maximum = Convert.ToInt32(rangeMax);
-                        control.Minimum = Convert.ToInt32(rangeMin);
-                    }
-
-                    if (defaultVal != null) {
-                        int temp = 0;
-
-                        try {
-                            temp = (int)defaultVal;
-                        } catch { }
-                        control.Value = temp;
-                    }
-
-                    _currentControl = control;
-                    ValueContainer.Children.Add(_currentControl);
-                    control.ValueChanged += ValueControl_ValueChanged;
-
-
-                    break;
-                case 1:  // Normal String TextBox
-
-                    TextBox control2 = new TextBox();
-                    if (defaultVal != null) {
-                        String temp = "";
-
-                        try {
-                            temp = (string)defaultVal;
-                        } catch { }
-                        control2.Text = temp;
-                    }
-
-
-                    control2.FontSize = 13;
-                    control2.HorizontalScrollBarVisibility = ScrollBarVisibility.Auto;
-                    control2.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
-                    _currentControl = control2;
-                    ValueContainer.Children.Add(_currentControl);
-                    control2.TextChanged += ValueControl_ValueChanged;
-
-                    break;
-                case 2:  // Normal Double Textbox
-
-                    DecimalUpDown control3 = new DecimalUpDown();
-                    if (rangeMax == -1 && rangeMin == -1) {
-                        control3.Maximum = Decimal.MaxValue;
-                        control3.Minimum = Decimal.MinValue;
-                    } else {
-                        control3.Maximum = rangeMax;
-                        control3.Minimum = rangeMin;
-                    }
-
-                    if (defaultVal != null) {
-                        Decimal temp = 0;
-
-                        try {
-                            temp = (Decimal)defaultVal;
-                        } catch { }
-                        control3.Value = temp;
-                    }
-
-                    _currentControl = control3;
-                    ValueContainer.Children.Add(_currentControl);
-                    control3.ValueChanged += ValueControl_ValueChanged;
-                    break;
-                case 3:  // Normal Boolean ComboBox
-
-                    ComboBox control4 = new ComboBox();
-                    control4.Tag = "BoolNormal";
-                    ComboBoxItem tItem = new ComboBoxItem();
-                    ComboBoxItem fItem = new ComboBoxItem();
-
-                    tItem.Content = "Disabled";
-                    fItem.Content = "Enabled";
-
-                    control4.Items.Add(tItem);
-                    control4.Items.Add(fItem);
-                    control4.SelectedIndex = 0;
-                    if (defaultVal != null) {
-                        if (((bool)defaultVal)) {
-                            control4.SelectedIndex = 1;
-                        } else {
-                            control4.SelectedIndex = 0;
-                        }
-                    }
-                    control4.SetValue(BorderBrushProperty, new SolidColorBrush(Color.FromRgb(155, 155, 155)));
-                    control4.SetValue(BorderThicknessProperty, new Thickness(1, 1, 1, 1));
-
-                    _currentControl = control4;
-                    ValueContainer.Children.Add(_currentControl);
-                    control4.SelectionChanged += ValueControl_ValueChanged;
-                    break;
-                case 4:  // YesNo Boolean ComboBox
-
-                    ComboBox control5 = new ComboBox();
-                    control5.Tag = "BoolYesNo";
-                    ComboBoxItem yItem = new ComboBoxItem();
-                    ComboBoxItem nItem = new ComboBoxItem();
-
-                    yItem.Content = "Disabled";
-                    nItem.Content = "Enabled";
-
-                    control5.Items.Add(yItem);
-                    control5.Items.Add(nItem);
-                    control5.SelectedIndex = 0;
-                    string df = defaultVal as string;
-                    if (df != null) {
-                        if (df == "Yes") {
-                            control5.SelectedIndex = 1;
-                        } else {
-                            control5.SelectedIndex = 0;
-                        }
-                    }
-                    control5.SetValue(BorderBrushProperty, new SolidColorBrush(Color.FromRgb(155, 155, 155)));
-                    control5.SetValue(BorderThicknessProperty, new Thickness(1, 1, 1, 1));
-
-                    _currentControl = control5;
-                    ValueContainer.Children.Add(_currentControl);
-                    control5.SelectionChanged += ValueControl_ValueChanged;
-                    break;
-                case 5:  // 1/0 Boolean ComboBox
-
-                    ComboBox control6 = new ComboBox();
-                    control6.Tag = "BoolOneZero";
-                    ComboBoxItem oItem = new ComboBoxItem();
-                    ComboBoxItem zItem = new ComboBoxItem();
-
-                    oItem.Content = "Disabled";
-                    zItem.Content = "Enabled";
-
-                    control6.Items.Add(oItem);
-                    control6.Items.Add(zItem);
-                    control6.SelectedIndex = 0;
-                    if (defaultVal != null) {
-                        int? bl = defaultVal.ToString().ToInt();
-                        if (bl == 1) {
-                            control6.SelectedIndex = 1;
-                        } else {
-                            control6.SelectedIndex = 0;
-                        }
-                    }
-                    control6.SetValue(BorderBrushProperty, new SolidColorBrush(Color.FromRgb(155, 155, 155)));
-                    control6.SetValue(BorderThicknessProperty, new Thickness(1, 1, 1, 1));
-
-                    _currentControl = control6;
-                    ValueContainer.Children.Add(_currentControl);
-                    control6.SelectionChanged += ValueControl_ValueChanged;
-                    break;
-                case 6:  // Double Slider
-                    Slider control7 = new Slider();
-                    control7.AutoToolTipPrecision = 4;
-                    if (interval > 0) {
-                        control7.TickFrequency = interval;
-                        control7.IsSnapToTickEnabled = true;
-                        control7.TickPlacement = TickPlacement.BottomRight;
-                    }
-                    control7.Orientation = Orientation.Horizontal;
-                    control7.AutoToolTipPlacement = AutoToolTipPlacement.TopLeft;
-                    if (rangeMax == -1 && rangeMin == -1) {
-                        control7.Maximum = short.MaxValue;
-                        control7.Minimum = short.MinValue;
-                    } else {
-                        control7.Maximum = (double)rangeMax;
-                        control7.Minimum = (double)rangeMin;
-                    }
-
-                    if (defaultVal != null) {
-                        control7.Value = Convert.ToDouble(defaultVal);
-                    }
-
-
-                    _currentControl = control7;
-                    ValueContainer.Children.Add(_currentControl);
-                    control7.ValueChanged += ValueControl_ValueChanged;
-                    break;
-                case 7:  // Integer Slider
-                    Slider control8 = new Slider();
-                    control8.AutoToolTipPrecision = 0;
-                    if (interval > 0) {
-                        control8.TickFrequency = interval;
-                        control8.IsSnapToTickEnabled = true;
-                        control8.TickPlacement = TickPlacement.BottomRight;
-                    }
-                    control8.Orientation = Orientation.Horizontal;
-                    control8.AutoToolTipPlacement = AutoToolTipPlacement.TopLeft;
-                    if (rangeMax == -1 && rangeMin == -1) {
-                        control8.Maximum = short.MaxValue;
-                        control8.Minimum = short.MinValue;
-                    } else {
-                        control8.Maximum = (int)rangeMax;
-                        control8.Minimum = (int)rangeMin;
-                    }
-
-                    if (defaultVal != null) {
-                        control8.Value = Convert.ToInt32(defaultVal);
-                    }
-
-
-                    _currentControl = control8;
-                    ValueContainer.Children.Add(_currentControl);
-                    control8.ValueChanged += ValueControl_ValueChanged;
-                    break;
-                case 8:  // ComboBox values with descriptions
-                    ComboBox control9 = new ComboBox();
-                    control9.Tag = "ComboValDesc";
-
-                    ComboBoxItem cb = null;
-                    foreach (var val in valdescriptions) {
-                        cb = new ComboBoxItem();
-                        cb.Content = val.Value;
-                        cb.Tag = val.Key;
-                        control9.Items.Add(cb);
-
-                        if ((cb.Tag as string) == (defaultVal as string)) {
-                            control9.SelectedItem = cb;
-                        }
-                    }
-                    control9.SetValue(BorderBrushProperty, new SolidColorBrush(Color.FromRgb(155, 155, 155)));
-                    control9.SetValue(BorderThicknessProperty, new Thickness(1, 1, 1, 1));
-                    _currentControl = control9;
-                    ValueContainer.Children.Add(_currentControl);
-                    control9.SelectionChanged += ValueControl_ValueChanged;
-
-                    break;
-                default:
-                    break;
-            }
         }
 
         private void LoadLocalConfigs() {
@@ -370,7 +138,7 @@ namespace Universal_Game_Configurator {
                     _ldScreen.SetTitleText("Reading & parsing local configurations...");
                 }));
                 if (_currentConfigurator.Files.Any(x => File.Exists(x) == false)) {
-                    Utilities.showError(this,
+                    MsgBoxUtil.showError(this,
                         "The game configuration files are missing from you computer.\nRun the game at least once before using this tool");
                     Environment.Exit(0);
                 }
@@ -411,7 +179,7 @@ namespace Universal_Game_Configurator {
         }
 
         private void SetInformation(string tag) {
-            XDocument doc = XDocument.Load(Utilities.AppDir + @"\data\text\descriptions.xml");
+            /*XDocument doc = XDocument.Load(Utilities.AppDir + @"\data\text\descriptions.xml");
             var root = doc.Descendants("Description");
             string img = "empty.png";
             foreach (var elementRoot in root) {
@@ -444,7 +212,7 @@ namespace Universal_Game_Configurator {
             } else {
                 imgDifference.Visibility = Visibility.Visible;
             }
-
+            */
 
         }
 
@@ -470,9 +238,9 @@ namespace Universal_Game_Configurator {
                     "Confirm settings", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes) {
                 try {
                     ApplySettings();
-                    Utilities.showMessage(this, "Settings applied.", "Settings");
+                    MsgBoxUtil.showMessage(this, "Settings applied.", "Settings");
                 } catch (Exception ex) {
-                    Utilities.showError(this, "Error occured:\n" + ex.ToString());
+                    MsgBoxUtil.showError(this, "Error occured:\n" + ex.ToString());
                 }
             }
         }
@@ -498,7 +266,7 @@ namespace Universal_Game_Configurator {
 
         private void btnBackup_Click(object sender, RoutedEventArgs e) {
             string bk = ".backup";
-            if (Utilities.showConfirmation(this, "Overwrite any backups created for this game?", "Backups") == MessageBoxResult.No) {
+            if (MsgBoxUtil.showConfirmation(this, "Overwrite any backups created for this game?", "Backups") == MessageBoxResult.No) {
                 Random rng = new Random();
                 bk = ".backup_" + rng.Next(0, 99999).ToString();
             }
@@ -525,9 +293,9 @@ namespace Universal_Game_Configurator {
                     n++;
                 }
 
-                Utilities.showMessage(this, "Backup successfull!\nFiles copied:\n\n" + sb.ToString() + "\n" + str, "Backup");
+                MsgBoxUtil.showMessage(this, "Backup successfull!\nFiles copied:\n\n" + sb.ToString() + "\n" + str, "Backup");
             } catch (Exception) {
-                Utilities.showError(this, "Error copying files");
+                MsgBoxUtil.showError(this, "Error copying files");
             }
         }
 
@@ -658,7 +426,7 @@ namespace Universal_Game_Configurator {
             SettingsList.ItemsSource = null;
             _configs.Clear();
             LoadConfigs();
-            Utilities.showMessage(this, "Settings reset complete", "Settings reset");
+            MsgBoxUtil.showMessage(this, "Settings reset complete", "Settings reset");
         }
 
         private void btnMenu_Click(object sender, RoutedEventArgs e) {
@@ -678,13 +446,13 @@ namespace Universal_Game_Configurator {
 
             for (int i = 0; i < SettingsList.Items.Count; i++) {
                 var item = SettingsList.Items[i] as ConfigEntry;
-                if (item.IsChanged) {
+                /*if (item.IsChanged) {
                     ListViewItem it = SettingsList.ItemContainerGenerator.ContainerFromItem(SettingsList.Items[i]) as ListViewItem;
                     if (it != null) {
                         it.Background = new SolidColorBrush(_mainColor);
                     }
 
-                }
+                }*/
             }
             App.Current.Resources["UIColor"] = new SolidColorBrush(_mainColor);
         }

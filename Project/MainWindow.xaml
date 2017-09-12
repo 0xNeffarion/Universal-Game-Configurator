@@ -146,14 +146,14 @@
                     </StackPanel>
                 </DockPanel>
             </Border>
-            <ListView AlternationCount="2" ItemContainerStyle="{StaticResource listviewAlternate}" x:Name="SettingsList" Grid.Row="3" Grid.Column="0" Margin="10,5,10,10" Grid.RowSpan="2" SizeChanged="listView_SizeChanged" Grid.ColumnSpan="2" SelectionChanged="SettingsList_SelectionChanged" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="Transparent" BorderThickness="0" BorderBrush="#FF898989" UseLayoutRounding="True">
-
+            <ListView AlternationCount="2" ItemContainerStyle="{StaticResource listviewAlternate}" x:Name="SettingsList" Grid.Row="3" Grid.Column="0" 
+                      Margin="10,5,10,10" Grid.RowSpan="2" SizeChanged="listView_SizeChanged" Grid.ColumnSpan="2" SelectionChanged="SettingsList_SelectionChanged" 
+                      SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Visible" 
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="Transparent" BorderThickness="0" BorderBrush="#FF898989" UseLayoutRounding="True">
                 <ListView.Resources>
                     <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" 
                      Color="Transparent"/>
                 </ListView.Resources>
-
-
                 <ListView.GroupStyle>
                     <GroupStyle>
                         <GroupStyle.ContainerStyle>
@@ -179,9 +179,6 @@
                         </GroupStyle.ContainerStyle>
                     </GroupStyle>
                 </ListView.GroupStyle>
-                <ListView.DataContext>
-                    <local:Config/>
-                </ListView.DataContext>
                 <ListView.View>
 
                     <GridView x:Name="SettingsGridView" AllowsColumnReorder="False" >

@@ -1,6 +1,8 @@
-﻿using System;
+using System;
+using System.Text;
+using Universal_Game_Configurator.Util.Hashing;
 
-namespace Universal_Game_Configurator {
+namespace Universal_Game_Configurator.Extensions {
     public static class StringExtensions {
 
         public static int ToInt(this string str) {
@@ -28,8 +30,12 @@ namespace Universal_Game_Configurator {
         }
 
         public static String CRC32Hash(this string str) {
-            return Utilities.FastCRC32.CRC32String(str).ToString("X");
+            byte[] bytes = Encoding.UTF8.GetBytes(str);
+            String result = CRC32.ToHex(bytes);
+
+            return result;
         }
+
 
     }
 }

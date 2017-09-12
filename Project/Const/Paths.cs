@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace Universal_Game_Configurator {
+namespace Universal_Game_Configurator.Const {
     public static class Paths {
 
         public const String PACKPATH = "pack://application:,,,/";

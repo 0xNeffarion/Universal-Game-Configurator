@@ -1,27 +1,31 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
+using Universal_Game_Configurator.Configurators;
+using Universal_Game_Configurator.Const;
+using Universal_Game_Configurator.Objects.Data.Databases;
+using Universal_Game_Configurator.Objects.Data.Lesser;
 
-namespace Universal_Game_Configurator {
+namespace Universal_Game_Configurator.Objects.Data.Helpers {
     public static class ConfigUtil {
 
-        public static Config DeserializeDatabase(Game game) {
+        public static ConfigsDatabase DeserializeDatabase(Game game) {
             Configurator configurator = game.Configurator;
 
-            XmlSerializer serializer = new XmlSerializer(typeof(Config));
+            XmlSerializer serializer = new XmlSerializer(typeof(ConfigsDatabase));
             StreamReader reader = new StreamReader(Paths.GAMECONFIGDB_DIRECTORY + game.Id + ".xml");
-            Config config = null;
-            config = (Config)serializer.Deserialize(reader);
+            ConfigsDatabase config = null;
+            config = (ConfigsDatabase)serializer.Deserialize(reader);
 
             return config;
         }
 
 
-        public static List<String> ParseConfigPaths(List<String> files, String installPath) {
+        public static List<String> ParseConfigPaths(List<ConfigFile> files, String installPath) {
             List<String> parsed = new List<String>();
-            foreach (String str in files) {
-                parsed.Add(GetConfigLocation(str, installPath));
+            foreach (ConfigFile str in files) {
+                parsed.Add(GetConfigLocation(str.FakePath, installPath));
             }
 
             return parsed;

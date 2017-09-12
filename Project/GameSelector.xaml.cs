@@ -15,8 +15,14 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
+using Universal_Game_Configurator.Configurators;
+using Universal_Game_Configurator.Objects.Data;
+using Universal_Game_Configurator.Objects.Data.Databases;
+using Universal_Game_Configurator.Objects.Data.Lesser;
+using Universal_Game_Configurator.Objects.ViewModels;
 
 namespace Universal_Game_Configurator {
     /// <summary>
@@ -24,52 +30,33 @@ namespace Universal_Game_Configurator {
     /// </summary>
     public partial class GameSelector : Window {
 
-        private List<Game> _gamesList = new List<Game>();
-        private Dictionary<string, Configurator> Types;
-        private LoadingScreen ldScreen;
-
         public GameSelector() {
             InitializeComponent();
-            this.Opacity = 0;
+
+
+
+            //SetupDataContext();
+            this.Opacity = 0.00;
+            DoubleAnimation anim = new DoubleAnimation(1, TimeSpan.FromMilliseconds(250));
+            this.BeginAnimation(OpacityProperty, anim);
+        }
+
+        private void SetupDataContext() {
+            GameViewModel vm = null;// new GameViewModel();
+
+            this.DataContext = vm;
+            vm.CloseWindowAction = new Action(this.Close);
         }
 
         private void LoadGamesList() {
-            String path = Utilities.AppDir + @"\data\games\database\gameslist.xml";
-
-            Games games = new Games();
-            games.games_list = new List<Game>();
-            List<String> inif = new List<String>();
-            inif.Add(Utilities.GetConfigLocation(@"#MYGAMES#\Fallout4\Fallout4.ini", ""));
-            inif.Add(Utilities.GetConfigLocation(@"#MYGAMES#\Fallout4\Fallout4Prefs.ini", ""));
-
-
-            games.games_list.Add(new Game() {
-                Id = 1,
-                Name = "Fallout 4",
-                Type = "A",
-                Genre = "RPG",
-                ImagePath = Utilities.AppDir + @"\data\games\images\icons\fo4.jpg",
-                InstallPath = "Steam App 377160",
-                ConfigFiles = inif
-            });
-
-            XmlSerializer xs = new XmlSerializer(typeof(Game));
-            using (var sr = new StreamReader(path)) {
-                // games = (Games)xs.Deserialize(sr);
-            }
-
-            _gamesList = games.games_list;
-
-            Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(delegate { ldScreen.Close(); }));
+            //Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(delegate { ldScreen.Close(); }));
         }
 
         private bool FilterSearch(object o) {
             if (txtBoxSearch.Text.Length > 2) {
                 var game = o as Game;
                 if (game != null) {
-                    if (game.Name.ToLower().Contains(txtBoxSearch.Text.ToLower())) {
-                        return true;
-                    }
+                    return game.Name.ToLower().Contains(txtBoxSearch.Text.ToLower());
                 }
             }
 
@@ -77,39 +64,11 @@ namespace Universal_Game_Configurator {
         }
 
         private void UpdateColumnsSize() {
-            GridCol1.Width = GamesListView.ActualWidth - 160 - 10;
-        }
-
-        private void GetInstalledGames() {
-            GamesListView.ItemsSource = null;
-            ldScreen = new LoadingScreen("Detecting and loading installed games...");
-            Thread th = new Thread(new ThreadStart(LoadGamesList));
-            th.Start();
-            ldScreen.ShowDialog();
-            GamesListView.ItemsSource = _gamesList;
-        }
-
-        private void GameSelectionWindow_Loaded(object sender, RoutedEventArgs e) {
-            windowTitle.Text = this.Title;
-            this.ApplyThemeToWindow(ThemeManager.THEME);
-            var anim = new DoubleAnimation(1, (Duration)TimeSpan.FromMilliseconds(150 * Settings.AnimationMult));
-            this.BeginAnimation(UIElement.OpacityProperty, anim);
-            GetInstalledGames();
+            GridCol1.Width = GamesListView.ActualWidth - 170;
         }
 
         private void GamesListView_SizeChanged(object sender, SizeChangedEventArgs e) {
             UpdateColumnsSize();
-        }
-
-        private void imgNext_MouseDown(object sender, MouseButtonEventArgs e) {
-            if (sender != null) {
-                Game gm = (Game)(sender as Image).DataContext;
-                if (gm != null) {
-                    MainWindow mw = new MainWindow(gm);
-                    mw.Show();
-                    this.Close();
-                }
-            }
         }
 
         private void txtBoxSearch_TextChanged(object sender, TextChangedEventArgs e) {
@@ -124,33 +83,12 @@ namespace Universal_Game_Configurator {
             }
         }
 
-        private void imgRefresh_MouseDown(object sender, MouseButtonEventArgs e) {
-            GetInstalledGames();
-        }
-
         private void titleBorder_MouseDown(object sender, MouseButtonEventArgs e) {
             if (e.ChangedButton == MouseButton.Left) {
-                this.DragMove();
+                DragMove();
             }
         }
 
-        private void GamesListView_KeyDown(object sender, KeyEventArgs e) {
-            if (GamesListView.SelectedIndex != -1) {
-                if (e.Key == Key.Enter) {
-                    var image = GamesListView.SelectedItem as Image;
-                    if (image != null) {
-                        Game gm = (Game)image.DataContext;
-                        if (gm != null) {
-                            this.Close();
-
-                            MainWindow mw = new MainWindow(gm);
-                            mw.Show();
-
-                        }
-                    }
-                }
-            }
-        }
 
         private void GameSelectionWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e) {
             Closing -= GameSelectionWindow_Closing;
@@ -165,6 +103,27 @@ namespace Universal_Game_Configurator {
         }
 
         private void btnCloseWindow_Click(object sender, RoutedEventArgs e) {
+            GamesDatabase gms = new GamesDatabase();
+            gms.Games = new List<Game>();
+            Game g = new Game() {
+                Id = 1,
+                Name = "TestName",
+                RegistryName = "Regnametest",
+                Genres = new Genre[] { Genre.RPG },
+                ConfiguratorType = ConfigType.A,
+                ConfigFiles = new List<ConfigFile>() { new ConfigFile() { FakePath = "testfakePath" } },
+                ImageName = "imagenametest"
+            };
+
+            gms.Games.Add(g);
+            gms.Games.Add(g);
+
+            XmlSerializer serializer = new XmlSerializer(typeof(GamesDatabase));
+            XmlTextWriter writer = new XmlTextWriter(@"C:\Users\Admin\Desktop\file.xml", Encoding.UTF8);
+            writer.Formatting = Formatting.Indented;
+            serializer.Serialize(writer, gms);
+            writer.Close();
+
             this.Close();
         }
     }

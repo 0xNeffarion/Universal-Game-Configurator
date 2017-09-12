@@ -1,4 +1,4 @@
-﻿namespace Universal_Game_Configurator {
+namespace Universal_Game_Configurator.Objects.Data {
 
     // Genre enum list
 

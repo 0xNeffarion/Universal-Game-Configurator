@@ -1,7 +1,12 @@
-﻿using Microsoft.Win32;
+using Microsoft.Win32;
 using System;
+using System.Text;
+using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.ComTypes;
+using System.Windows.Forms;
+using Universal_Game_Configurator.Util.Extern;
 
-namespace Universal_Game_Configurator {
+namespace Universal_Game_Configurator.Util {
     public class WinSystem {
 
         public static class Registry {
@@ -65,6 +70,39 @@ namespace Universal_Game_Configurator {
                 return GetApplicationInstallPath(appName) != null;
             }
 
+        }
+
+        public static class Display {
+
+            [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+            [return: MarshalAs(UnmanagedType.Bool)]
+            internal static extern bool EnumDisplaySettings([MarshalAs(UnmanagedType.LPStr)] String lpszDeviceName,
+                [MarshalAs(UnmanagedType.U4)] int iModeNum, [In, Out] ref DEVMODE lpDevMode);
+
+            /// <summary>
+            /// Refresh rate of the current monitor
+            /// </summary>
+            /// <returns>Returns max refresh rate being used or 60 minimum</returns>
+            public static int getRefreshRate() {
+                DEVMODE dvm = new DEVMODE();
+
+                int width = Screen.PrimaryScreen.Bounds.Width;
+                int height = Screen.PrimaryScreen.Bounds.Height;
+                int maxHz = 0;
+
+                int i = 0;
+                while (EnumDisplaySettings(null, i, ref dvm)) {
+                    if (dvm.dmPelsWidth == width && dvm.dmPelsHeight == height) {
+                        if (dvm.dmDisplayFrequency > maxHz) {
+                            maxHz = dvm.dmDisplayFrequency;
+                        }
+                    }
+                    i++;
+                }
+
+
+                return maxHz > 60 ? maxHz : 60;
+            }
         }
 
 

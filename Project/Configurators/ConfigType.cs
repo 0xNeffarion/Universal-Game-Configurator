@@ -1,7 +1,9 @@
-﻿namespace Universal_Game_Configurator {
+using System.Xml.Serialization;
+
+namespace Universal_Game_Configurator.Configurators {
 
     public enum ConfigType {
-        A = 0
+        A
     }
 
 }

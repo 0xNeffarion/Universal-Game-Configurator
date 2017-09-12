@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.Globalization;
 using System.Windows.Data;
+using Universal_Game_Configurator.Objects.Data.Lesser;
 
-namespace Universal_Game_Configurator {
+namespace Universal_Game_Configurator.Converters {
     public class GenresConverter : IValueConverter {
 
         public static GenresConverter Instance = new GenresConverter();

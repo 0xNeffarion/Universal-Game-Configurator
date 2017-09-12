@@ -12,7 +12,7 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using Microsoft.Win32;
 
-namespace Universal_Game_Configurator {
+namespace Universal_Game_Configurator.Util {
 
     public static class Utilities {
 
