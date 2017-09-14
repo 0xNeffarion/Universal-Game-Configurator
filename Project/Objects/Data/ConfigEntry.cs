@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
+using System.ComponentModel;
 using System.Xml;
 using System.Xml.Serialization;
 using Universal_Game_Configurator.Controls;
+using Universal_Game_Configurator.Objects.Data.Helpers;
+using Universal_Game_Configurator.Objects.Data.Lesser;
 
 namespace Universal_Game_Configurator.Objects.Data {
 
@@ -17,8 +19,8 @@ namespace Universal_Game_Configurator.Objects.Data {
         /// <summary>
         /// Entry value minimum and maximum range (If any)
         /// </summary>
-        [XmlArrayItem("Range")]
-        public Decimal[] Ranges = new Decimal[2];
+        [XmlElement("Ranges")]
+        public Ranges Ranges { get; set; }
 
         /// <summary>
         /// Map used to translate config values.
@@ -27,19 +29,20 @@ namespace Universal_Game_Configurator.Objects.Data {
         ///          1 equals Normal
         ///          2 equals Hard
         /// </summary>
-        [XmlElement("DescriptionValues")]
-        public Dictionary<String, String> DescriptionValues { get; set; }
+        [XmlArray("DescriptionValues")]
+        [XmlArrayItem("Entry")]
+        public DescriptionValue[] DescriptionValues { get; set; }
 
         /// <summary>
-        /// Entry is considered value-fixed if value descriptions are used
+        /// Entry is considered value-fixed if descriptions values are used
         /// </summary>
-        [XmlElement("IsFixed")]
-        public Boolean IsFixedValues { get; set; }
+        [XmlIgnore]
+        public Boolean IsFixedValues { get { return (DescriptionValues != null && DescriptionValues.Length > 0); } }
 
         /// <summary>
         /// Unique ID of entry
         /// </summary>
-        [XmlElement("UID")]
+        [XmlAttribute(AttributeName = "ID")]
         public int Id { get; set; }
 
         /// <summary>
@@ -49,7 +52,7 @@ namespace Universal_Game_Configurator.Objects.Data {
         public EntryType Type { get; set; }
 
         /// <summary>
-        /// Index for the config file list
+        /// Index for the config file list (starts at 0)
         /// </summary>
         [XmlElement("FileIndex")]
         public int FileIndex { get; set; }
@@ -64,7 +67,7 @@ namespace Universal_Game_Configurator.Objects.Data {
         /// Default value for the variable (if it exists)
         /// </summary>
         [XmlElement("Default")]
-        public Object Default { get; set; }
+        public String Default { get; set; }
 
         /// <summary>
         /// Variable name in the config file
@@ -82,7 +85,13 @@ namespace Universal_Game_Configurator.Objects.Data {
         /// Variable description id
         /// </summary>
         [XmlElement("DescriptionId")]
-        public int Description { get; set; }
+        public int DescriptionId { get; set; }
+
+        /// <summary>
+        /// Description object searched by the description id
+        /// </summary>
+        [XmlIgnore]
+        public Description Description { get { return DescriptionUtil.FromId(this.DescriptionId); } }
 
         /// <summary>
         /// Variable title/name
@@ -99,7 +108,8 @@ namespace Universal_Game_Configurator.Objects.Data {
         /// <summary>
         /// Variable value interval. For Sliders and UpDown UI Boxes
         /// </summary>
-        [XmlElement("ValueInterval")]
+        [XmlElement("Interval")]
+        [DefaultValue(-1)]
         public Double Interval { get; set; }
 
 

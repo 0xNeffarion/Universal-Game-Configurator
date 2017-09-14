@@ -1,24 +1,18 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Xml.Serialization;
-using Universal_Game_Configurator.Configurators;
 using Universal_Game_Configurator.Const;
 using Universal_Game_Configurator.Objects.Data.Databases;
 using Universal_Game_Configurator.Objects.Data.Lesser;
+using Universal_Game_Configurator.Util;
 
 namespace Universal_Game_Configurator.Objects.Data.Helpers {
     public static class ConfigUtil {
 
         public static ConfigsDatabase DeserializeDatabase(Game game) {
-            Configurator configurator = game.Configurator;
+            String path = Paths.GAMECONFIGDB_DIRECTORY + game.Id + ".xml";
 
-            XmlSerializer serializer = new XmlSerializer(typeof(ConfigsDatabase));
-            StreamReader reader = new StreamReader(Paths.GAMECONFIGDB_DIRECTORY + game.Id + ".xml");
-            ConfigsDatabase config = null;
-            config = (ConfigsDatabase)serializer.Deserialize(reader);
-
-            return config;
+            return Serialization.Deserialize<ConfigsDatabase>(path);
         }
 
 

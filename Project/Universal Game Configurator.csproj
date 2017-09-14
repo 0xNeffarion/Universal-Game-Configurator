@@ -132,6 +132,7 @@
     <Compile Include="Converters\GenresConverter.cs" />
     <Compile Include="Converters\ImageConverter.cs" />
     <Compile Include="Objects\Commands\GameSelector\ConfigureCommand.cs" />
+    <Compile Include="Objects\Data\Lesser\Ranges.cs" />
     <Compile Include="Objects\Data\Lesser\ConfigFile.cs" />
     <Compile Include="Objects\Data\ConfigEntry.cs" />
     <Compile Include="Configurators\Configurator.cs" />
@@ -147,12 +148,12 @@
     <Compile Include="Controls\EntryType.cs" />
     <Compile Include="Objects\Data\Game.cs" />
     <Compile Include="Objects\Data\Databases\GamesDatabase.cs" />
-    <Compile Include="Objects\Data\Lesser\Group.cs" />
+    <Compile Include="Objects\Data\Enums\Group.cs" />
     <Compile Include="LoadingScreen.xaml.cs">
       <DependentUpon>LoadingScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="Extensions\StringExtensions.cs" />
-    <Compile Include="Objects\Data\Genre.cs" />
+    <Compile Include="Objects\Data\Enums\Genre.cs" />
     <Compile Include="Objects\Data\Lesser\Genres.cs" />
     <Compile Include="Objects\Commands\Base\BaseCommand.cs" />
     <Compile Include="Objects\ViewModels\Base\BaseViewModel.cs" />
@@ -161,8 +162,11 @@
     <Compile Include="Settings\Settings.cs" />
     <Compile Include="Util\Extern\Devmode.cs" />
     <Compile Include="Util\INIFile.cs" />
+    <Compile Include="Util\Logging\LogProvider.cs" />
     <Compile Include="Util\MsgBoxUtil.cs" />
+    <Compile Include="Util\Serialization.cs" />
     <Compile Include="Util\Tools\CollectionTools.cs" />
+    <Compile Include="Util\Tools\GithubTools.cs" />
     <Compile Include="Util\Utilities.cs" />
     <Compile Include="Const\Paths.cs" />
     <Compile Include="Util\Tools\WebTools.cs" />
@@ -246,13 +250,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Objects\ViewModels\Helpers\" />
-    <Folder Include="Util\Hashing\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="data\configs\games\2.xml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="data\configs\games\1.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>

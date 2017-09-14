@@ -1,6 +1,5 @@
 using System;
 using System.Text;
-using Universal_Game_Configurator.Util.Hashing;
 
 namespace Universal_Game_Configurator.Extensions {
     public static class StringExtensions {
@@ -27,13 +26,6 @@ namespace Universal_Game_Configurator.Extensions {
 
         public static Decimal ToDecimal(this string str) {
             return Convert.ToDecimal(str);
-        }
-
-        public static String CRC32Hash(this string str) {
-            byte[] bytes = Encoding.UTF8.GetBytes(str);
-            String result = CRC32.ToHex(bytes);
-
-            return result;
         }
 
 

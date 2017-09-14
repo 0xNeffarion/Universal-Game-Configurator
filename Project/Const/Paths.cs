@@ -20,5 +20,8 @@ namespace Universal_Game_Configurator.Const {
         public static readonly String GAMESLIST_PATH = APPLICATION_DIRECTORY + @"\data\games\database\" + GAMESLIST_FILENAME;
 
         public static readonly String SETTINGS_PATH = APPLICATION_DIRECTORY + @"\" + SETTINGS_FILENAME;
+
+        public static readonly String LOGS_DIRECTORY = APPLICATION_DIRECTORY + @"\logs";
+
     }
 }

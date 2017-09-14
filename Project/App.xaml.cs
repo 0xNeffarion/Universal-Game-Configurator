@@ -11,31 +11,39 @@ using Universal_Game_Configurator.Objects.Data;
 using Universal_Game_Configurator.Objects.Data.Lesser;
 using Universal_Game_Configurator.Util;
 using Universal_Game_Configurator.Theme;
+using Universal_Game_Configurator.Util.Logging;
+using Universal_Game_Configurator.Util.Tools;
 
 namespace Universal_Game_Configurator {
 
     public partial class App : Application {
 
         public App() {
+            LogProvider.Initialize();
+
+            Console.WriteLine("Last version: " + GithubTools.GetLastVersion().ToString());
+
+            Serialization.CreateXmlSerializersCache();
+
+            AppDomain.CurrentDomain.ProcessExit += CurrentDomain_ProcessExit;
             AppDomain.CurrentDomain.FirstChanceException += CurrentDomain_FirstChanceException;
             Current.DispatcherUnhandledException += Current_DispatcherUnhandledException;
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
-            Current.Exit += Current_Exit;
 
             this.ApplyTheme(ThemeManager.THEME);
 
-            Timeline.DesiredFrameRateProperty.OverrideMetadata(typeof(Timeline), new FrameworkPropertyMetadata { DefaultValue = WinSystem.Display.getRefreshRate() });
+            Timeline.DesiredFrameRateProperty.OverrideMetadata(typeof(Timeline),
+                new FrameworkPropertyMetadata { DefaultValue = WinSystem.Display.getRefreshRate() });
+        }
+
+        private void CurrentDomain_ProcessExit(object sender, EventArgs e) {
+            LogProvider.Close();
         }
 
         public bool DoHandle { get; set; }
 
         protected override void OnStartup(StartupEventArgs e) {
-            Type[] myTypes = new Type[] { typeof(GamesDatabase), typeof(ConfigsDatabase), typeof(Game), typeof(ConfigEntry), typeof(ConfigFile) };
-            XmlSerializer.FromTypes(myTypes);
-        }
-
-        private void Current_Exit(object sender, ExitEventArgs e) {
 
         }
 

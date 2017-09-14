@@ -8,9 +8,10 @@ namespace Universal_Game_Configurator.Objects.Data.Databases {
     /// Config Entry List Class. Used for serializing/deserializing
     /// </summary>
     [Serializable]
-    [XmlRoot("Database")]
+    [XmlRoot("ConfigsDatabase")]
     public class ConfigsDatabase {
 
+        [XmlArrayItem("Entry")]
         public List<ConfigEntry> Entries { get; set; }
 
     }

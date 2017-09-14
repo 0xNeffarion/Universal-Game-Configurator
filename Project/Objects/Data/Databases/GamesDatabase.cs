@@ -8,7 +8,7 @@ namespace Universal_Game_Configurator.Objects.Data.Databases {
     /// Games List Class. Used for serializing/deserializing
     /// </summary>
     [Serializable]
-    [XmlRoot("Database")]
+    [XmlRoot("GamesDatabase")]
     public class GamesDatabase {
 
         public List<Game> Games { get; set; }

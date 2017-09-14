@@ -11,7 +11,7 @@ namespace Universal_Game_Configurator.Objects.Data {
         /// <summary>
         /// Unique ID of the description
         /// </summary>
-        [XmlElement("UID")]
+        [XmlAttribute(AttributeName = "ID")]
         public int Id { get; set; }
 
         /// <summary>

@@ -82,7 +82,7 @@ namespace Universal_Game_Configurator.Util {
             /// <summary>
             /// Refresh rate of the current monitor
             /// </summary>
-            /// <returns>Returns max refresh rate being used or 60 minimum</returns>
+            /// <returns>Returns current monitor max refresh rate being used or 60 minimum</returns>
             public static int getRefreshRate() {
                 DEVMODE dvm = new DEVMODE();
 

@@ -4,25 +4,23 @@ using System.Linq;
 using System.Xml.Serialization;
 using Universal_Game_Configurator.Const;
 using Universal_Game_Configurator.Objects.Data.Databases;
+using Universal_Game_Configurator.Util;
 
 namespace Universal_Game_Configurator.Objects.Data.Helpers {
     public static class DescriptionUtil {
 
         private static readonly List<Description> descriptions = new List<Description>();
 
-        private static void deserialize() {
-            XmlSerializer serializer = new XmlSerializer(typeof(DescriptionsDatabase));
-            StreamReader reader = new StreamReader(Paths.DESCRIPTIONS_PATH);
-            DescriptionsDatabase descs = null;
-            descs = (DescriptionsDatabase)serializer.Deserialize(reader);
-
-            descriptions.AddRange(descs.Descriptions);
+        private static void Deserialize() {
+            descriptions.Clear();
+            DescriptionsDatabase db = Serialization.Deserialize<DescriptionsDatabase>(Paths.DESCRIPTIONS_PATH);
+            descriptions.AddRange(db.Descriptions);
         }
 
         public static List<Description> Descriptions {
             get {
                 if (descriptions.Count <= 0) {
-                    deserialize();
+                    Deserialize();
                 }
                 return descriptions;
             }

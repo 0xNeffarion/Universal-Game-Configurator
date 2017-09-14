@@ -21,6 +21,7 @@ using System.Xml.Serialization;
 using Universal_Game_Configurator.Configurators;
 using Universal_Game_Configurator.Objects.Data;
 using Universal_Game_Configurator.Objects.Data.Databases;
+using Universal_Game_Configurator.Objects.Data.Helpers;
 using Universal_Game_Configurator.Objects.Data.Lesser;
 using Universal_Game_Configurator.Objects.ViewModels;
 
@@ -33,8 +34,6 @@ namespace Universal_Game_Configurator {
         public GameSelector() {
             InitializeComponent();
 
-
-
             //SetupDataContext();
             this.Opacity = 0.00;
             DoubleAnimation anim = new DoubleAnimation(1, TimeSpan.FromMilliseconds(250));
@@ -42,7 +41,7 @@ namespace Universal_Game_Configurator {
         }
 
         private void SetupDataContext() {
-            GameViewModel vm = null;// new GameViewModel();
+            GameViewModel vm = new GameViewModel();
 
             this.DataContext = vm;
             vm.CloseWindowAction = new Action(this.Close);
@@ -103,25 +102,34 @@ namespace Universal_Game_Configurator {
         }
 
         private void btnCloseWindow_Click(object sender, RoutedEventArgs e) {
-            GamesDatabase gms = new GamesDatabase();
-            gms.Games = new List<Game>();
-            Game g = new Game() {
+            ConfigsDatabase cfgs = new ConfigsDatabase();
+            List<DescriptionValue> vl = new List<DescriptionValue>();
+            vl.Add(new DescriptionValue() { Value = "val1", Description = "desc1" });
+            vl.Add(new DescriptionValue() { Value = "val2", Description = "desc2" });
+
+
+            ConfigEntry ce = new ConfigEntry {
                 Id = 1,
-                Name = "TestName",
-                RegistryName = "Regnametest",
-                Genres = new Genre[] { Genre.RPG },
-                ConfiguratorType = ConfigType.A,
-                ConfigFiles = new List<ConfigFile>() { new ConfigFile() { FakePath = "testfakePath" } },
-                ImageName = "imagenametest"
+                Name = "ConfigEntryName",
+                FileIndex = 0,
+                Section = "SectionName",
+                DescriptionId = 1,
+                Group = Group.Gameplay,
+                Type = Controls.EntryType.DoubleUpDown,
+                Ranges = new Ranges() { Minimum = 1, Maximum = 100 },
+                Variable = "VariableName",
+                Default = "DefaultValue",
+                Interval = 2
             };
 
-            gms.Games.Add(g);
-            gms.Games.Add(g);
+            cfgs.Entries = new List<ConfigEntry>();
+            cfgs.Entries.Add(ce);
 
-            XmlSerializer serializer = new XmlSerializer(typeof(GamesDatabase));
+
+            XmlSerializer serializer = new XmlSerializer(typeof(ConfigsDatabase));
             XmlTextWriter writer = new XmlTextWriter(@"C:\Users\Admin\Desktop\file.xml", Encoding.UTF8);
             writer.Formatting = Formatting.Indented;
-            serializer.Serialize(writer, gms);
+            serializer.Serialize(writer, cfgs);
             writer.Close();
 
             this.Close();

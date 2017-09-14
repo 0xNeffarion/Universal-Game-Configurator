@@ -15,7 +15,7 @@ namespace Universal_Game_Configurator.Objects.Data {
         /// <summary>
         /// Unique ID of the game
         /// </summary>
-        [XmlElement("UID")]
+        [XmlAttribute(AttributeName = "ID")]
         public int Id { get; set; }
 
         /// <summary>
@@ -60,8 +60,6 @@ namespace Universal_Game_Configurator.Objects.Data {
             get {
                 return WinSystem.Registry.GetApplicationInstallPath(this.RegistryName);
             }
-
-            set { this.InstallPath = value; }
         }
 
         /// <summary>
