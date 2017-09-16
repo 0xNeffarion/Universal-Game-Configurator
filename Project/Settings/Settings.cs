@@ -3,16 +3,19 @@ using System.Windows.Media;
 using Universal_Game_Configurator.Const;
 using Universal_Game_Configurator.Util;
 
-namespace Universal_Game_Configurator.Settings {
+namespace Universal_Game_Configurator {
 
     public class Settings {
 
+        private static readonly INIFile ini = new INIFile(Paths.SETTINGS_PATH);
         private static Color _UISecondaryColor;
-        private static Boolean _UseAnimations;
+        private static Boolean _UIUseAnimations;
+        private static Boolean _UIUseHardwareAcceleration;
+        private static Boolean _UIUseIncreasedFPS;
 
-        public static int AnimationMult {
+        public static Double AnimationMult {
             get {
-                return UseAnimations ? 1 : 0;
+                return _UIUseAnimations ? 1 : 0.001;
             }
         }
 
@@ -27,25 +30,45 @@ namespace Universal_Game_Configurator.Settings {
             }
         }
 
-        public static Boolean UseAnimations {
+        public static Boolean UIUseAnimations {
             get {
-                _UseAnimations = Boolean.Parse(GetSetting("EnableAnimations"));
-                return _UseAnimations;
+                _UIUseAnimations = (GetSetting("EnableAnimations").ToLower().Equals("true"));
+                return _UIUseAnimations;
             }
             set {
-                _UseAnimations = value;
+                _UIUseAnimations = value;
                 SetSetting("EnableAnimations", value.ToString());
             }
         }
 
+        public static Boolean UIUseHardwareAcceleration {
+            get {
+                _UIUseHardwareAcceleration = (GetSetting("UseHardwareAcc").ToLower().Equals("true"));
+                return _UIUseHardwareAcceleration;
+            }
+            set {
+                _UIUseHardwareAcceleration = value;
+                SetSetting("UseHardwareAcc", value.ToString());
+            }
+        }
+
+        public static Boolean UIUseIncreasedFPS {
+            get {
+                _UIUseIncreasedFPS = (GetSetting("UseIncreasedFPS").ToLower().Equals("true"));
+                return _UIUseIncreasedFPS;
+            }
+            set {
+                _UIUseIncreasedFPS = value;
+                SetSetting("UseIncreasedFPS", value.ToString());
+            }
+        }
+
         private static String GetSetting(String name) {
-            INIFile ini = new INIFile(Paths.SETTINGS_PATH);
-            return ini.IniReadValue("general", name);
+            return ini.IniReadValue("Main", name);
         }
 
         private static void SetSetting(String name, String value) {
-            INIFile ini = new INIFile(Paths.SETTINGS_PATH);
-            ini.IniWriteValue("general", name, value);
+            ini.IniWriteValue("Main", name, value);
         }
 
     }

@@ -17,7 +17,9 @@ namespace Universal_Game_Configurator.Objects.Commands.Base {
         }
 
         public void Execute(object parameter) {
-            baseAction();
+            if (this.baseAction != null) {
+                baseAction.Invoke();
+            }
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Universal_Game_Configurator.Objects.Data {
         /// <summary>
         /// Unique ID of the game
         /// </summary>
-        [XmlAttribute(AttributeName = "ID")]
+        [XmlAttribute(AttributeName = "id")]
         public int Id { get; set; }
 
         /// <summary>
@@ -45,6 +45,12 @@ namespace Universal_Game_Configurator.Objects.Data {
         /// </summary>
         [XmlArrayItem("Genre")]
         public Genre[] Genres { get; set; }
+
+        /// <summary>
+        /// Game genre object
+        /// </summary>
+        [XmlIgnore]
+        public Genres GenreObj { get { return new Genres(Genres); } }
 
         /// <summary>
         /// Game image name (ex: fo4) to show on the game selection

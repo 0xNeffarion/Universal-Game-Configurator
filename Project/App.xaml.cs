@@ -20,9 +20,6 @@ namespace Universal_Game_Configurator {
 
         public App() {
             LogProvider.Initialize();
-
-            Console.WriteLine("Last version: " + GithubTools.GetLastVersion().ToString());
-
             Serialization.CreateXmlSerializersCache();
 
             AppDomain.CurrentDomain.ProcessExit += CurrentDomain_ProcessExit;

@@ -5,6 +5,7 @@ using System.Text;
 namespace Universal_Game_Configurator.Util {
 
     public class INIFile {
+
         public String path;
 
         public INIFile(string INIPath) {

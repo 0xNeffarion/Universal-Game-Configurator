@@ -9,7 +9,7 @@
         ResizeMode="NoResize" Icon="Resources/UGC_Icon.ico" WindowStartupLocation="CenterScreen" 
         TextOptions.TextFormattingMode="Display" ScrollViewer.VerticalScrollBarVisibility="Disabled" 
         BorderThickness="0" Loaded="loadingWindow_Loaded" FontFamily="Open Sans" UseLayoutRounding="True" 
-        Opacity="0.8" AllowsTransparency="True" WindowStyle="None" Background="{x:Null}">
+        Opacity="0.8" AllowsTransparency="True" WindowStyle="None" Background="{x:Null}" Topmost="True">
     <Border x:Name="loadBorder" CornerRadius="5" Background="{DynamicResource WindowBackgroundBrush}" 
             BorderBrush="#FF9B9B9B" BorderThickness="1" MouseDown="loadBorder_MouseDown" >
         <Grid>

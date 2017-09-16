@@ -85,6 +85,9 @@
     <ApplicationIcon>Resources\UGC_Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="PresentationFramework.Aero" />
     <Reference Include="presentationframework.aero2" />
@@ -99,6 +102,9 @@
     <Reference Include="System.Management.Instrumentation" />
     <Reference Include="System.Windows" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -129,8 +135,10 @@
     <Compile Include="Configurators\ConfigType.cs" />
     <Compile Include="Configurators\ConfigTypeUtil.cs" />
     <Compile Include="Controls\ControlFactory.cs" />
+    <Compile Include="Converters\GameImageConverter.cs" />
     <Compile Include="Converters\GenresConverter.cs" />
     <Compile Include="Converters\ImageConverter.cs" />
+    <Compile Include="Objects\Commands\Base\BaseParameterCommand.cs" />
     <Compile Include="Objects\Commands\GameSelector\ConfigureCommand.cs" />
     <Compile Include="Objects\Data\Lesser\Ranges.cs" />
     <Compile Include="Objects\Data\Lesser\ConfigFile.cs" />

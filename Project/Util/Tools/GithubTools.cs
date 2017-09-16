@@ -40,6 +40,7 @@ namespace Universal_Game_Configurator.Util.Tools {
             if (String.IsNullOrEmpty(response)) {
                 return null;
             }
+
             String[] res = Regex.Split(response, "<div class=\"release-meta\">");
             String[] res1 = Regex.Split(res[1], "<ul class=\"tag-references\">");
             String[] res2 = Regex.Split(res1[1], "<span class=\"css-truncate-target\">");
@@ -48,9 +49,26 @@ namespace Universal_Game_Configurator.Util.Tools {
             return result;
         }
 
+        private static String ReadReleaseDownload() {
+            String response = GetResponse();
+            if (String.IsNullOrEmpty(response)) {
+                return null;
+            }
+
+            String[] res = Regex.Split(response, "<ul class=\"release-downloads\">");
+            String[] res1 = Regex.Split(res[1], "<li>");
+            String[] res2 = Regex.Split(res1[1], "<a href=");
+            String result = Regex.Split(res2[1], "rel=\"nofollow\">")[0].Trim();
+
+            return "https://github.com" + (result.Replace("\"", "").Trim());
+        }
+
         public static Version GetLastVersion() {
-            String webVersion = ReadVersion().Substring(1);
-            return Version.Parse(webVersion);
+            return Version.Parse(ReadVersion().Substring(1));
+        }
+
+        public static String GetLastRelease() {
+            return ReadReleaseDownload();
         }
 
     }

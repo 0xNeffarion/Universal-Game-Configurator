@@ -71,10 +71,10 @@ namespace Universal_Game_Configurator {
             _configs.Clear();
             SettingsList.ItemsSource = null;
 
-            _ldScreen = new LoadingScreen("Loading game configs...");
-            Thread th = new Thread(new ThreadStart(LoadConfigs));
-            th.Start();
-            _ldScreen.ShowDialog();
+            // _ldScreen = new LoadingScreen("Loading game configs...");
+            // Thread th = new Thread(new ThreadStart(LoadConfigs));
+            // th.Start();
+            // _ldScreen.ShowDialog();
 
         }
 

@@ -42,7 +42,7 @@ namespace Universal_Game_Configurator.Objects.Data {
         /// <summary>
         /// Unique ID of entry
         /// </summary>
-        [XmlAttribute(AttributeName = "ID")]
+        [XmlAttribute(AttributeName = "id")]
         public int Id { get; set; }
 
         /// <summary>

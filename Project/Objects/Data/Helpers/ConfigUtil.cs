@@ -10,9 +10,7 @@ namespace Universal_Game_Configurator.Objects.Data.Helpers {
     public static class ConfigUtil {
 
         public static ConfigsDatabase DeserializeDatabase(Game game) {
-            String path = Paths.GAMECONFIGDB_DIRECTORY + game.Id + ".xml";
-
-            return Serialization.Deserialize<ConfigsDatabase>(path);
+            return Serialization.Deserialize<ConfigsDatabase>(Paths.GAMECONFIGDB_DIRECTORY + game.Id + ".xml");
         }
 
 

@@ -36,7 +36,7 @@ namespace Universal_Game_Configurator.Util {
         }
 
         /// <summary>
-        /// Deserializes any object using cached XmlSerializers
+        /// Deserializes any cached object using cached XmlSerializers
         /// </summary>
         /// <param name="filePath">XML full file path</param>
         /// <returns>Deserialized object or null if it fails</returns>

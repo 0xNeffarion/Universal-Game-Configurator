@@ -13,7 +13,11 @@ namespace Universal_Game_Configurator.Objects.Data.Lesser {
             StringBuilder sb = new StringBuilder();
 
             for (int i = 0; i < genres.Length; i++) {
-                sb.Append(genres[i]).Append(@"/");
+                if (i != (genres.Length - 1)) {
+                    sb.Append(genres[i]).Append(@"/");
+                } else {
+                    sb.Append(genres[i]);
+                }
             }
 
             return sb.ToString();
