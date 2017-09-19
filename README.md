@@ -25,4 +25,4 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for information on how to contrib
 
 ## License
 
-This project is licensed under the Apache License - see the [LICENSE](LICENSE) file for more details
+This project is licensed under the GPL v3 license - see the [LICENSE](LICENSE) file for more details
