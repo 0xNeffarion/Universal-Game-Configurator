@@ -2,6 +2,8 @@
 
 # Universal Game Configurator
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/84942037710d451e923fb6b308a6486a)](https://www.codacy.com/app/0xNeffarion/Universal-Game-Configurator?utm_source=github.com&utm_medium=referral&utm_content=0xNeffarion/Universal-Game-Configurator&utm_campaign=badger)
+
 Software that allows you to modify configurations of a variety of games, all without needing to open the game itself.
 
 ## WIP
