@@ -27,6 +27,7 @@ namespace Universal_Game_Configurator.Objects.Data.Helpers {
                     Console.WriteLine(String.Format("Found game. Name: {0}. Directory: {1}", g.Name, g.InstallPath));
                 }
             });
+            Console.WriteLine("Finished searching");
 
             return games.Cast<Game>().ToList();
         }

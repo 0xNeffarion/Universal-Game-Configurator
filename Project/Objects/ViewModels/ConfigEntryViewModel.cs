@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media.Animation;
 using Universal_Game_Configurator.Configurators;
 using Universal_Game_Configurator.Objects.Commands.Base;
 using Universal_Game_Configurator.Objects.Data;
@@ -11,60 +13,58 @@ using Universal_Game_Configurator.Objects.ViewModels.Base;
 namespace Universal_Game_Configurator.Objects.ViewModels {
     public class ConfigEntryViewModel : BaseViewModel {
 
-        private String Initial_Value { get; set; }
+        private String _initialValue { get; set; }
 
-        public ConfigEntryViewModel(ConfigEntry entry, Game game) {
 
-        }
+        #region Window Commands
 
-        public int Id { get; set; }
+        public ICommand CloseWindowCommand { get; set; }
 
-        public String Variable { get; set; }
+        public ICommand MinimizeWindowCommand { get; set; }
 
-        public int FileIndex { get; set; }
+        public ICommand GoBackToSelectorCommand { get; set; }
 
-        public String Section { get; set; }
+        #region Window Actions/Functions
 
-        public Description Description { get; set; }
-
-        public String Value { get; set; }
-
-        public String Name { get; set; }
-
-        public Group Group { get; set; }
-
-        public List<String> Files { get; set; }
-
-        public Configurator Configurator { get; set; }
-
-        public Boolean IsChanged {
-            get {
-                return !this.Value.Equals(this.Initial_Value);
+        public void CloseWindow(Object param) {
+            Window win = param as Window;
+            if (win == null) {
+                return;
             }
+
+            DoubleAnimation anim = new DoubleAnimation(0, TimeSpan.FromMilliseconds(200 * Settings.AnimationMult));
+            anim.Completed += (s, _) => win.Close();
+            win.BeginAnimation(UIElement.OpacityProperty, anim);
         }
 
-        public ICommand SaveEntryCommand { get; set; }
+        public void MinimizeWindow(Object param) {
+            Window win = param as Window;
+            if (win == null) {
+                return;
+            }
 
-
-        private void SaveEntry() {
-            //Configurator.WriteValue(this.ToConfigEntry());
+            win.WindowState = WindowState.Minimized;
         }
 
-        private void Initialize(int id, string variable, int fileIndex, string section, string value,
-                                string name, Group group, List<string> files, Configurator configurator, int descriptionId) {
-            this.Id = id;
-            this.Variable = variable;
-            this.FileIndex = fileIndex;
-            this.Section = section;
-            this.Value = value;
-            this.Name = name;
-            this.Group = group;
-            this.Files = files;
-            this.Initial_Value = value;
-            this.Configurator = configurator;
-            this.Description = DescriptionUtil.FromId(descriptionId);
-            this.SaveEntryCommand = new BaseCommand(SaveEntry);
+        public void GoBackToSelector(Object param) {
+            Window win = param as Window;
+            if (win == null) {
+                return;
+            }
+
+            GameSelector gs = new GameSelector();
+            DoubleAnimation anim = new DoubleAnimation(0, TimeSpan.FromMilliseconds(200 * Settings.AnimationMult));
+            anim.Completed += (s, _) => {
+                win.Close();
+                gs.Show();
+                gs.Activate();
+            };
+            win.BeginAnimation(UIElement.OpacityProperty, anim);
         }
+
+        #endregion
+
+        #endregion
 
     }
 }

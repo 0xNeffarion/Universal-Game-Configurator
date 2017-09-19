@@ -11,17 +11,19 @@ namespace Universal_Game_Configurator.Util {
 
         public static class Registry {
 
+            private const String REGISTRY_INSTALL_PATH = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall";
+
             /// <summary>
             /// Provides installed application directory
             /// </summary>
             /// <param name="appName">Full case sensitive application name</param>
             /// <returns>full installation path or null if doesnt exist</returns>
             public static string GetApplicationInstallPath(String appName) {
-                string RegPath = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall";
+
                 RegistryKey key;
                 if (Environment.Is64BitOperatingSystem) {
                     key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64)
-                        .OpenSubKey(RegPath);
+                        .OpenSubKey(REGISTRY_INSTALL_PATH);
                     using (key) {
                         foreach (string subkey_name in key.GetSubKeyNames()) {
                             if (subkey_name == appName) {
@@ -32,7 +34,7 @@ namespace Universal_Game_Configurator.Util {
                         }
                     }
                     key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32)
-                        .OpenSubKey(RegPath);
+                        .OpenSubKey(REGISTRY_INSTALL_PATH);
                     using (key) {
                         foreach (string subkey_name in key.GetSubKeyNames()) {
                             if (subkey_name == appName) {
@@ -42,10 +44,9 @@ namespace Universal_Game_Configurator.Util {
                             }
                         }
                     }
-
                 } else {
                     key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32)
-                        .OpenSubKey(RegPath);
+                        .OpenSubKey(REGISTRY_INSTALL_PATH);
                     using (key) {
                         foreach (string subkey_name in key.GetSubKeyNames()) {
                             if (subkey_name == appName) {
@@ -56,7 +57,6 @@ namespace Universal_Game_Configurator.Util {
                         }
                     }
                 }
-
 
                 return null;
             }

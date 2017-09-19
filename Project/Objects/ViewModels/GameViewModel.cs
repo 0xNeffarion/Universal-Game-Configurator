@@ -84,11 +84,6 @@ namespace Universal_Game_Configurator.Objects.ViewModels {
 
         #endregion
 
-        #region Window Backing Fields
-
-
-        #endregion
-
         #endregion
 
     }
