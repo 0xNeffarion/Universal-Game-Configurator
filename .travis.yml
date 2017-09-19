@@ -1,3 +1,0 @@
-language: csharp
-solution: "Universal-Game-Configurator.sln"
-dotnet: 1.0.3

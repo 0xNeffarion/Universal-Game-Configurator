@@ -6,7 +6,7 @@ namespace Universal_Game_Configurator.Util {
 
     public class INIFile {
 
-        public String path;
+        private String path;
 
         public INIFile(string INIPath) {
             path = INIPath;

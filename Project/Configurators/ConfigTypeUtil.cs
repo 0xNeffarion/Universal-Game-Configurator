@@ -7,8 +7,7 @@ namespace Universal_Game_Configurator.Configurators {
     public static class ConfigTypesUtil {
 
         private static Dictionary<ConfigType, Configurator> RetrieveTable(List<ConfigFile> filesList, String InstallPath) {
-            Dictionary<ConfigType, Configurator> table = new Dictionary<ConfigType, Configurator>();
-            table = new Dictionary<ConfigType, Configurator>() {
+            Dictionary<ConfigType, Configurator> table = new Dictionary<ConfigType, Configurator>() {
                 { ConfigType.A, new TypeA(filesList, InstallPath) }
             };
 

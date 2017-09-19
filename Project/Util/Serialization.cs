@@ -23,7 +23,7 @@ namespace Universal_Game_Configurator.Util {
                 typeof(DescriptionValue)
         };
 
-        public static readonly Dictionary<Type, XmlSerializer> XmlSerializerCache = new Dictionary<Type, XmlSerializer>();
+        private static readonly Dictionary<Type, XmlSerializer> XmlSerializerCache = new Dictionary<Type, XmlSerializer>();
 
         /// <summary>
         /// Fills XmlSerializerCache Dictionary to use as cache
