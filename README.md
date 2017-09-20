@@ -13,13 +13,13 @@ Here are some early screenshots of the UI: [Game Selector](https://i.imgur.com/H
 ### Prerequisites
 
 * Microsoft Windows 7 or above
-* Microsoft Visual Studio
 * [.NET Framework 4.5.1](https://www.microsoft.com/en-gb/download/details.aspx?id=40773)
 
 ## Libraries
 
 * [Extended WPF Toolkit](https://github.com/xceedsoftware/wpftoolkit)
 * [Fody INotifyPropertyChanged](https://github.com/Fody/PropertyChanged)
+* [System.Windows.Interactivity](https://www.nuget.org/packages/System.Windows.Interactivity.WPF)
 
 ## Contributing
 
