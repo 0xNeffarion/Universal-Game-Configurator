@@ -10,7 +10,12 @@ namespace Universal_Game_Configurator.Converters {
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
             try {
-                return new BitmapImage(new Uri(Paths.GAMEIMAGES_DIRECTORY + ((String)value) + ".jpg"));
+                BitmapImage i = new BitmapImage();
+                i.BeginInit();
+                i.CreateOptions |= BitmapCreateOptions.IgnoreColorProfile;
+                i.UriSource = new Uri(Paths.GAMEIMAGES_DIRECTORY + ((String)value) + ".jpg");
+                i.EndInit();
+                return i;
             } catch {
                 return null;
             }

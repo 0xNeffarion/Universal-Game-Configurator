@@ -12,24 +12,14 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Windows.Threading;
-using System.Xml.Linq;
-using Universal_Game_Configurator.Configurators;
 using Universal_Game_Configurator.Objects.Data;
+using Universal_Game_Configurator.Objects.ViewModels;
 using Universal_Game_Configurator.Theme;
-using Universal_Game_Configurator.Util;
-using Xceed.Wpf.AvalonDock.Controls;
-using Xceed.Wpf.Toolkit;
 using Color = System.Windows.Media.Color;
 using ColorDialog = System.Windows.Forms.ColorDialog;
-using WindowState = System.Windows.WindowState;
 
 namespace Universal_Game_Configurator {
 
@@ -37,23 +27,21 @@ namespace Universal_Game_Configurator {
 
         private Color _mainColor = Color.FromArgb(200, 215, 190, 230);
 
-        public MainWindow(Game game) {
-            //_currentConfigurator = ConfigTypes.GetConfigurator(game.Type, game.ConfigFiles);
-
+        public MainWindow(Game game, ObservableCollection<Game> cachedgames) {
             InitializeComponent();
-            App.Current.Resources["UIColor"] = new SolidColorBrush(Colors.MediumPurple);
+            SetupContext(game, cachedgames);
             this.Opacity = 0;
+            DoubleAnimation anim = new DoubleAnimation(1, TimeSpan.FromMilliseconds(250 * Settings.AnimationMult));
+            this.BeginAnimation(OpacityProperty, anim);
             this.Title = "Universal Game Configurator - Configurator [" + game.Name + "]";
         }
 
+        private void SetupContext(Game game, ObservableCollection<Game> cachedgames) {
+            this.DataContext = new ConfigEntryViewModel(game, cachedgames);
+            this.Activate();
+        }
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
-            windowTitle.Text = this.Title;
-            this.ApplyThemeToWindow(ThemeManager.THEME);
-            var anim = new DoubleAnimation(1, (Duration)TimeSpan.FromMilliseconds(300));
-            this.BeginAnimation(UIElement.OpacityProperty, anim);
-
-            SettingsList.ItemsSource = null;
 
             // _ldScreen = new LoadingScreen("Loading game configs...");
             // Thread th = new Thread(new ThreadStart(LoadConfigs));
@@ -156,7 +144,7 @@ namespace Universal_Game_Configurator {
         }
 
         private void txtBoxSearch_TextChanged(object sender, TextChangedEventArgs e) {
-            if (txtBoxSearch.Text.Length > 2) {
+            /*if (txtBoxSearch.Text.Length > 2) {
                 if (txtBoxSearch.Text == String.Empty) {
                     SettingsList.Items.Filter = null;
                     return;
@@ -164,42 +152,42 @@ namespace Universal_Game_Configurator {
                 SettingsList.Items.Filter = FilterSearch;
             } else {
                 SettingsList.Items.Filter = null;
-            }
+            }*/
         }
 
         private void chk_alphabetic_Checked(object sender, RoutedEventArgs e) {
-            if (this.IsLoaded) {
-                if (chk_alphabetic.IsChecked == true) {
+            /* if (this.IsLoaded) {
+                 if (chk_alphabetic.IsChecked == true) {
 
-                    var view = (CollectionView)CollectionViewSource.GetDefaultView(SettingsList.ItemsSource);
-                    if (view != null) {
-                        view.SortDescriptions.Clear();
-                        var sort = new SortDescription("Name", ListSortDirection.Ascending);
-                        view.SortDescriptions.Add(sort);
-                        sort = new SortDescription("Group", ListSortDirection.Ascending);
-                        view.SortDescriptions.Add(sort);
-                        view.Refresh();
+                     var view = (CollectionView)CollectionViewSource.GetDefaultView(SettingsList.ItemsSource);
+                     if (view != null) {
+                         view.SortDescriptions.Clear();
+                         var sort = new SortDescription("Name", ListSortDirection.Ascending);
+                         view.SortDescriptions.Add(sort);
+                         sort = new SortDescription("Group", ListSortDirection.Ascending);
+                         view.SortDescriptions.Add(sort);
+                         view.Refresh();
 
-                    }
-                    SettingsList.SelectedIndex = 0;
+                     }
+                     SettingsList.SelectedIndex = 0;
 
-                } else {
-                    var view = (CollectionView)CollectionViewSource.GetDefaultView(SettingsList.ItemsSource);
-                    if (view != null) {
-                        view.SortDescriptions.Clear();
-                        var sort = new SortDescription("Name", ListSortDirection.Descending);
-                        view.SortDescriptions.Add(sort);
-                        sort = new SortDescription("Group", ListSortDirection.Ascending);
-                        view.SortDescriptions.Add(sort);
-                        view.Refresh();
-                    }
-                    SettingsList.SelectedIndex = 0;
-                }
-            }
+                 } else {
+                     var view = (CollectionView)CollectionViewSource.GetDefaultView(SettingsList.ItemsSource);
+                     if (view != null) {
+                         view.SortDescriptions.Clear();
+                         var sort = new SortDescription("Name", ListSortDirection.Descending);
+                         view.SortDescriptions.Add(sort);
+                         sort = new SortDescription("Group", ListSortDirection.Ascending);
+                         view.SortDescriptions.Add(sort);
+                         view.Refresh();
+                     }
+                     SettingsList.SelectedIndex = 0;
+                 }
+             }*/
         }
 
         private void chk_alphabetic_Unchecked(object sender, RoutedEventArgs e) {
-            if (this.IsLoaded) {
+            /*if (this.IsLoaded) {
                 if (chk_alphabetic.IsChecked == false) {
                     var view = (CollectionView)CollectionViewSource.GetDefaultView(SettingsList.ItemsSource);
                     if (view != null) {
@@ -212,7 +200,7 @@ namespace Universal_Game_Configurator {
                     }
                     SettingsList.SelectedIndex = 0;
                 }
-            }
+            }*/
         }
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e) {

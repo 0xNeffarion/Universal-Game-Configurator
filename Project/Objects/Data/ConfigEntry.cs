@@ -82,6 +82,12 @@ namespace Universal_Game_Configurator.Objects.Data {
         public String Value { get; set; }
 
         /// <summary>
+        /// Boolean for listview color changing
+        /// </summary>
+        [XmlIgnore]
+        public Boolean IsChanged { get; set; }
+
+        /// <summary>
         /// Variable description id
         /// </summary>
         [XmlElement("DescriptionId")]

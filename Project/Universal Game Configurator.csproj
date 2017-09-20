@@ -139,7 +139,6 @@
     <Compile Include="Converters\GenresConverter.cs" />
     <Compile Include="Converters\ImageConverter.cs" />
     <Compile Include="Objects\Commands\Base\BaseParameterCommand.cs" />
-    <Compile Include="Objects\Commands\GameSelector\ConfigureCommand.cs" />
     <Compile Include="Objects\Data\Lesser\Ranges.cs" />
     <Compile Include="Objects\Data\Lesser\ConfigFile.cs" />
     <Compile Include="Objects\Data\ConfigEntry.cs" />
@@ -279,25 +278,16 @@
       <SubType>Designer</SubType>
     </Content>
     <Compile Include="Theme\ThemeManager.cs" />
-    <Resource Include="Resources\1466570622_about.png" />
-    <Resource Include="Resources\UGC_Icon_trans_hover.png" />
-    <Resource Include="Resources\UGC_Icon_trans.png" />
-    <Resource Include="Resources\help.png" />
-    <Resource Include="Resources\Differences\lensflare.jpg" />
-    <Resource Include="Resources\Differences\aa.jpg" />
-    <Resource Include="Resources\Differences\empty.png" />
+    <Resource Include="Resources\pixel.png" />
+    <Resource Include="Resources\arrow_goforward.png" />
     <Resource Include="Resources\magnifier.png" />
-    <Resource Include="Resources\page_save.png" />
-    <Resource Include="Resources\badge-square-cross-16.png" />
-    <Resource Include="Resources\arrow-left-16.png" />
-    <Resource Include="Resources\asset-green-16.png" />
-    <Resource Include="Resources\badge-circle-check-16.png" />
-    <Resource Include="Resources\badge-square-check-16.png" />
-    <Resource Include="Resources\check-16.png" />
-    <Resource Include="Resources\arrow_refresh.png" />
-    <Resource Include="Resources\badge-square-plus-24.png" />
-    <Resource Include="Resources\badge-circle-plus-24.png" />
-    <Resource Include="Resources\arrow-right-24.png" />
+    <Resource Include="Resources\arrows_refresh.png" />
+    <Resource Include="Resources\arrow_goback.png" />
+    <Resource Include="Resources\box_backup.png" />
+    <Resource Include="Resources\help.png" />
+    <Resource Include="Resources\save.png" />
+    <Resource Include="Resources\ugc_icon_transparent.png" />
+    <Resource Include="Resources\UGC_Icon_trans_hover.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\Fody.2.1.2\build\netstandard1.0\Fody.targets" Condition="Exists('packages\Fody.2.1.2\build\netstandard1.0\Fody.targets')" />

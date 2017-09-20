@@ -13,8 +13,7 @@
         Title="Universal Game Configurator - Configurator" Height="660" Width="830" 
         FontFamily="Open Sans" TextOptions.TextFormattingMode="Display" WindowStartupLocation="CenterScreen" 
         MinHeight="570" MinWidth="660" Icon="Resources/UGC_Icon.ico" UseLayoutRounding="True"
-        WindowStyle="None" AllowsTransparency="True" ResizeMode="CanResizeWithGrip"
-        DataContext="ConfigEntryViewModel">
+        WindowStyle="None" AllowsTransparency="True" ResizeMode="CanResizeWithGrip">
     <Window.Resources>
         <Style x:Key="sepSty" TargetType="{x:Type Separator}">
             <Setter Property="Height" Value="1" />
@@ -79,7 +78,7 @@
                 <RowDefinition Height="88*"/>
                 <RowDefinition Height="45"/>
             </Grid.RowDefinitions>
-            <Border Background="{DynamicResource WindowBackgroundBrush}" DockPanel.Dock="Top" BorderBrush="#FF444444" BorderThickness="0,0,0,1" Grid.Row="0" Grid.ColumnSpan="3" MouseDown="Border_MouseDown">
+            <Border Background="{DynamicResource WindowBackgroundBrush}" DockPanel.Dock="Top" BorderBrush="#FF444444" BorderThickness="1" Grid.Row="0" Grid.ColumnSpan="3" MouseDown="Border_MouseDown">
                 <DockPanel Background="#FF424242">
                     <Button ContextMenuService.IsEnabled="false" x:Name="btnMenu" BorderThickness="0" Background="#FF404040" Width="75" Margin="0,0,5,0" Foreground="#FFDEDEDE" HorizontalContentAlignment="Stretch" Height="28" HorizontalAlignment="Left" >
                         <Button.ContextMenu>
@@ -109,7 +108,7 @@
                                 </ContextMenu.Style>
                                 <MenuItem FontSize="13" Header="About">
                                     <MenuItem.Icon>
-                                        <Image Height="16" Width="16" RenderOptions.BitmapScalingMode="HighQuality" Source="Resources/1466570622_about.png" />
+                                        <Image Height="16" Width="16" />
                                     </MenuItem.Icon>
                                 </MenuItem>
                                 <MenuItem Header="Help" ></MenuItem>
@@ -122,8 +121,8 @@
                             <ControlTemplate TargetType="{x:Type Button}">
                                 <Border x:Name="brd_main" CornerRadius="1" Background="#FF383838">
                                     <StackPanel Orientation="Horizontal" Height="18" Margin="0,0,2,0" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                        <Image x:Name="img_main" RenderOptions.BitmapScalingMode="HighQuality"
-        HorizontalAlignment="Left" Source="Resources/UGC_Icon_trans.png" Width="16" Height="16" Stretch="UniformToFill" Margin="0,0,5,0"></Image>
+                                        <Image x:Name="img_main" HorizontalAlignment="Left" Width="16" Height="16" Source="Resources/ugc_icon_transparent.png"
+                                               RenderOptions.BitmapScalingMode="HighQuality" Stretch="UniformToFill" Margin="0,0,5,0"></Image>
                                         <TextBlock x:Name="txtMenu" Text="MENU" HorizontalAlignment="Right" Margin="0,1,0,0" FontWeight="SemiBold"></TextBlock>
                                     </StackPanel>
                                 </Border>
@@ -137,28 +136,24 @@
                         </Button.Template>
                     </Button>
                     <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" VerticalAlignment="Center" Margin="7,0,0,0">
-                        <TextBlock x:Name="windowTitle" Text="Title" Foreground="White" ForceCursor="True" FontWeight="SemiBold" FontSize="14" VerticalAlignment="Center"></TextBlock>
+                        <TextBlock x:Name="windowTitle" Text="{Binding Title,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Foreground="White" ForceCursor="True" FontWeight="SemiBold" FontSize="14" VerticalAlignment="Center"></TextBlock>
                     </StackPanel>
 
                     <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,4,0" DockPanel.Dock="Right">
-                        <Button x:Name="btnMinimizeWindow" 
+                        <Button x:Name="btnMinimizeWindow" FontFamily="Marlett" Content="0" Margin="1,1,4,1" VerticalAlignment="Center" Padding="7,4" FontWeight="Bold" Foreground="White"
                                 Command="{Binding MinimizeWindowCommand}" 
-                                 CommandParameter="{Binding ElementName=MainConfigureWindow}"
-                                FontFamily="Marlett" Content="0" Margin="1,1,4,1" VerticalAlignment="Center" Padding="7,4" FontWeight="Bold" Foreground="White" />
-                        <Button x:Name="btnCloseWindow" FontFamily="Marlett" Content="r" Margin="1" VerticalAlignment="Center" Padding="7,4" FontWeight="Bold" Foreground="White" Background="#FFCB2626"
+                            CommandParameter="{Binding ElementName=MainConfigureWindow}" />
+                        <Button x:Name="btnCloseWindow" FontFamily="Marlett" Content="r" Margin="1" VerticalAlignment="Center" Padding="7,4" FontWeight="Bold" Foreground="White" Background="#FFCB2626" 
                                 Command="{Binding CloseWindowCommand}" 
-                            CommandParameter="{Binding ElementName=MainConfigureWindow}"/>
-
+                            CommandParameter="{Binding ElementName=MainConfigureWindow}"  />
                     </StackPanel>
                 </DockPanel>
             </Border>
             <ListView AlternationCount="2" ItemContainerStyle="{StaticResource listviewAlternate}" x:Name="SettingsList" Grid.Row="3" Grid.Column="0" 
                       Margin="10,5,10,10" Grid.RowSpan="2" Grid.ColumnSpan="2"
-                      SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Visible" 
-                      ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="Transparent" BorderThickness="0" BorderBrush="#FF898989" UseLayoutRounding="True">
+                      SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Visible" Background="Transparent" BorderThickness="0" BorderBrush="#FF898989" UseLayoutRounding="True">
                 <ListView.Resources>
-                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" 
-                     Color="Transparent"/>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
                 </ListView.Resources>
                 <ListView.GroupStyle>
                     <GroupStyle>
@@ -186,26 +181,25 @@
                     </GroupStyle>
                 </ListView.GroupStyle>
                 <ListView.View>
-
                     <GridView x:Name="SettingsGridView" AllowsColumnReorder="False" >
                         <GridViewColumn x:Name="ConfigCol1" Header="Setting">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" TextAlignment="Center" ToolTip="{Binding Path=Text, RelativeSource={RelativeSource Self}}" ></TextBlock>
+                                    <TextBlock Text="" TextTrimming="CharacterEllipsis" TextAlignment="Center"  ></TextBlock>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn x:Name="ConfigCol2" Header="Current Value">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock TextTrimming="CharacterEllipsis" TextAlignment="Center" ToolTip="{Binding Path=Text, RelativeSource={RelativeSource Self}}" Text="{Binding Value}" FontFamily="Op"></TextBlock>
+                                    <TextBlock Text="" TextTrimming="CharacterEllipsis" TextAlignment="Center" ></TextBlock>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn x:Name="ConfigCol3" Header="Default Value">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock TextTrimming="CharacterEllipsis" TextAlignment="Center" ToolTip="{Binding Path=Text, RelativeSource={RelativeSource Self}}" Text="{Binding Default}"></TextBlock>
+                                    <TextBlock Text="" TextTrimming="CharacterEllipsis" TextAlignment="Center"></TextBlock>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -215,27 +209,43 @@
             <StackPanel Margin="5,0,3,3" Grid.Row="5" Grid.Column="0" Orientation="Horizontal" Grid.ColumnSpan="2">
                 <Button x:Name="btnBack" Width="140" Margin="5,0,0,7" ToolTip="Go back and change the game to configure" IsCancel="True">
                     <StackPanel Orientation="Horizontal">
-                        <Image RenderOptions.BitmapScalingMode="HighQuality" Source="Resources/arrow-left-16.png" Width="16" Height="16" Margin="0,0,5,0" Stretch="UniformToFill" />
+                        <Image Width="16" Height="16" Margin="0,0,5,0" RenderOptions.BitmapScalingMode="HighQuality" Stretch="UniformToFill">
+                            <Image.Source>
+                                <BitmapImage CreateOptions="IgnoreColorProfile" UriSource="Resources/arrow_goback.png"></BitmapImage>
+                            </Image.Source>
+                        </Image>
                         <TextBlock Text="Change game" FontSize="13" FontWeight="SemiBold" />
                     </StackPanel>
                 </Button>
                 <Button x:Name="btnBackup" Width="110" Margin="5,0,0,7" ToolTip="Creates backup of all the settings files">
                     <StackPanel Orientation="Horizontal">
-                        <Image RenderOptions.BitmapScalingMode="HighQuality" Source="Resources/asset-green-16.png" Width="16" Height="16" Margin="0,0,5,0" Stretch="UniformToFill" />
+                        <Image Width="16" Height="16" Margin="0,0,5,0" RenderOptions.BitmapScalingMode="HighQuality" Stretch="UniformToFill">
+                            <Image.Source>
+                                <BitmapImage CreateOptions="IgnoreColorProfile" UriSource="Resources/box_backup.png"></BitmapImage>
+                            </Image.Source>
+                        </Image>
                         <TextBlock Text="Backup" FontSize="13" FontWeight="SemiBold" />
                     </StackPanel>
                 </Button>
-                <Button x:Name="btnReset" Width="110" Margin="5,0,0,7" ToolTip="Reset settings to what they were before you applied them" >
+                <Button x:Name="btnReset" Width="110" Command="" Margin="5,0,0,7" ToolTip="Reset settings to what they were before you applied them" >
                     <StackPanel Orientation="Horizontal">
-                        <Image RenderOptions.BitmapScalingMode="HighQuality" Source="Resources/arrow_refresh.png" Width="16" Height="16" Margin="0,0,5,0" Stretch="UniformToFill" />
+                        <Image Width="16" Height="16" Margin="0,0,5,0" RenderOptions.BitmapScalingMode="HighQuality" Stretch="UniformToFill">
+                            <Image.Source>
+                                <BitmapImage CreateOptions="IgnoreColorProfile" UriSource="Resources/arrows_refresh.png"></BitmapImage>
+                            </Image.Source>
+                        </Image>
                         <TextBlock Text="Reset" FontSize="13" FontWeight="SemiBold" />
                     </StackPanel>
                 </Button>
             </StackPanel>
             <Button x:Name="btnApplySelected" Grid.Row="5" Grid.Column="2" Margin="5,0,10,10" ToolTip="Applies and saves all configurations">
                 <StackPanel Orientation="Horizontal">
-                    <Image RenderOptions.BitmapScalingMode="HighQuality" Source="Resources/badge-square-check-16.png" Width="16" Height="16" Margin="0,0,5,0" Stretch="UniformToFill" />
-                    <TextBlock Text="Save all settings" FontSize="13" FontWeight="SemiBold" />
+                    <Image Width="16" Height="16" Margin="0,0,5,0" RenderOptions.BitmapScalingMode="HighQuality" Stretch="UniformToFill">
+                        <Image.Source>
+                            <BitmapImage CreateOptions="IgnoreColorProfile" UriSource="Resources/save.png"></BitmapImage>
+                        </Image.Source>
+                    </Image>
+                    <TextBlock Text="Apply &amp; Save all settings" FontSize="13" FontWeight="SemiBold" />
                 </StackPanel>
             </Button>
             <GroupBox x:Name="groupBox_setting" Grid.Column="2" Margin="5,5,10,5" Header="Setting:" Grid.Row="1" FontWeight="SemiBold" FontSize="13" Grid.RowSpan="3">
@@ -256,7 +266,10 @@
                     <TextBlock x:Name="textInfoName" TextWrapping="Wrap" Text="" Grid.Row="0" FontSize="13" FontWeight="SemiBold" TextAlignment="Center" VerticalAlignment="Center" TextTrimming="WordEllipsis" Margin="0,12,0,13" Height="16" />
                     <Label x:Name="label" Content="Example" Grid.Row="2" Width="60" Height="25" VerticalAlignment="Top"/>
                     <Border Margin="5,25,5,0" Grid.Row="2" BorderBrush="#FF4B4B4B" BorderThickness="1" CornerRadius="5">
-                        <Image x:Name="imgDifference"  RenderOptions.BitmapScalingMode="HighQuality" Source="Resources/Differences/empty.png" Margin="5">
+                        <Image x:Name="imgDifference" RenderOptions.BitmapScalingMode="HighQuality" Margin="5">
+                            <Image.Source>
+                                <BitmapImage CreateOptions="IgnoreColorProfile" UriSource="Resources/pixel.png"></BitmapImage>
+                            </Image.Source>
                             <Image.ToolTip>
                                 <ToolTip>
                                     <ToolTip.Triggers>
@@ -269,7 +282,7 @@
                                         </EventTrigger>
                                     </ToolTip.Triggers>
                                     <Grid>
-                                        <Image x:Name="imgDifference_tooltip" Width="900" MaxHeight="1000" Height="Auto" RenderOptions.BitmapScalingMode="HighQuality" Source="Resources/Differences/empty.png" Margin="5" />
+                                        <Image x:Name="imgDifference_tooltip" Width="900" MaxHeight="1000" Height="Auto" RenderOptions.BitmapScalingMode="HighQuality" Margin="5" />
                                     </Grid>
                                 </ToolTip>
                             </Image.ToolTip>
@@ -280,10 +293,15 @@
                 </Grid>
             </GroupBox>
             <Border Margin="10,10,10,7" Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0" BorderThickness="1" BorderBrush="#FF898989">
-                <xctk:WatermarkTextBox Style="{StaticResource txtBox}" x:Name="txtBoxSearch"  TextWrapping="Wrap" Height="26" VerticalAlignment="Center" BorderThickness="0" TextChanged="txtBoxSearch_TextChanged" VerticalContentAlignment="Center" Foreground="White">
+                <xctk:WatermarkTextBox Style="{StaticResource txtBox}" x:Name="txtBoxSearch"  TextWrapping="Wrap" Height="26" VerticalAlignment="Center" BorderThickness="0" 
+                                       TextChanged="txtBoxSearch_TextChanged" VerticalContentAlignment="Center" Foreground="White">
                     <xctk:WatermarkTextBox.Watermark>
                         <StackPanel Orientation="Horizontal">
-                            <Image Source="Resources/magnifier.png" Width="16" Height="16" Stretch="Uniform" />
+                            <Image Width="16" Height="16" Stretch="Uniform">
+                                <Image.Source>
+                                    <BitmapImage CreateOptions="IgnoreColorProfile" UriSource="Resources/magnifier.png"></BitmapImage>
+                                </Image.Source>
+                            </Image>
                             <TextBlock Text="Search settings name..." Margin="4,2,0,0" Foreground="#FFF0F0F0" />
                         </StackPanel>
                     </xctk:WatermarkTextBox.Watermark>

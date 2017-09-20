@@ -7,7 +7,8 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:data="clr-namespace:Universal_Game_Configurator.Objects.Data"
         xmlns:converters="clr-namespace:Universal_Game_Configurator.Converters"
-        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:wi="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
         mc:Ignorable="d"
         Title="Universal Game Configurator - Game selection" Height="579" Width="615" 
         Icon="Resources/UGC_Icon.ico" WindowStartupLocation="CenterScreen" TextOptions.TextFormattingMode="Display" 
@@ -51,7 +52,7 @@
             </Grid.RowDefinitions>
             <DockPanel x:Name="titleBorder" Grid.ColumnSpan="2" Background="#FF424242" MouseDown="titleBorder_MouseDown">
                 <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" VerticalAlignment="Center" Margin="10,0,0,0">
-                    <TextBlock x:Name="windowTitle" Text="Title" Foreground="White" ForceCursor="True" FontWeight="SemiBold" FontSize="14" VerticalAlignment="Center"></TextBlock>
+                    <TextBlock x:Name="windowTitle" Text="{Binding Title,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Foreground="White" ForceCursor="True" FontWeight="SemiBold" FontSize="14" VerticalAlignment="Center"></TextBlock>
                 </StackPanel>
                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,4,0" DockPanel.Dock="Right">
                     <Button x:Name="btnMinimizeWindow" FontFamily="Marlett" Content="0" Margin="1,1,4,1" VerticalAlignment="Center" Padding="7,4" 
@@ -70,7 +71,7 @@
                 <ListView.Resources>
                     <Style TargetType="{x:Type ListViewItem}">
                         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
-                        <Setter Property="FocusVisualStyle" Value="{StaticResource ListViewItemFocusVisual}" />
+                        <Setter Property="FocusVisualStyle" Value="{DynamicResource ListViewItemFocusVisual}" />
                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                         <Setter Property="Template">
                             <Setter.Value>
@@ -109,8 +110,8 @@
                                     </ControlTemplate.Resources>
                                     <Border SnapsToDevicePixels="true" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="2" x:Name="border">
                                         <Grid Margin="0">
-                                            <Rectangle x:Name="Background" IsHitTestVisible="True" Opacity="0.25" Fill="{StaticResource NormalBrush}" RadiusX="1" RadiusY="1"/>
-                                            <Rectangle x:Name="HoverRectangle" IsHitTestVisible="True" Opacity="0" Fill="{StaticResource NormalBrush}" RadiusX="1" RadiusY="1"/>
+                                            <Rectangle x:Name="Background" IsHitTestVisible="True" Opacity="0.25" Fill="{DynamicResource NormalBrush}" RadiusX="1" RadiusY="1"/>
+                                            <Rectangle x:Name="HoverRectangle" IsHitTestVisible="True" Opacity="0" Fill="{DynamicResource NormalBrush}" RadiusX="1" RadiusY="1"/>
                                             <Rectangle x:Name="SelectedRectangle" IsHitTestVisible="True" Opacity="0" RadiusX="1" RadiusY="1">
                                                 <Rectangle.Fill>
                                                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -211,16 +212,16 @@
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                         <Image x:Name="imgNext" VerticalAlignment="Center" Width="24" 
-                                           Height="24" Source="Resources/arrow-right-24.png" Cursor="Hand" ToolTip="Configure" 
+                                           Height="24" Source="Resources/arrow_goforward.png" Cursor="Hand" ToolTip="Configure" 
                                                IsHitTestVisible="True" Margin="0,0,5,0" >
-                                            <i:Interaction.Triggers>
-                                                <i:EventTrigger EventName="MouseDown">
+                                            <wi:Interaction.Triggers>
+                                                <wi:EventTrigger EventName="MouseDown">
                                                     <!-- {Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}} -->
-                                                    <i:InvokeCommandAction CommandParameter="{Binding ElementName=GameSelectionWindow}" 
+                                                    <wi:InvokeCommandAction CommandParameter="{Binding ElementName=GameSelectionWindow}" 
                                                                            Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, 
                                                                            Path=DataContext.ConfigureCommand}"/>
-                                                </i:EventTrigger>
-                                            </i:Interaction.Triggers>
+                                                </wi:EventTrigger>
+                                            </wi:Interaction.Triggers>
                                         </Image>
                                     </StackPanel>
                                 </DataTemplate>
@@ -243,14 +244,15 @@
                     </xctk:WatermarkTextBox.Watermark>
                 </xctk:WatermarkTextBox>
             </Border>
-            <Image x:Name="imgRefresh" Grid.Column="1" Grid.Row="1" Source="Resources/arrow_refresh.png" Margin="7,14,10,11" Cursor="Hand"
-                   ToolTip="Refresh list">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="MouseDown">
-                        <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, 
-                                                                           Path=DataContext.GetGamesCommand}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
+            <Image x:Name="imgRefresh" Grid.Column="1" Grid.Row="1" Source="Resources/arrows_refresh.png" Margin="7,14,10,11" Cursor="Hand"
+                   ToolTip="Refresh list" >
+                <wi:Interaction.Triggers>
+                    <wi:EventTrigger EventName="MouseDown">
+                        <ei:CallMethodAction
+                                TargetObject="{Binding}"
+                                MethodName="GetGames"/>
+                    </wi:EventTrigger>
+                </wi:Interaction.Triggers>
             </Image>
         </Grid>
     </Border>

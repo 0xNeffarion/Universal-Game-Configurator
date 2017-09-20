@@ -2783,10 +2783,10 @@
                     <Border SnapsToDevicePixels="true" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="2" x:Name="border">
 
                         <Grid Margin="2,0,2,0">
-                            <Rectangle x:Name="Background" IsHitTestVisible="False" Opacity="0.25" Fill="{StaticResource NormalBrush}" RadiusX="1" RadiusY="1"/>
-                            <Rectangle x:Name="HoverRectangle" IsHitTestVisible="False" Opacity="0" Fill="{StaticResource NormalBrush}" RadiusX="1" RadiusY="1"/>
-                            <Rectangle x:Name="SelectedRectangle" IsHitTestVisible="False" Opacity="0" Fill="{StaticResource SelectedBackgroundBrush}" RadiusX="1" RadiusY="1"/>
-                            <GridViewRowPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Margin="0,2,0,2" VerticalAlignment="Stretch" />
+                            <Rectangle x:Name="Background" IsHitTestVisible="True" Opacity="0.25" Fill="{StaticResource NormalBrush}" RadiusX="1" RadiusY="1"/>
+                            <Rectangle x:Name="HoverRectangle" IsHitTestVisible="True" Opacity="0" Fill="{StaticResource NormalBrush}" RadiusX="1" RadiusY="1"/>
+                            <Rectangle x:Name="SelectedRectangle" IsHitTestVisible="True" Opacity="0" Fill="{StaticResource SelectedBackgroundBrush}" RadiusX="1" RadiusY="1"/>
+                            <GridViewRowPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Margin="0,0,0,0" VerticalAlignment="Stretch" />
                         </Grid>
 
                     </Border>
@@ -2847,14 +2847,13 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
-
     <Style x:Key="GridViewColumnHeaderGripper" TargetType="{x:Type Thumb}">
         <Setter Property="Canvas.Right" Value="-8.5" />
         <Setter Property="Width" Value="18" />
         <Setter Property="Height" Value="{Binding Path=ActualHeight, RelativeSource={RelativeSource TemplatedParent}}" />
-        <Setter Property="Padding" Value="0,3,0,4" />
-        <Setter Property="Background" Value="{DynamicResource LightBrush}" />
+        <Setter Property="Padding" Value="1,0" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Background" Value="Transparent" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Thumb}">
@@ -2873,7 +2872,7 @@
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Background" Value="{DynamicResource LightBrush}" />
-        <Setter Property="Padding" Value="2,0,2,0" />
+        <Setter Property="Padding" Value="0" />
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
         <Setter Property="Template">
             <Setter.Value>
@@ -2906,20 +2905,15 @@
                             </DoubleAnimationUsingKeyFrames>
                         </Storyboard>
                     </ControlTemplate.Resources>
-                    <Grid Margin="0,1,0,1">
+                    <Grid Margin="0">
                         <Grid>
-
-                            <Border x:Name="Main" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" Background="{DynamicResource NormalBrush}" BorderBrush="{DynamicResource NormalBorderBrush}" CornerRadius="0,0,0,0" />
-                            <Rectangle Opacity="1" Stroke="{x:Null}" RadiusX="0" RadiusY="0" VerticalAlignment="Stretch" Height="Auto" x:Name="Shine" Fill="{DynamicResource ShineBrush}"/>
-                            <Border x:Name="HoverBorder" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" Background="{DynamicResource HoverBrush}" BorderBrush="{DynamicResource NormalBorderBrush}" CornerRadius="0,0,0,0" Opacity="0" />
-                            <Border x:Name="HoverShineBorder" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" Background="{DynamicResource HoverShineBrush}" BorderBrush="{DynamicResource NormalBorderBrush}" CornerRadius="0,0,0,0" Opacity="0" />
-                            <Border x:Name="PressedBorder" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" Background="{DynamicResource PressedBrush}" BorderBrush="{DynamicResource PressedBorderBrush}" CornerRadius="0,0,0,0" Opacity="0" />
-
-                            <Border BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}">
-                                <Border.BorderBrush>
-                                    <SolidColorBrush Color="{DynamicResource WhiteColor}"/>
-                                </Border.BorderBrush>
-                                <ContentPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" Margin="2,2,2,2" />
+                            <Border x:Name="Main" BorderThickness="0" Margin="0" Padding="0" Background="{DynamicResource NormalBrush}" CornerRadius="0" />
+                            <Rectangle Opacity="1" Stroke="{x:Null}" RadiusX="0" RadiusY="0" VerticalAlignment="Stretch" Height="Auto" x:Name="Shine" Fill="{DynamicResource ShineBrush}" StrokeThickness="0"/>
+                            <Border x:Name="HoverBorder" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" Background="{DynamicResource HoverBrush}" BorderBrush="{DynamicResource NormalBorderBrush}" CornerRadius="0" Opacity="0" />
+                            <Border x:Name="HoverShineBorder" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" Background="{DynamicResource HoverShineBrush}" BorderBrush="{DynamicResource NormalBorderBrush}" CornerRadius="0" Opacity="0" />
+                            <Border x:Name="PressedBorder" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" Background="{DynamicResource PressedBrush}" BorderBrush="{DynamicResource PressedBorderBrush}" CornerRadius="0" Opacity="0" />
+                            <Border BorderThickness="{TemplateBinding BorderThickness}" Padding="0">
+                                <ContentPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" Margin="2" />
                             </Border>
                         </Grid>
                         <Canvas>

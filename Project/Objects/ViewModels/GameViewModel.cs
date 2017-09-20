@@ -2,12 +2,11 @@ using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Interactivity;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using Universal_Game_Configurator.Objects.Commands.Base;
-using Universal_Game_Configurator.Objects.Commands.GameSelector;
 using Universal_Game_Configurator.Objects.Data;
 using Universal_Game_Configurator.Objects.Data.Helpers;
 using Universal_Game_Configurator.Objects.ViewModels.Base;
@@ -21,30 +20,37 @@ namespace Universal_Game_Configurator.Objects.ViewModels {
 
         public ICommand ConfigureCommand { get; set; }
 
-        public ICommand GetGamesCommand { get; set; }
+        public GameViewModel(ObservableCollection<Game> gamesSaved) {
+            Initialize();
+            this.Games = gamesSaved;
+        }
 
         public GameViewModel() {
+            Initialize();
+            GetGames();
+        }
+
+        private void Initialize() {
             ConfigureCommand = new BaseParameterCommand<Object>(Configure);
-            GetGamesCommand = new BaseCommand(GetGames);
             MinimizeWindowCommand = new BaseParameterCommand<Object>(MinimizeWindow);
             CloseWindowCommand = new BaseParameterCommand<Object>(CloseWindow);
-            GetGames();
         }
 
         private void Configure(Object param) {
             if (SelectedGameIndex >= 0 && Games != null) {
                 if (Games.Count > 0 && Games.Count >= SelectedGameIndex) {
-                    MainWindow mw = new MainWindow(Games[SelectedGameIndex] as Game);
+                    MainWindow mw = new MainWindow(Games[SelectedGameIndex] as Game, this.Games);
                     mw.Show();
                     CloseWindow(param);
                 }
             }
         }
 
-        private void GetGames() {
+        public void GetGames() {
             Games = null;
             LoadingScreen loadingScreen = new LoadingScreen("Detecting installed games...");
             loadingScreen.Show();
+            loadingScreen.Activate();
             Dispatcher myThread = Dispatcher.CurrentDispatcher;
             Task task = new Task(async () => {
                 Games = new ObservableCollection<Game>(GamesUtil.GetInstalledGames());

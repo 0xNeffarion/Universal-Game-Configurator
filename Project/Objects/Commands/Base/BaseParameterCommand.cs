@@ -4,7 +4,7 @@ using System.Windows.Input;
 namespace Universal_Game_Configurator.Objects.Commands.Base {
     public class BaseParameterCommand<Object> : ICommand {
 
-        private Action<Object> baseAction;
+        private readonly Action<Object> baseAction;
 
         public BaseParameterCommand(Action<Object> action) {
             this.baseAction = action;

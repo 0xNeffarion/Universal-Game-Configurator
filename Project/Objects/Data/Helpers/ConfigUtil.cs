@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
+using System.Text;
 using Universal_Game_Configurator.Const;
 using Universal_Game_Configurator.Objects.Data.Databases;
 using Universal_Game_Configurator.Objects.Data.Lesser;
@@ -9,10 +11,14 @@ using Universal_Game_Configurator.Util;
 namespace Universal_Game_Configurator.Objects.Data.Helpers {
     public static class ConfigUtil {
 
-        public static ConfigsDatabase DeserializeDatabase(Game game) {
+        private static ConfigsDatabase DeserializeDatabase(Game game) {
             return Serialization.Deserialize<ConfigsDatabase>(Paths.GAMECONFIGDB_DIRECTORY + game.Id + ".xml");
         }
 
+        public static ObservableCollection<ConfigEntry> ParseConfigEntries(Game game) {
+            ConfigsDatabase database = DeserializeDatabase(game);
+            return new ObservableCollection<ConfigEntry>(database.Entries);
+        }
 
         public static List<String> ParseConfigPaths(List<ConfigFile> files, String installPath) {
             List<String> parsed = new List<String>();
@@ -34,31 +40,31 @@ namespace Universal_Game_Configurator.Objects.Data.Helpers {
         /// <param name="gamePath">game executable path</param>
         /// <returns>full complete path to config with all path codes translated</returns>
         private static String GetConfigLocation(String pathCode, String gamePath) {
-            string basePath = "";
+            StringBuilder basePath = new StringBuilder();
             String[] Dirs = pathCode.Split(new char[] { '\\' });
             foreach (var dir in Dirs) {
                 if (dir.Equals("#GAMEDIR#")) {
-                    basePath += gamePath;
+                    basePath.Append(gamePath);
                 } else if (dir.Equals("#MYDOCS#")) {
-                    basePath += Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                    basePath.Append(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
                 } else if (dir.Equals("#MYGAMES#")) {
-                    basePath += Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\my games";
+                    basePath.Append(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)).Append(@"\my games");
                 } else if (dir.Equals("#APPDATA#")) {
-                    basePath += Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                    basePath.Append(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
                 } else if (dir.Equals("#PGFILES#")) {
-                    basePath += Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
+                    basePath.Append(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
                 } else if (dir.Equals("#PGFILESX86#")) {
-                    basePath += Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
+                    basePath.Append(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86));
                 } else if (dir.Equals("#F_FOLDER#") || dir.Equals("#F_FILE#")) {
-                    basePath += GetConfigSubs(basePath, dir);
+                    basePath.Append(GetConfigSubs(basePath.ToString(), dir));
                 } else {
-                    basePath += dir;
+                    basePath.Append(dir);
                 }
 
-                basePath += @"\";
+                basePath.Append(@"\");
             }
 
-            return basePath.Substring(0, basePath.Length - 1);
+            return basePath.ToString().Substring(0, basePath.Length - 1);
         }
 
         /// <summary>
