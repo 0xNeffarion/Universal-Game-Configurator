@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
+using Universal_Game_Configurator.Controls;
 using Universal_Game_Configurator.Objects.Data;
 using Universal_Game_Configurator.Objects.Data.Databases;
 using Universal_Game_Configurator.Objects.Data.Lesser;
@@ -20,7 +21,9 @@ namespace Universal_Game_Configurator.Util {
                 typeof(ConfigEntry),
                 typeof(ConfigFile),
                 typeof(Description),
-                typeof(DescriptionValue)
+                typeof(DescriptionValue),
+                typeof(Group),
+                typeof(EntryType)
         };
 
         private static readonly Dictionary<Type, XmlSerializer> XmlSerializerCache = new Dictionary<Type, XmlSerializer>();

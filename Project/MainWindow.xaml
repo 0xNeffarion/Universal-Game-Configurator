@@ -255,7 +255,7 @@
                     </Border>
                 </Grid>
             </GroupBox>
-            <GroupBox x:Name="groupBox_information" Grid.Column="2" Margin="5,0,10,10" Header="Information" Grid.Row="4" >
+            <GroupBox x:Name="groupBox_information" Grid.Column="2" Margin="5,0,10,10" Header="Information" FontWeight="SemiBold" Grid.Row="4" >
                 <Grid Margin="8" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="41"/>

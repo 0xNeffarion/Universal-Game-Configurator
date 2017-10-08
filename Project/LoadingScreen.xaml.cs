@@ -1,28 +1,42 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Universal_Game_Configurator {
-    /// <summary>
-    /// Interaction logic for LoadingScreen.xaml
-    /// </summary>
+
     public partial class LoadingScreen : Window {
 
         private string loadText = "";
 
-        public LoadingScreen(string txt) {
+        public LoadingScreen(String txt) {
             InitializeComponent();
             loadText = txt;
+            pgbar.IsIndeterminate = true;
+        }
+
+        public LoadingScreen(String txt, Boolean progress) {
+            InitializeComponent();
+            loadText = txt;
+            pgbar.IsIndeterminate = !progress;
+            pgbar.Value = 0;
+        }
+
+        public void SetIntermediate(Boolean val) {
+            if (val) {
+                pgbar.IsIndeterminate = true;
+            } else {
+                pgbar.IsIndeterminate = false;
+                pgbar.Value = 0;
+            }
+        }
+
+        public void SetProgressValue(double val) {
+            pgbar.Value = val;
+        }
+
+        public void SetProgressAndText(String text, ref double val) {
+            pgbar.Value = val;
+            txtTitle.Text = text;
         }
 
         private void loadingWindow_Loaded(object sender, RoutedEventArgs e) {

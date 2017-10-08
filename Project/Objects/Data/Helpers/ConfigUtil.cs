@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
+using Universal_Game_Configurator.Configurators;
 using Universal_Game_Configurator.Const;
 using Universal_Game_Configurator.Objects.Data.Databases;
 using Universal_Game_Configurator.Objects.Data.Lesser;
 using Universal_Game_Configurator.Util;
+using Universal_Game_Configurator.Util.Logging;
 
 namespace Universal_Game_Configurator.Objects.Data.Helpers {
     public static class ConfigUtil {
@@ -16,8 +18,19 @@ namespace Universal_Game_Configurator.Objects.Data.Helpers {
         }
 
         public static ObservableCollection<ConfigEntry> ParseConfigEntries(Game game) {
+            LogProvider.Log("Starting config entries deserialization");
             ConfigsDatabase database = DeserializeDatabase(game);
-            return new ObservableCollection<ConfigEntry>(database.Entries);
+            LogProvider.Log("Finished deserialization");
+            ObservableCollection<ConfigEntry> entries = new ObservableCollection<ConfigEntry>(database.Entries);
+            Configurator cf = game.Configurator;
+            LogProvider.Log("Starting config entries local value parsing");
+            for (int i = 0; i < entries.Count; i++) {
+                entries[i].Value = cf.ReadValue(entries[i]);
+                LogProvider.Log("Entry: " + entries[i].Variable + ". Local Value: " + entries[i].Value);
+            }
+            LogProvider.Log("Finished parsing");
+
+            return entries;
         }
 
         public static List<String> ParseConfigPaths(List<ConfigFile> files, String installPath) {

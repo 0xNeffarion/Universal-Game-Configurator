@@ -1,0 +1,45 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Universal_Game_Configurator"
+        xmlns:Universal_Game_Configurator="clr-namespace:Universal_Game_Configurator" x:Class="Universal_Game_Configurator.Editor.EditDesc"
+        mc:Ignorable="d"
+        Title="Description Editor" Height="472" Width="540" ResizeMode="NoResize" TextOptions.TextFormattingMode="Display" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="53*"/>
+            <ColumnDefinition Width="475*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="135*"/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="31*"/>
+            <RowDefinition Height="31*"/>
+            <RowDefinition Height="169*"/>
+            <RowDefinition Height="68*"/>
+        </Grid.RowDefinitions>
+        <ListBox x:Name="listDesc" Margin="10" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Auto" Grid.ColumnSpan="2" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" SelectionChanged="listDesc_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Tag}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <TextBox x:Name="txtId" HorizontalAlignment="Left" Height="23" Margin="5,5,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="455" Grid.Column="1" VerticalContentAlignment="Center" TextChanged="txtId_TextChanged"/>
+        <Label Content="ID:" HorizontalAlignment="Left" Height="35" Margin="10,0,0,0" Grid.Row="1" VerticalAlignment="Top" Width="43" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Grid.RowSpan="2"/>
+        <Label Content="Tag:" HorizontalAlignment="Left" Height="33" Margin="10,0,0,0" Grid.Row="2" VerticalAlignment="Top" Width="43" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Grid.RowSpan="2"/>
+        <TextBox x:Name="txtTag" HorizontalAlignment="Left" Height="23" Margin="5,5,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="455" Grid.Column="1" VerticalContentAlignment="Center" TextChanged="txtTag_TextChanged"/>
+        <Label Content="Image:" HorizontalAlignment="Left" Height="33" Grid.Row="3" VerticalAlignment="Top" Width="53" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Grid.RowSpan="2"/>
+        <TextBox x:Name="txtImage" HorizontalAlignment="Left" Height="23" Margin="5,5,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="455" Grid.Column="1" VerticalContentAlignment="Center" TextChanged="txtImage_TextChanged"/>
+        <Label Content="Text:" HorizontalAlignment="Left" Height="27" Grid.Row="4" VerticalAlignment="Top" Width="53" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Margin="0,2,0,0"/>
+        <TextBox x:Name="txtText" Grid.Row="4" Grid.Column="1" VerticalContentAlignment="Stretch" AcceptsTab="True" AcceptsReturn="True" TextWrapping="Wrap" HorizontalContentAlignment="Stretch" Margin="5,10,10,10" TextChanged="txtText_TextChanged"/>
+        <Button x:Name="btnDel" Grid.ColumnSpan="2" Content="DEL" HorizontalAlignment="Left" Height="45" Margin="10,10,0,0" Grid.Row="5" VerticalAlignment="Top" Width="74" Click="btnDel_Click"/>
+        <Button x:Name="btnNew" Content="NEW" HorizontalAlignment="Left" Height="45" Margin="36,10,0,0" Grid.Row="5" VerticalAlignment="Top" Width="74" Grid.Column="1" FontWeight="Bold" Click="btnNew_Click"/>
+        <Button x:Name="btnSave" Content="SAVE ALL" Grid.Column="1" HorizontalAlignment="Left" Margin="135,10,0,0" Grid.Row="5" VerticalAlignment="Top" Width="127" Height="45" FontWeight="Bold" Click="btnSave_Click"/>
+        <Button x:Name="btnBack" Content="GO BACK" Grid.Column="1" HorizontalAlignment="Left" Margin="267,10,0,0" Grid.Row="5" VerticalAlignment="Top" Width="95" Height="45" Click="btnBack_Click"/>
+        <Button x:Name="btnRaw" Content="SHOW RAW" Grid.Column="1" HorizontalAlignment="Left" Margin="367,10,0,0" Grid.Row="5" VerticalAlignment="Top" Width="93" Height="45" Click="btnRaw_Click"/>
+
+    </Grid>
+</Window> 

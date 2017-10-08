@@ -23,6 +23,14 @@ namespace Universal_Game_Configurator.Const {
 
         public static readonly String LOGS_DIRECTORY = APPLICATION_DIRECTORY + @"\logs";
 
+        public static readonly String DATA_DIRECTORY = APPLICATION_DIRECTORY + @"\data";
+
+        public static readonly String DATAVERSION_PATH = DATA_DIRECTORY + @"\VERSION";
+
+        public static readonly String TEMP_DIRECTORY = APPLICATION_DIRECTORY + @"\temp";
+
+        public static readonly String EXTERNAL_DIRECTORY = APPLICATION_DIRECTORY + @"\external";
+
         public static readonly String GAMEIMAGES_DIRECTORY = APPLICATION_DIRECTORY + @"\data\games\images\icons\";
 
     }

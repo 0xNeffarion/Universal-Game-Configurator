@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ConfigsDatabase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Entries>
+    <Entry id="1">
+      <Ranges>
+        <Min>1</Min>
+        <Max>100</Max>
+      </Ranges>
+      <Type>e5</Type>
+      <FileIndex>0</FileIndex>
+      <Section>Imagespace</Section>
+      <Default>1</Default>
+      <VariableName>bDoDepthOfField</VariableName>
+      <DescriptionId>1</DescriptionId>
+      <Name>Depth Of Field</Name>
+      <Group>g1</Group>
+      <Interval>-1</Interval>
+    </Entry>
+    <Entry id="2">
+      <Ranges>
+        <Min>1</Min>
+        <Max>100</Max>
+      </Ranges>
+      <Type>e5</Type>
+      <FileIndex>0</FileIndex>
+      <Section>Display</Section>
+      <Default>0</Default>
+      <VariableName>bBorderless</VariableName>
+      <DescriptionId>2</DescriptionId>
+      <Name>Borderless Window</Name>
+      <Group>g0</Group>
+      <Interval>-1</Interval>
+    </Entry>
+  </Entries>
+</ConfigsDatabase>

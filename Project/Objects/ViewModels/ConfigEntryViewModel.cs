@@ -38,7 +38,7 @@ namespace Universal_Game_Configurator.Objects.ViewModels {
 
         public void GetEntries() {
             Entries = null;
-            LoadingScreen loadingScreen = new LoadingScreen("Parsing configuration files...");
+            LoadingScreen loadingScreen = new LoadingScreen("Parsing & reading configuration files...");
             loadingScreen.Show();
             Dispatcher myThread = Dispatcher.CurrentDispatcher;
             Task task = new Task(async () => {

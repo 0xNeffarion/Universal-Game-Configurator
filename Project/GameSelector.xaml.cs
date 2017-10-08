@@ -65,6 +65,5 @@ namespace Universal_Game_Configurator {
                 DragMove();
             }
         }
-
     }
 }

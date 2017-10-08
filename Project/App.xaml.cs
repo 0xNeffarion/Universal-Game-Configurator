@@ -13,6 +13,7 @@ using Universal_Game_Configurator.Util;
 using Universal_Game_Configurator.Theme;
 using Universal_Game_Configurator.Util.Logging;
 using Universal_Game_Configurator.Util.Tools;
+using Universal_Game_Configurator.Updater;
 
 namespace Universal_Game_Configurator {
 
@@ -32,6 +33,7 @@ namespace Universal_Game_Configurator {
 
             Timeline.DesiredFrameRateProperty.OverrideMetadata(typeof(Timeline),
                 new FrameworkPropertyMetadata { DefaultValue = WinSystem.Display.getRefreshRate() });
+
         }
 
         private void CurrentDomain_ProcessExit(object sender, EventArgs e) {

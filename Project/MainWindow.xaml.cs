@@ -30,26 +30,38 @@ namespace Universal_Game_Configurator {
         public MainWindow(Game game, ObservableCollection<Game> cachedgames) {
             InitializeComponent();
             SetupContext(game, cachedgames);
+            Initialize(game);
+        }
+
+        private void SetupContext(Game game, ObservableCollection<Game> cachedgames) {
+            ConfigEntryViewModel vm = new ConfigEntryViewModel(game, cachedgames);
+            this.DataContext = vm;
+            this.SettingsList.ItemsSource = vm.Entries;
+
+            // Create settings list groups
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(SettingsList.ItemsSource);
+            if (view != null) {
+                view.SortDescriptions.Clear();
+                var sort = new SortDescription("Name", ListSortDirection.Ascending);
+                view.SortDescriptions.Add(sort);
+                sort = new SortDescription("Group", ListSortDirection.Ascending);
+                view.SortDescriptions.Add(sort);
+                view.Refresh();
+            }
+
+        }
+
+        private void Initialize(Game game) {
             this.Opacity = 0;
             DoubleAnimation anim = new DoubleAnimation(1, TimeSpan.FromMilliseconds(250 * Settings.AnimationMult));
             this.BeginAnimation(OpacityProperty, anim);
             this.Title = "Universal Game Configurator - Configurator [" + game.Name + "]";
-        }
-
-        private void SetupContext(Game game, ObservableCollection<Game> cachedgames) {
-            this.DataContext = new ConfigEntryViewModel(game, cachedgames);
             this.Activate();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
 
-            // _ldScreen = new LoadingScreen("Loading game configs...");
-            // Thread th = new Thread(new ThreadStart(LoadConfigs));
-            // th.Start();
-            // _ldScreen.ShowDialog();
-
         }
-
 
         private void SettingsList_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             /*if (SettingsList.Items.Count > 0) {

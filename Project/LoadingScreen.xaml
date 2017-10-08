@@ -17,7 +17,7 @@
                 <RowDefinition Height="61"/>
                 <RowDefinition Height="51"/>
             </Grid.RowDefinitions>
-            <ProgressBar Height="23" IsIndeterminate="True" Grid.Row="1" Margin="25,0,25,10" />
+            <ProgressBar x:Name="pgbar"  Height="23" IsIndeterminate="True" Grid.Row="1" Margin="25,0,25,10" />
             <TextBlock x:Name="txtTitle" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" TextWrapping="Wrap" 
                        Text="%TEXT%" VerticalAlignment="Center" FontSize="18" FontWeight="SemiBold" TextTrimming="WordEllipsis" 
                        TextAlignment="Center" Foreground="#FFE8E8E8"/>

@@ -9,6 +9,7 @@ namespace Universal_Game_Configurator.Util.Logging {
 
         private static String FilePath = null;
         private static FileStream LogStream = null;
+        private static readonly int BUFFER_SIZE = 256;
 
         public static void Initialize() {
             FilePath = GetFilePath();
@@ -17,6 +18,7 @@ namespace Universal_Game_Configurator.Util.Logging {
 
         public static void Close() {
             if (LogStream != null) {
+                LogStream.Flush();
                 LogStream.Close();
             }
         }
@@ -29,6 +31,15 @@ namespace Universal_Game_Configurator.Util.Logging {
             }
 
             FileInfo[] files = dir.GetFiles("logfile_*.txt");
+
+            if (files.Length > 5) {
+                for (int i = 0; i < files.Length; i++) {
+                    files[i].Delete();
+                }
+
+                files = dir.GetFiles("logfile_*.txt");
+            }
+
             int inc = 0, max = 0;
 
             if (files != null && files.Length > 0) {
@@ -51,7 +62,7 @@ namespace Universal_Game_Configurator.Util.Logging {
         }
 
         private static void CreateStream() {
-            LogStream = new FileStream(FilePath, FileMode.OpenOrCreate, FileAccess.Write);
+            LogStream = new FileStream(FilePath, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Read, BUFFER_SIZE);
         }
 
         private static void AppendLine(String str) {
@@ -60,13 +71,13 @@ namespace Universal_Game_Configurator.Util.Logging {
             }
 
             String output = str + Environment.NewLine;
-            Byte[] bytes = Encoding.ASCII.GetBytes(str);
+            Byte[] bytes = Encoding.UTF8.GetBytes(output);
 
             LogStream.Write(bytes, 0, bytes.Length);
         }
 
         private static String GetTime() {
-            return DateTime.Now.ToString("HH:mm:ss");
+            return DateTime.Now.ToString("HH:mm:ss.fff");
         }
 
         public static void Log(String str) {

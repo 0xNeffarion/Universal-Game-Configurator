@@ -1,22 +1,19 @@
 using System;
-using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.NetworkInformation;
-using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
-using System.Text.RegularExpressions;
-using System.Windows;
-using Microsoft.Win32;
 
 namespace Universal_Game_Configurator.Util {
 
     public static class Utilities {
 
-
+        public static String MD5File(String filename) {
+            using (var md5 = MD5.Create()) {
+                using (var stream = File.OpenRead(filename)) {
+                    return Encoding.Default.GetString(md5.ComputeHash(stream));
+                }
+            }
+        }
 
     }
 }

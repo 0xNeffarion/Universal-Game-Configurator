@@ -11,7 +11,8 @@
       <Image>fo4</Image>
       <RegistryName>Steam App 377160</RegistryName>
       <ConfigFiles>
-        <File>testfakePath</File>
+        <File>#MYGAMES#/Fallout4/Fallout4Prefs.ini</File>
+        <File>#MYGAMES#/Fallout4/Fallout4.ini</File>
       </ConfigFiles>
     </Game>
   </Games>

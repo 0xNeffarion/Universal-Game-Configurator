@@ -20,6 +20,7 @@ namespace Universal_Game_Configurator.Objects.Data {
         /// Entry value minimum and maximum range (If any)
         /// </summary>
         [XmlElement("Ranges")]
+        [DefaultValue(null)]
         public Ranges Ranges { get; set; }
 
         /// <summary>

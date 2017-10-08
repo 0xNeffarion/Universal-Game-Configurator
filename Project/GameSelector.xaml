@@ -39,8 +39,11 @@
     <Border CornerRadius="5" Background="{DynamicResource WindowBackgroundBrush}" BorderBrush="#FF555555" BorderThickness="1" >
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="536*"/>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="20"/>
                 <ColumnDefinition Width="34"/>
+
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="29"></RowDefinition>
@@ -50,7 +53,7 @@
                 <RowDefinition Height="139*"/>
                 <RowDefinition Height="177*"/>
             </Grid.RowDefinitions>
-            <DockPanel x:Name="titleBorder" Grid.ColumnSpan="2" Background="#FF424242" MouseDown="titleBorder_MouseDown">
+            <DockPanel x:Name="titleBorder" Grid.ColumnSpan="4" Background="#FF424242" MouseDown="titleBorder_MouseDown">
                 <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" VerticalAlignment="Center" Margin="10,0,0,0">
                     <TextBlock x:Name="windowTitle" Text="{Binding Title,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Foreground="White" ForceCursor="True" FontWeight="SemiBold" FontSize="14" VerticalAlignment="Center"></TextBlock>
                 </StackPanel>
@@ -65,7 +68,7 @@
                             CommandParameter="{Binding ElementName=GameSelectionWindow}"/>
                 </StackPanel>
             </DockPanel>
-            <ListView x:Name="GamesListView" Grid.ColumnSpan="2" Grid.Column="0" Grid.RowSpan="3" Margin="10,5,10,20" Grid.Row="3" ScrollViewer.VerticalScrollBarVisibility="Visible" 
+            <ListView x:Name="GamesListView" Grid.ColumnSpan="4" Grid.Column="0" Grid.RowSpan="3" Margin="10,5,10,20" Grid.Row="3" ScrollViewer.VerticalScrollBarVisibility="Visible" 
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled" Padding="0,0,0,6" SelectionMode="Single" SizeChanged="GamesListView_SizeChanged" Foreground="#FFFBFBFB" 
                       BorderBrush="LightGray" BorderThickness="0" Background="{x:Null}" ItemsSource="{Binding Games}" SelectedIndex="{Binding SelectedGameIndex}" >
                 <ListView.Resources>
@@ -231,9 +234,9 @@
                 </ListView.View>
             </ListView>
             <TextBlock x:Name="TitleText" TextWrapping="Wrap" Text="Select the game to configure:" Grid.Row="1"
-                   Grid.ColumnSpan="2" Grid.Column="0" TextAlignment="Center" VerticalAlignment="Center" FontSize="17" FontWeight="SemiBold" Height="23" Margin="0,15,0,0" Foreground="#FFE0E0E0"/>
-            <DockPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"/>
-            <Border Margin="10,10,20,5" Grid.Row="2" Grid.Column="0" BorderThickness="1" BorderBrush="#FF898989" Grid.ColumnSpan="2">
+                   Grid.ColumnSpan="4" Grid.Column="0" TextAlignment="Center" VerticalAlignment="Center" FontSize="17" FontWeight="SemiBold" Height="23" Margin="0,15,0,0" Foreground="#FFE0E0E0"/>
+            <DockPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="4"/>
+            <Border Margin="10,10,20,5" Grid.Row="2" Grid.Column="0" BorderThickness="1" BorderBrush="#FF898989" Grid.ColumnSpan="4">
                 <xctk:WatermarkTextBox Style="{StaticResource borderRem}" x:Name="txtBoxSearch"  TextWrapping="Wrap" Height="26" VerticalAlignment="Center" 
                                        TextChanged="txtBoxSearch_TextChanged" Foreground="White" VerticalContentAlignment="Center" Background="{x:Null}" BorderThickness="0" >
                     <xctk:WatermarkTextBox.Watermark>
@@ -244,13 +247,33 @@
                     </xctk:WatermarkTextBox.Watermark>
                 </xctk:WatermarkTextBox>
             </Border>
-            <Image x:Name="imgRefresh" Grid.Column="1" Grid.Row="1" Source="Resources/arrows_refresh.png" Margin="7,14,10,11" Cursor="Hand"
-                   ToolTip="Refresh list" >
+            <Image x:Name="imgRefresh" Grid.Column="3" Grid.Row="1" Source="Resources/arrows_refresh.png" Margin="10" Cursor="Hand"
+                   ToolTip="Refresh list" RenderOptions.BitmapScalingMode="HighQuality" >
                 <wi:Interaction.Triggers>
                     <wi:EventTrigger EventName="MouseDown">
                         <ei:CallMethodAction
                                 TargetObject="{Binding}"
                                 MethodName="GetGames"/>
+                    </wi:EventTrigger>
+                </wi:Interaction.Triggers>
+            </Image>
+            <Image x:Name="imgDownloadDb" Grid.Column="2" Grid.Row="1" Source="Resources/db_update.png" Margin="2,5" Cursor="Hand"
+                   ToolTip="Download database and refresh list" RenderOptions.BitmapScalingMode="HighQuality" Visibility="Visible" >
+                <wi:Interaction.Triggers>
+                    <wi:EventTrigger EventName="MouseDown">
+                        <ei:CallMethodAction
+                                TargetObject="{Binding}"
+                                MethodName="ForceUpdatesAndGames"/>
+                    </wi:EventTrigger>
+                </wi:Interaction.Triggers>
+            </Image>
+            <Image x:Name="imgEditDb" Grid.Column="1" Grid.Row="1" Source="Resources/db_edit.png" Margin="2,5" Cursor="Hand"
+                   ToolTip="Open ucg database editor" RenderOptions.BitmapScalingMode="HighQuality" Visibility="Visible">
+                <wi:Interaction.Triggers>
+                    <wi:EventTrigger EventName="MouseDown">
+                        <ei:CallMethodAction 
+                                TargetObject="{Binding}"
+                                MethodName="OpenDatabaseEditor"></ei:CallMethodAction>
                     </wi:EventTrigger>
                 </wi:Interaction.Triggers>
             </Image>
