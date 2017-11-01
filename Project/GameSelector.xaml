@@ -39,9 +39,9 @@
     <Border CornerRadius="5" Background="{DynamicResource WindowBackgroundBrush}" BorderBrush="#FF555555" BorderThickness="1" >
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="536*"/>
-                <ColumnDefinition Width="20"/>
-                <ColumnDefinition Width="20"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="32"/>
+                <ColumnDefinition Width="24"/>
                 <ColumnDefinition Width="34"/>
 
             </Grid.ColumnDefinitions>
@@ -257,8 +257,8 @@
                     </wi:EventTrigger>
                 </wi:Interaction.Triggers>
             </Image>
-            <Image x:Name="imgDownloadDb" Grid.Column="2" Grid.Row="1" Source="Resources/db_update.png" Margin="2,5" Cursor="Hand"
-                   ToolTip="Download database and refresh list" RenderOptions.BitmapScalingMode="HighQuality" Visibility="Visible" >
+            <Image x:Name="imgDownloadDb" Grid.Column="2" Grid.Row="1" Source="Resources/db_update.png" Margin="4,11" Cursor="Hand"
+                   ToolTip="Download database and refresh list" RenderOptions.BitmapScalingMode="HighQuality" Visibility="Visible" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center" Width="16" >
                 <wi:Interaction.Triggers>
                     <wi:EventTrigger EventName="MouseDown">
                         <ei:CallMethodAction
@@ -267,8 +267,8 @@
                     </wi:EventTrigger>
                 </wi:Interaction.Triggers>
             </Image>
-            <Image x:Name="imgEditDb" Grid.Column="1" Grid.Row="1" Source="Resources/db_edit.png" Margin="2,5" Cursor="Hand"
-                   ToolTip="Open ucg database editor" RenderOptions.BitmapScalingMode="HighQuality" Visibility="Visible">
+            <Image x:Name="imgEditDb" Grid.Column="1" Grid.Row="1" Source="Resources/db_edit.png" Margin="0,9,5,9" Cursor="Hand"
+                   ToolTip="Open ucg database editor" RenderOptions.BitmapScalingMode="HighQuality" Visibility="Collapsed">
                 <wi:Interaction.Triggers>
                     <wi:EventTrigger EventName="MouseDown">
                         <ei:CallMethodAction 

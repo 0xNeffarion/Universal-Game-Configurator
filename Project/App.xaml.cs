@@ -14,6 +14,9 @@ using Universal_Game_Configurator.Theme;
 using Universal_Game_Configurator.Util.Logging;
 using Universal_Game_Configurator.Util.Tools;
 using Universal_Game_Configurator.Updater;
+using System.Collections.Generic;
+using Universal_Game_Configurator.Util.Crypto;
+using Universal_Game_Configurator.Const;
 
 namespace Universal_Game_Configurator {
 
@@ -43,7 +46,23 @@ namespace Universal_Game_Configurator {
         public bool DoHandle { get; set; }
 
         protected override void OnStartup(StartupEventArgs e) {
+            Boolean showEditor = false;
 
+            if (e.Args != null && e.Args.Length > 0) {
+                List<String> args = new List<String>(e.Args);
+                if (args.Contains("-editor")) {
+                    showEditor = true;
+                }
+                if (args.Contains("-force")) {
+                    DatabaseUpdater.DeleteDataFolder();
+                }
+            }
+
+            LogProvider.Log("x64 hash: " + Hashing.SHA2Hash(Paths.EXTERNAL_DIRECTORY + @"\7zip\7zr-x64.exe"));
+            LogProvider.Log("x86 hash: " + Hashing.SHA2Hash(Paths.EXTERNAL_DIRECTORY + @"\7zip\7zr-x86.exe"));
+
+            GameSelector gs = new GameSelector(showEditor);
+            gs.Show();
         }
 
         #region Exceptions

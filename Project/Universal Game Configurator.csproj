@@ -182,6 +182,7 @@
     <Compile Include="Objects\ViewModels\GameViewModel.cs" />
     <Compile Include="Settings\Settings.cs" />
     <Compile Include="Util\Calculations.cs" />
+    <Compile Include="Util\Crypto\Hashing.cs" />
     <Compile Include="Util\Extern\Devmode.cs" />
     <Compile Include="Util\INIFile.cs" />
     <Compile Include="Util\Logging\LogProvider.cs" />

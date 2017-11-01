@@ -10,9 +10,13 @@ using System.Windows.Threading;
 using Universal_Game_Configurator.Util.Logging;
 using Universal_Game_Configurator.Util;
 using System.Text;
+using Universal_Game_Configurator.Util.Crypto;
 
 namespace Universal_Game_Configurator.Updater {
     public class DatabaseUpdater {
+
+        private const String SEVENZIP_X64 = "579881923A0772DCDF99B85588EFAC1EE072F2CF79010C48B202FC00DE0ED26B";
+        private const String SEVENZIP_X86 = "73628E0B1566DE03C0D846CB774BF5AE02CB5C363988CED5BE23AEBA3275B72E";
 
         private LoadingScreen ldScreen = null;
         private Dispatcher myDispatcher = null;
@@ -45,6 +49,7 @@ namespace Universal_Game_Configurator.Updater {
             return v;
         }
 
+
         public static Boolean IsDatabaseOutOfDate() {
             LogProvider.Log("Checking database versions...");
             Version local = GetLocalDatabaseVersion();
@@ -63,8 +68,7 @@ namespace Universal_Game_Configurator.Updater {
             LogProvider.Log("Database updater process complete");
         }
 
-        private void DeleteOldData() {
-            ldScreen.SetTitleText("Deleting old data...");
+        public static void DeleteDataFolder() {
             LogProvider.Log("Deleting old data folder");
             DirectoryInfo dir = new DirectoryInfo(Paths.DATA_DIRECTORY);
             if (dir.Exists) {
@@ -73,6 +77,11 @@ namespace Universal_Game_Configurator.Updater {
             } else {
                 LogProvider.Log("Data folder doesn't exist");
             }
+        }
+
+        private void DeleteOldData() {
+            ldScreen.SetTitleText("Deleting old data...");
+            DatabaseUpdater.DeleteDataFolder();
         }
 
         private String CreateTemp() {
@@ -132,6 +141,11 @@ namespace Universal_Game_Configurator.Updater {
         }
 
         private void ExtractToDir(String inp, String outp) {
+            if (!Verify7Zip()) {
+                MsgBoxUtil.showError("7Zip Checksum mismatch!");
+                return;
+            }
+
             String zPath = Get7ZipPath();
             String args = "x -y -bsp1 -bse1 -bso1 " + inp;
             Regex rex = new Regex(@"(?<p>[0-9]+)%");
@@ -180,6 +194,19 @@ namespace Universal_Game_Configurator.Updater {
             }
 
             return path;
+        }
+
+        private Boolean Verify7Zip() {
+            String path = Get7ZipPath();
+            if (!File.Exists(path)) {
+                return false;
+            }
+
+            if (Environment.Is64BitOperatingSystem) {
+                return Hashing.SHA2Hash(path).Equals(SEVENZIP_X64);
+            } else {
+                return Hashing.SHA2Hash(path).Equals(SEVENZIP_X86);
+            }
         }
 
         private void WebDownloadCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e) {

@@ -1,2 +1,23 @@
-[00:18:15.005] - Checking database versions...
-[00:18:16.026] - Local: 0.1.1 | Remote: 0.1.1
+[22:20:34.884] - Deleting old data folder
+[22:20:34.890] - Data folder deleted
+[22:20:35.010] - Checking database versions...
+[22:20:36.119] - Local: 0.0.0 | Remote: 0.1.1
+[22:20:36.120] - Initializing Database updater
+[22:20:36.231] - Deleting old data folder
+[22:20:36.231] - Data folder doesn't exist
+[22:20:36.231] - Creating random name for temporary file
+[22:20:36.231] - Temporary file name: db_1671160600.temp.7z
+[22:20:36.232] - Retrieving database url from github
+[22:20:36.927] - Starting database download (async)
+[22:20:37.808] - Download in progress. File size: 24.54 KBs | Downloaded: 15.98 KBs | 65%
+[22:20:37.809] - Download in progress. File size: 24.54 KBs | Downloaded: 16.58 KBs | 67%
+[22:20:37.922] - Download in progress. File size: 24.54 KBs | Downloaded: 24.54 KBs | 100%
+[22:20:37.923] - Download in progress. File size: 24.54 KBs | Downloaded: 24.54 KBs | 100%
+[22:20:37.923] - Download complete.
+[22:20:37.924] - Starting database extraction...
+[22:20:37.925] - Database file size: 24.54KBs
+[22:20:37.925] - Launching 7zip executable for extraction.
+[22:20:37.970] - Extracting database. Progress: 0%
+[22:20:37.971] - Database fully extracted.
+[22:20:37.971] - Database updater process complete
+[22:20:37.976] - Cleaning temporary folder

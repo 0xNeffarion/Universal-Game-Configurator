@@ -10,10 +10,10 @@ namespace Universal_Game_Configurator {
 
     public partial class GameSelector : Window {
 
-        public GameSelector() {
+        public GameSelector(Boolean showEditor = false, Boolean forceUpdate = false) {
             InitializeComponent();
             SetupDataContext(null);
-            Initialize();
+            Initialize(showEditor);
         }
 
         public GameSelector(GameViewModel savedViewModel) {
@@ -22,10 +22,13 @@ namespace Universal_Game_Configurator {
             Initialize();
         }
 
-        private void Initialize() {
+        private void Initialize(Boolean showEditor = false) {
             this.Opacity = 0.00;
             DoubleAnimation anim = new DoubleAnimation(1, TimeSpan.FromMilliseconds(250 * Settings.AnimationMult));
             this.BeginAnimation(OpacityProperty, anim);
+            if (showEditor) {
+                imgEditDb.Visibility = Visibility.Visible;
+            }
         }
 
         private void SetupDataContext(GameViewModel savedVM) {
