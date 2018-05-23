@@ -24,27 +24,27 @@ namespace Universal_Game_Configurator.Util.Crypto {
         }
 
         public static String SHA1Hash(String text) {
-            return TextHash(text, SHA1Managed.Create());
+            return TextHash(text, SHA1.Create());
         }
 
         public static String SHA1Hash(FileInfo file) {
-            return FileHash(file, SHA1Managed.Create());
+            return FileHash(file, SHA1.Create());
         }
 
         public static String SHA2Hash(FileInfo file) {
-            return FileHash(file, SHA256Managed.Create());
+            return FileHash(file, SHA256.Create());
         }
 
         public static String SHA2Hash(String text) {
-            return TextHash(text, SHA256Managed.Create());
+            return TextHash(text, SHA256.Create());
         }
 
         public static String MD5Hash(FileInfo file) {
-            return FileHash(file, MD5Cng.Create());
+            return FileHash(file, MD5.Create());
         }
 
         public static String MD5Hash(String text) {
-            return TextHash(text, MD5Cng.Create());
+            return TextHash(text, MD5.Create());
         }
 
     }
