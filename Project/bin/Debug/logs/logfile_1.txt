@@ -1,23 +1,23 @@
-[22:20:34.884] - Deleting old data folder
-[22:20:34.890] - Data folder deleted
-[22:20:35.010] - Checking database versions...
-[22:20:36.119] - Local: 0.0.0 | Remote: 0.1.1
-[22:20:36.120] - Initializing Database updater
-[22:20:36.231] - Deleting old data folder
-[22:20:36.231] - Data folder doesn't exist
-[22:20:36.231] - Creating random name for temporary file
-[22:20:36.231] - Temporary file name: db_1671160600.temp.7z
-[22:20:36.232] - Retrieving database url from github
-[22:20:36.927] - Starting database download (async)
-[22:20:37.808] - Download in progress. File size: 24.54 KBs | Downloaded: 15.98 KBs | 65%
-[22:20:37.809] - Download in progress. File size: 24.54 KBs | Downloaded: 16.58 KBs | 67%
-[22:20:37.922] - Download in progress. File size: 24.54 KBs | Downloaded: 24.54 KBs | 100%
-[22:20:37.923] - Download in progress. File size: 24.54 KBs | Downloaded: 24.54 KBs | 100%
-[22:20:37.923] - Download complete.
-[22:20:37.924] - Starting database extraction...
-[22:20:37.925] - Database file size: 24.54KBs
-[22:20:37.925] - Launching 7zip executable for extraction.
-[22:20:37.970] - Extracting database. Progress: 0%
-[22:20:37.971] - Database fully extracted.
-[22:20:37.971] - Database updater process complete
-[22:20:37.976] - Cleaning temporary folder
+[16:55:34.341] - x64 hash: 9B1DEA0DC3D3A444196542BFD5FAC79503843A963FDC310563749D64CA48BF99
+[16:55:34.342] - x86 hash: 7A5DA4B3D6288D8D1C8D236DAEFEEB34C440387DC90F0670FC0FD84CF52BE0C0
+[16:55:35.372] - Checking database versions...
+[16:55:36.570] - Local: 0.0.0 | Remote: 0.1.1
+[16:55:36.571] - Initializing Database updater
+[16:55:37.770] - Deleting old data folder
+[16:55:37.770] - Data folder doesn't exist
+[16:55:37.771] - Creating random name for temporary file
+[16:55:37.771] - Temporary file name: db_1835611325.temp.7z
+[16:55:37.773] - Retrieving database url from github
+[16:55:38.269] - Starting database download (async)
+[16:55:39.100] - Download in progress. File size: 24.54 KBs | Downloaded: 15.98 KBs | 65%
+[16:55:39.104] - Download in progress. File size: 24.54 KBs | Downloaded: 16.58 KBs | 67%
+[16:55:39.105] - Download in progress. File size: 24.54 KBs | Downloaded: 24.54 KBs | 100%
+[16:55:39.105] - Download in progress. File size: 24.54 KBs | Downloaded: 24.54 KBs | 100%
+[16:55:39.105] - Download complete.
+[16:55:39.107] - Starting database extraction...
+[16:55:39.108] - Database file size: 24.54KBs
+[16:55:39.108] - Launching 7zip executable for extraction.
+[16:55:39.153] - Extracting database. Progress: 0%
+[16:55:39.153] - Database fully extracted.
+[16:55:39.153] - Database updater process complete
+[16:55:39.189] - Cleaning temporary folder

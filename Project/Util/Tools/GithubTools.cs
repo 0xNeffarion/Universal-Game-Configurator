@@ -7,11 +7,14 @@ namespace Universal_Game_Configurator.Util.Tools {
 
     public static class GithubTools {
 
-        public const String DATA_REPONAME = "UCG-Data";
+        public const String DATA_REPONAME = "UGC-Data";
 
         private const String OWNER = "0xNeffarion";
 
         private static String GetResponse(String RepoName) {
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
             String url = String.Format("https://github.com/{0}/{1}/releases/latest", OWNER, RepoName);
             String output = null;
             HttpWebRequest webReq = (HttpWebRequest)HttpWebRequest.Create(new Uri(url));
@@ -36,10 +39,8 @@ namespace Universal_Game_Configurator.Util.Tools {
                 return null;
             }
 
-            String[] res = Regex.Split(response, "<div class=\"release-meta\">");
-            String[] res1 = Regex.Split(res[1], "<ul class=\"tag-references\">");
-            String[] res2 = Regex.Split(res1[1], "<span class=\"css-truncate-target\">");
-            String result = Regex.Split(res2[1], "</span>")[0].Trim();
+            String[] res = Regex.Split(response, "<span class=\"css-truncate-target\">");
+            String result = Regex.Split(res[1], "</span>")[0].Trim();
 
             return result;
         }
@@ -50,10 +51,10 @@ namespace Universal_Game_Configurator.Util.Tools {
                 return null;
             }
 
-            String[] res = Regex.Split(response, "<ul class=\"release-downloads\">");
-            String[] res1 = Regex.Split(res[1], "<li>");
-            String[] res2 = Regex.Split(res1[1], "<a href=");
-            String result = Regex.Split(res2[1], "rel=\"nofollow\">")[0].Trim();
+            String[] res = Regex.Split(response, "<li class=\"d-block py-2\">");
+            String[] res1 = Regex.Split(res[1], "<a href=\"");
+            String[] res2 = Regex.Split(res1[1], "\" rel=\"nofollow\"");
+            String result = res2[0].Trim();
 
             return "https://github.com" + (result.Replace("\"", "").Trim());
         }

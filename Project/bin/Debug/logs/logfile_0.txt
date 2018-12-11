@@ -1,2 +1,16 @@
-[22:20:12.143] - Checking database versions...
-[22:20:13.289] - Local: 0.1.1 | Remote: 0.1.1
+[16:54:32.551] - x64 hash: 9B1DEA0DC3D3A444196542BFD5FAC79503843A963FDC310563749D64CA48BF99
+[16:54:32.552] - x86 hash: 7A5DA4B3D6288D8D1C8D236DAEFEEB34C440387DC90F0670FC0FD84CF52BE0C0
+[16:54:33.589] - Checking database versions...
+[16:54:34.734] - Local: 0.0.0 | Remote: 0.1.1
+[16:54:34.735] - Initializing Database updater
+[16:54:35.954] - Deleting old data folder
+[16:54:35.954] - Data folder doesn't exist
+[16:54:35.955] - Creating random name for temporary file
+[16:54:35.955] - Temporary file name: db_1505928221.temp.7z
+[16:54:35.967] - Retrieving database url from github
+[16:54:36.447] - Starting database download (async)
+[16:54:37.315] - Download in progress. File size: 24.54 KBs | Downloaded: 15.98 KBs | 65%
+[16:54:37.318] - Download in progress. File size: 24.54 KBs | Downloaded: 16.58 KBs | 67%
+[16:54:37.319] - Download in progress. File size: 24.54 KBs | Downloaded: 24.54 KBs | 100%
+[16:54:37.319] - Download in progress. File size: 24.54 KBs | Downloaded: 24.54 KBs | 100%
+[16:54:37.319] -

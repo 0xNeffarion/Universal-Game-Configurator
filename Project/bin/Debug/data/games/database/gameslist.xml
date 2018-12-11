@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<GamesDatabase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Games>
+    <Game id="1">
+      <Name>Fallout 4</Name>
+      <Configurator>A</Configurator>
+      <Genres>
+        <Genre>RPG</Genre>
+        <Genre>OpenWorld</Genre>
+      </Genres>
+      <Image>fo4</Image>
+      <RegistryName>Steam App 377160</RegistryName>
+      <ConfigFiles>
+        <File>#MYGAMES#/Fallout4/Fallout4Prefs.ini</File>
+        <File>#MYGAMES#/Fallout4/Fallout4.ini</File>
+      </ConfigFiles>
+    </Game>
+  </Games>
+</GamesDatabase>

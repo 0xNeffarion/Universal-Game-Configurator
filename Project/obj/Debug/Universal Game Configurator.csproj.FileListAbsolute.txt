@@ -46,3 +46,52 @@ H:\Programming\GitHub\Universal-Game-Configurator\Project\obj\Debug\Universal Ga
 H:\Programming\GitHub\Universal-Game-Configurator\Project\obj\Debug\Universal Game Configurator.exe
 H:\Programming\GitHub\Universal-Game-Configurator\Project\obj\Debug\Universal Game Configurator.pdb
 H:\Programming\GitHub\Universal-Game-Configurator\Project\obj\Debug\Universal Game Configurator.csprojResolveAssemblyReference.cache
+S:\Programming\GitHub\Universal-Game-Configurator\Project\bin\Debug\external\7zip\7zr-x64.exe
+S:\Programming\GitHub\Universal-Game-Configurator\Project\bin\Debug\external\7zip\7zr-x86.exe
+S:\Programming\GitHub\Universal-Game-Configurator\Project\bin\Debug\external\7zip\README.txt
+S:\Programming\GitHub\Universal-Game-Configurator\Project\bin\Debug\Universal Game Configurator.exe.config
+S:\Programming\GitHub\Universal-Game-Configurator\Project\bin\Debug\Universal Game Configurator.exe
+S:\Programming\GitHub\Universal-Game-Configurator\Project\bin\Debug\Universal Game Configurator.pdb
+S:\Programming\GitHub\Universal-Game-Configurator\Project\bin\Debug\Microsoft.Expression.Interactions.dll
+S:\Programming\GitHub\Universal-Game-Configurator\Project\bin\Debug\System.Windows.Interactivity.dll
+S:\Programming\GitHub\Universal-Game-Configurator\Project\bin\Debug\Xceed.Wpf.AvalonDock.dll
+S:\Programming\GitHub\Universal-Game-Configurator\Project\bin\Debug\Xceed.Wpf.DataGrid.dll
+S:\Programming\GitHub\Universal-Game-Configurator\Project\bin\Debug\Xceed.Wpf.Toolkit.dll
+S:\Programming\GitHub\Universal-Game-Configurator\Project\bin\Debug\Microsoft.Expression.Interactions.xml
+S:\Programming\GitHub\Universal-Game-Configurator\Project\bin\Debug\System.Windows.Interactivity.xml
+S:\Programming\GitHub\Universal-Game-Configurator\Project\bin\Debug\de\Xceed.Wpf.AvalonDock.resources.dll
+S:\Programming\GitHub\Universal-Game-Configurator\Project\bin\Debug\es\Xceed.Wpf.AvalonDock.resources.dll
+S:\Programming\GitHub\Universal-Game-Configurator\Project\bin\Debug\fr\Xceed.Wpf.AvalonDock.resources.dll
+S:\Programming\GitHub\Universal-Game-Configurator\Project\bin\Debug\hu\Xceed.Wpf.AvalonDock.resources.dll
+S:\Programming\GitHub\Universal-Game-Configurator\Project\bin\Debug\it\Xceed.Wpf.AvalonDock.resources.dll
+S:\Programming\GitHub\Universal-Game-Configurator\Project\bin\Debug\pt-BR\Xceed.Wpf.AvalonDock.resources.dll
+S:\Programming\GitHub\Universal-Game-Configurator\Project\bin\Debug\ro\Xceed.Wpf.AvalonDock.resources.dll
+S:\Programming\GitHub\Universal-Game-Configurator\Project\bin\Debug\ru\Xceed.Wpf.AvalonDock.resources.dll
+S:\Programming\GitHub\Universal-Game-Configurator\Project\bin\Debug\sv\Xceed.Wpf.AvalonDock.resources.dll
+S:\Programming\GitHub\Universal-Game-Configurator\Project\bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
+S:\Programming\GitHub\Universal-Game-Configurator\Project\obj\Debug\Universal Game Configurator.csprojAssemblyReference.cache
+S:\Programming\GitHub\Universal-Game-Configurator\Project\obj\Debug\Theme\ExpressionDark.baml
+S:\Programming\GitHub\Universal-Game-Configurator\Project\obj\Debug\Editor\EditDesc.g.cs
+S:\Programming\GitHub\Universal-Game-Configurator\Project\obj\Debug\Editor\EditGames.g.cs
+S:\Programming\GitHub\Universal-Game-Configurator\Project\obj\Debug\Editor\MainEditorWindow.g.cs
+S:\Programming\GitHub\Universal-Game-Configurator\Project\obj\Debug\GameSelector.g.cs
+S:\Programming\GitHub\Universal-Game-Configurator\Project\obj\Debug\LoadingScreen.g.cs
+S:\Programming\GitHub\Universal-Game-Configurator\Project\obj\Debug\MainWindow.g.cs
+S:\Programming\GitHub\Universal-Game-Configurator\Project\obj\Debug\App.g.cs
+S:\Programming\GitHub\Universal-Game-Configurator\Project\obj\Debug\Universal Game Configurator_Content.g.cs
+S:\Programming\GitHub\Universal-Game-Configurator\Project\obj\Debug\Universal Game Configurator_MarkupCompile.cache
+S:\Programming\GitHub\Universal-Game-Configurator\Project\obj\Debug\Universal Game Configurator_MarkupCompile.lref
+S:\Programming\GitHub\Universal-Game-Configurator\Project\obj\Debug\App.baml
+S:\Programming\GitHub\Universal-Game-Configurator\Project\obj\Debug\Editor\EditDesc.baml
+S:\Programming\GitHub\Universal-Game-Configurator\Project\obj\Debug\Editor\EditGames.baml
+S:\Programming\GitHub\Universal-Game-Configurator\Project\obj\Debug\Editor\MainEditorWindow.baml
+S:\Programming\GitHub\Universal-Game-Configurator\Project\obj\Debug\GameSelector.baml
+S:\Programming\GitHub\Universal-Game-Configurator\Project\obj\Debug\LoadingScreen.baml
+S:\Programming\GitHub\Universal-Game-Configurator\Project\obj\Debug\MainWindow.baml
+S:\Programming\GitHub\Universal-Game-Configurator\Project\obj\Debug\Universal Game Configurator.g.resources
+S:\Programming\GitHub\Universal-Game-Configurator\Project\obj\Debug\Universal_Game_Configurator.Properties.Resources.resources
+S:\Programming\GitHub\Universal-Game-Configurator\Project\obj\Debug\Universal Game Configurator.csproj.GenerateResource.cache
+S:\Programming\GitHub\Universal-Game-Configurator\Project\obj\Debug\Universal Game Configurator.csproj.CoreCompileInputs.cache
+S:\Programming\GitHub\Universal-Game-Configurator\Project\obj\Debug\Universal Game Configurator.csproj.CopyComplete
+S:\Programming\GitHub\Universal-Game-Configurator\Project\obj\Debug\Universal Game Configurator.exe
+S:\Programming\GitHub\Universal-Game-Configurator\Project\obj\Debug\Universal Game Configurator.pdb

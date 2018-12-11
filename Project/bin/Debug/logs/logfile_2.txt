@@ -1,4 +1,23 @@
-[22:29:55.442] - x64 hash: 579881923A0772DCDF99B85588EFAC1EE072F2CF79010C48B202FC00DE0ED26B
-[22:29:55.448] - x86 hash: 73628E0B1566DE03C0D846CB774BF5AE02CB5C363988CED5BE23AEBA3275B72E
-[22:29:56.841] - Checking database versions...
-[22:29:58.168] - Local: 0.1.1 | Remote: 0.1.1
+[16:56:33.055] - x64 hash: 9B1DEA0DC3D3A444196542BFD5FAC79503843A963FDC310563749D64CA48BF99
+[16:56:33.056] - x86 hash: 7A5DA4B3D6288D8D1C8D236DAEFEEB34C440387DC90F0670FC0FD84CF52BE0C0
+[16:56:33.974] - Checking database versions...
+[16:56:35.103] - Local: 0.0.0 | Remote: 0.1.1
+[16:56:35.104] - Initializing Database updater
+[16:56:35.988] - Deleting old data folder
+[16:56:35.990] - Data folder deleted
+[16:56:35.990] - Creating random name for temporary file
+[16:56:35.990] - Temporary file name: db_2006050181.temp.7z
+[16:56:35.992] - Retrieving database url from github
+[16:56:36.530] - Starting database download (async)
+[16:56:37.341] - Download in progress. File size: 24.54 KBs | Downloaded: 15.98 KBs | 65%
+[16:56:37.343] - Download in progress. File size: 24.54 KBs | Downloaded: 16.58 KBs | 67%
+[16:56:37.344] - Download in progress. File size: 24.54 KBs | Downloaded: 24.54 KBs | 100%
+[16:56:37.344] - Download in progress. File size: 24.54 KBs | Downloaded: 24.54 KBs | 100%
+[16:56:37.344] - Download complete.
+[16:56:37.345] - Starting database extraction...
+[16:56:37.346] - Database file size: 24.54KBs
+[16:56:37.346] - Launching 7zip executable for extraction.
+[16:56:37.376] - Extracting database. Progress: 0%
+[16:56:37.376] - Database fully extracted.
+[16:56:37.376] - Database updater process complete
+[16:56:37.396] - Cleaning temporary folder

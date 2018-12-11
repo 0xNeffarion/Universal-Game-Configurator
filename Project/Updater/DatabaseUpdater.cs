@@ -15,9 +15,6 @@ using Universal_Game_Configurator.Util.Crypto;
 namespace Universal_Game_Configurator.Updater {
     public class DatabaseUpdater {
 
-        private const String SEVENZIP_X64 = "579881923A0772DCDF99B85588EFAC1EE072F2CF79010C48B202FC00DE0ED26B";
-        private const String SEVENZIP_X86 = "73628E0B1566DE03C0D846CB774BF5AE02CB5C363988CED5BE23AEBA3275B72E";
-
         private LoadingScreen ldScreen = null;
         private Dispatcher myDispatcher = null;
 
@@ -55,7 +52,7 @@ namespace Universal_Game_Configurator.Updater {
             Version local = GetLocalDatabaseVersion();
             Version remote = GetRemoteDatabaseVersion();
 
-            LogProvider.Log(String.Format("Local: {0} | Remote: {1}", local.ToString(), remote.ToString()));
+            LogProvider.Log(string.Format("Local: {0} | Remote: {1}", local.ToString(), remote.ToString()));
 
             return remote > local;
         }
@@ -141,10 +138,6 @@ namespace Universal_Game_Configurator.Updater {
         }
 
         private void ExtractToDir(String inp, String outp) {
-            if (!Verify7Zip()) {
-                MsgBoxUtil.showError("7Zip Checksum mismatch!");
-                return;
-            }
 
             String zPath = Get7ZipPath();
             String args = "x -y -bsp1 -bse1 -bso1 " + inp;
@@ -196,18 +189,6 @@ namespace Universal_Game_Configurator.Updater {
             return path;
         }
 
-        private Boolean Verify7Zip() {
-            String path = Get7ZipPath();
-            if (!File.Exists(path)) {
-                return false;
-            }
-
-            if (Environment.Is64BitOperatingSystem) {
-                return Hashing.SHA2Hash(path).Equals(SEVENZIP_X64);
-            } else {
-                return Hashing.SHA2Hash(path).Equals(SEVENZIP_X86);
-            }
-        }
 
         private void WebDownloadCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e) {
             if (ldScreen != null) {
